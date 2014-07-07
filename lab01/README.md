@@ -37,11 +37,20 @@ Pinco Pallino's health profile is: Height=1.72, Weight=85.5
 ```
 
 * Exercises
-    * Modify Person.java and add the attribute birthdate. Search for an appropriate type for the attribute.&nbsp;
-    * Implement the following methods in the HealthProfileReader program
-        * createPerson(String firstname, String lastname, Date birthdate): creates a new person and adds it to the Database
-        * displayHealthProfile(Long personId): should lookup the person in the database identified by personId and then print the related healthProfile
-        * updateHealthProfile(Long personId, Double height, Double weight): lookup the person in the database identified by personId and update the related healthProfile with the indicated height and weight
+    * In Person.java:
+    	1. Add a Long attribute to store the person’s personId (including accessor methods)
+    	2. Add a String attribute to store the person’s birthdate (including accessor methods, use as date format “YYYY-mm-dd”)
+    	3. Update the constructors accordingly to include these attributes
+    	4. Update the empty constructor to set the personId to a random number between 1 and 9999.
+    	5. [optional/advanced] Update the empty constructor to set the birthdate string to a random date between 1950 and the current Year. 
+    * In HealthProfileReader.java:
+    	1. Change the database so that the key for each person is the personId
+    	2. Add the static method createPerson(Long personId, String firstname, String lastname, String birthdate), which creates a new person and adds it to the Database
+    	3. Add the static method displayHealthProfile(Long personId) , which should lookup the person in the database identified by personId and then print the related healthProfile.
+    	4. Add the static method updateHealthProfile(Long personId, Double height, Double weight) , which should lookup the person in the database identified by personId and update the related healthProfile with the indicated height and weight
+    	5. Replace the main program with a version that takes the method name from command-line arguments and to executes it: 
+           ```java HealthProfileReader method_name method_parameters```
+           ```Example: java HealthProfileReader displayHealthProfile 1```
 * More about Programming in Java
     * [Java Cheat Sheet][3]&nbsp;&nbsp;
     * [Java Introductory Tutorial][4] &nbsp;
