@@ -21,3 +21,7 @@ libraries/
 */libraries/
 */.DS_Store
 *.DS_Store
+
+# eclipse files
+*.classpath
+*.project
