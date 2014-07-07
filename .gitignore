@@ -16,3 +16,8 @@ solutions/
 */solutions/
 myworkspace/
 */myworkspace/
+.DS_Store
+libraries/
+*/libraries/
+*/.DS_Store
+*.DS_Store
