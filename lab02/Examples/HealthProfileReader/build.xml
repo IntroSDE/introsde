@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<project name="myFirstANTProject" default="compile" basedir=".">
+
+    <property name="BuildDir" value="build"/>
+
+    <target name="init">
+        <echo message="Init has been called"/>
+        <mkdir dir="${BuildDir}" />
+        <echo message="${BuildDir} has been created"/>
+    </target>
+    <target name="compile" depends="init">
+        <echo message="Compile target has been called"/>
+        <javac srcdir="src" destdir="${BuildDir}" />
+    	<java classname="HealthProfileReader" classpath="build">
+    		   <arg value="displayHealthProfile"/>
+    	       <arg value="1"/>
+    	</java>
+    </target>
+    
+    <target name="compile-person" depends="init">
+        <echo message="Compile target has been called"/>
+        <javac srcdir="src" destdir="build" />
+        <java classname="HealthProfileReader" classpath="build">
+        	<arg value="createNewPerson"/>
+        	<arg value="30"/>
+            <arg value="John"/>
+            <arg value="Doe"/>
+            <arg value="1986-08-38"/>
+        </java>
+    </target>
+    
+    <target name="archive" depends="compile-person">
+        <echo>Starting to archive...</echo>
+        <jar destfile="dist/project.jar" basedir="build">
+            <manifest>
+                <attribute name="Main-Class" value="HealthProfileReader" />
+                <attribute name="Class-Path" value="build"/>
+            </manifest>
+        </jar>
+        <echo>Archived!</echo>
+    </target>
+
+    <target name="execute-hprofile" depends="compile">
+        <java classname="HealthProfileReader" classpath="build">
+            <arg value="createNewPerson"/>
+            <arg value="30"/>
+            <arg value="John"/>
+            <arg value="Doe"/>
+            <arg value="1986-08-38"/>
+        </java>
+    </target>
+</project>

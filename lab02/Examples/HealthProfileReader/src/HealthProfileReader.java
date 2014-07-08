@@ -37,21 +37,23 @@ public class HealthProfileReader {
 			System.out
 					.println("Are you sure you gave me ALL the information I need?");
 		} else {
-			String method = args[1];
+			String method = args[0];
 			if (method.equals("createNewPerson")) {
-				Long personId = Long.getLong(args[2]);
-				String firstname = args[3];
-				String lastname = args[4];
-				String birthdate = args[5];
+				Long personId = Long.parseLong(args[1]);
+				String firstname = args[2];
+				String lastname = args[3];
+				String birthdate = args[4];
 				createPerson(personId, firstname, lastname, birthdate);
 			} else if (method.equals("displayHealthProfile")) {
-				Long personId = Long.getLong(args[2]);
+				Long personId = Long.parseLong(args[1]);
 				displayHealthProfile(personId);				
 			}  else if (method.equals("updateHealthProfile")) {
-				Long personId = Long.getLong(args[2]);
-				Double height = Double.valueOf(args[3]);
-				Double weight = Double.valueOf(args[4]);
+				Long personId = Long.parseLong(args[1]);
+				Double height = Double.parseDouble(args[2]);
+				Double weight = Double.parseDouble(args[3]);
 				updateHealthProfile(personId, height, weight);
+			} else {
+				System.out.println("The system did not find the method '"+method+"'");
 			}
 		}
 	}
@@ -61,6 +63,9 @@ public class HealthProfileReader {
 			String lastname, String birthdate) {
 		Person p = new Person(personId, firstname, lastname, birthdate);
 		database.put(p.getPersonId(), p);
+		System.out.println("A new person record (" + p.getPersonId()
+				+ ") has been created for " + p.getLastname() + ", "
+				+ p.getFirstname() + " born on " + p.getBirthdate());
 	}
 
 	/* Solution to Exercise #01-2c */
