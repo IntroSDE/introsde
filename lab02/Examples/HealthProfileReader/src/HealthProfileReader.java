@@ -39,18 +39,18 @@ public class HealthProfileReader {
 		} else {
 			String method = args[0];
 			if (method.equals("createNewPerson")) {
-				Long personId = Long.getLong(args[1]);
+				Long personId = Long.parseLong(args[1]);
 				String firstname = args[2];
 				String lastname = args[3];
 				String birthdate = args[4];
 				createPerson(personId, firstname, lastname, birthdate);
 			} else if (method.equals("displayHealthProfile")) {
-				Long personId = Long.getLong(args[1]);
+				Long personId = Long.parseLong(args[1]);
 				displayHealthProfile(personId);				
 			}  else if (method.equals("updateHealthProfile")) {
-				Long personId = Long.getLong(args[1]);
-				Double height = Double.valueOf(args[2]);
-				Double weight = Double.valueOf(args[3]);
+				Long personId = Long.parseLong(args[1]);
+				Double height = Double.parseDouble(args[2]);
+				Double weight = Double.parseDouble(args[3]);
 				updateHealthProfile(personId, height, weight);
 			} else {
 				System.out.println("The system did not find the method '"+method+"'");
