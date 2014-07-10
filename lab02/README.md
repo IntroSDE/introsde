@@ -72,8 +72,8 @@ $ git fetch upstream   $ git merge upstream/master
 * Now, hit the link "administration" in the axis2 home. The default user/password is admin/axis2. From here, you can deploy/undeploy other services. 
 
 * **Example:**
-    * From the "Example" folder of this Lab, open in a new project the Example "axis2-quickstart"
-    * Check the "service.xml" definition that it will be used to create a WSDL file describing a SOAP endpoint service based on the [StockQuoteService](https://github.com/cdparra/introsde/blob/master/lab02/Example/axis2-quickstart/samples/quickstart/service/pojo/StockQuoteService.java) java class. This java class takes the stock code of a company (e.g., IBM) and returns its stocks value. Check the services.xml
+    * From the "Example" folder of this Lab, create a new project with the Example "axis2-quickstart"
+    * Check the "service.xml" definition that it will be used to create a WSDL file describing a SOAP endpoint service based on the StockQuoteService java class. This java class takes the stock code of a company (e.g., IBM) and returns its stocks value. 
 ```
 	open resources/META-INF/services.xml
 ```
@@ -116,11 +116,14 @@ $ git fetch upstream   $ git merge upstream/master
     * The other important parameters are *targetNamespace* and *schemaNamespace*, which later has to be reused in the ant build file (we will get there). 
     * What receivers will be used to process incoming messages (the standard axis2 receivers org.apache.axis2.rpc.receivers).  
 
-* Now, you need a build.xml file to get this thing done: 
-    * **build.xml**: ant build file with the following three axis2 targets:
-	   * *generate.wsdl*: This target generates the StockQuoteService.wsdl file in the build folder, using the java2wsdl command. Make sure that *targetNamespace* and *schemaTargetNamespace* is same as in service.xml file.
-	   * *generate.service*: This target generates the axis2 archive (which is nothing but a jar actually) in the build folder under the name *StockQuoteService.aar*, which includes the *services.xml* and the compiled classes. You can use this  *.aar file to deploy the service through axis2 webapp. 
-	   * *generate.client*: This target generates the client side classes. Make sure you run this after executing generate.wsdl so the MyService.wsdl file is present in the build folder.
+* To create the service and make it available, we need to do two things: 
+    * Create a WSDL (Web Service Description Language) file that describes the SOAP (Simple Object Access Protocol) endpoint. 
+    * Package all the necessary classes in a convenient way, so that it can be deployed in Axis2. 
+    * We achieve this by using an ANT script. 
+* Open the build.xml and explore it. It includes the following axis2 targets:
+    * *generate.wsdl*: This target generates the StockQuoteService.wsdl file in the build folder, using the java2wsdl command. Make sure that *targetNamespace* and *schemaTargetNamespace* is same as in service.xml file. See how we first define the command called java2wsdl, implemented by the class org.apache.ws.java2wsdl.Java2WSDLTask. This class is in the axis2 classpath.
+    * *generate.service*: This target generates the axis2 archive (which is nothing but a jar actually) in the build folder under the name *StockQuoteService.aar*, which includes the *services.xml* and the compiled classes. You can use this  *.aar file to deploy the service through axis2 webapp. The same target is followed by a simple copy of the package (StockQuoteService.aar) to the folder AXIS2_HOME/repository/services (if you use Axis2 standalone) or to the AXIS2_HOME_TOMCAT/WEB-INF/services, in our case.  This is the deployment. We can also do this manually if we wish.  
+    * *generate.client*: This target generates the client side classes. Make sure you run this after executing generate.wsdl so the MyService.wsdl file is present in the build folder.
 
 **Observation:** in the build.xml, replace the properties AXIS2_HOME and AXIS2_TOMCAT_HOME to make it point to your local installations. If you are didn't download the binary version of axis2, remove all the references to AXIS2_HOME. 
 
@@ -187,9 +190,6 @@ Try it!
 ### Exercise 2
 
 * Expose the HealthProfileReader through an axis2 web service
-
-### Homework: things To Do BEFORE NEXT session
-
 
 ## Additional notes
 
