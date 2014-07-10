@@ -121,6 +121,67 @@ Pinco Pallino's health profile is: Height=1.72, Weight=85.5
 
 Do the same for all other binaries you will need (unless the binary folder is already added automatically) (Ant, Tomcat, etc.)&nbsp;
 
+### Installing Tomcat and Axis2 
+* First, install tomcat. Go to apache [tomcat website][12]. 
+* Download the zip version of the latest version of Tomcat application manager. 
+* Unzip it somewhere (e.g. /opt or C:\) 
+* Set environment variables: 
+```
+    # if you are in unix/linux/mac or you are using msysgit from windows
+    export CATALINA_HOME=/opt/apache-tomcat-7.0.39
+ 
+    # windows
+    set CATALINA_HOME=C:\apache-tomcat-7.0.39
+```
+
+**Observation:** for those using msysgit in windows, beware that the "\" is a escape character, so you can use either *C:\\apache-tomcat-7.0.39* or */C/apache-tomcat-7.0.39* 
+
+* Start the server (to make things easier, add also these binaries to your PATH
+```
+    # if you are in unix/linux/mac or you are using msysgit from windows
+    $CATALINA_HOME/bin/startup.sh
+
+    # windows
+    %CATALINA_HOME%\bin\startup.bat
+```
+* Now, go to http://localhost:8080/ and if you see the apache tomcat cat, you are fine. 
+* **Next step:** donwload and install [axis2][19]. You can either download the war package directly, or download the binary distribution, unzip it somewhere and then build the war. Let's do the second. For this lab session, I downloaded the axis2-1.6.2-bin.zip distribution. 
+```
+    unzip axis2-1.6.2-bin.zip  
+    mv axis2-1.6.2 /opt
+```
+**Observation:** there might be problems with the classpath if you are using only the war distribution. One way of checking exactly what you have in the class path is running *ant SOME_EXISTING_TARGET -diagnostics*. To avoid potential problems, use the binary distribution. 
+
+* Now, you need to enter the weabpp folder in the axis home and create the package war of axis2. How? **Using ant** ;-)
+```
+    cd /opt/axis2-1.6.2/webapp
+    ant create.war
+    ...
+    create.war:
+        [war] Building war: /opt/axis2-1.6.2/dist/axis2.war
+    ...
+```
+* Deploy the war in tomcat. For this, you need to access the tomcat manager in your browser (http://localhost:8080/manager/html) 
+* By default, Tomcat does not enable admin or manager access. To enable it, you will have to edit the $TOMCAT_HOME/conf/tomcat-users.xml manually by adding the following (or uncommenting if it is there)
+```
+    <user username="admin" password="whateverpasswordyouwantiuseadmin" roles="manager-gui,tomcat"/>
+```
+* Now, you can access the manager in  http://localhost:8080/manager/html and deploy axis war. 
+* Go to the section Deploy -> WAR file to deploy -> Choose File and select the war you have just created.  
+* Now that it is deployed, you can open axis2 
+```
+    Follow this link http://localhost:8080/axis2. 
+```
+
+* Should show you a page with 3 links: services, validate, administration. Open validate. 
+```
+    Follow the link http://localhost:8080/axis2/axis2-web/HappyAxis.jsp
+```
+
+* It should should show you a HappyAxis page with the list of needed libraries and their status (if they are or not in your system).  If the Happy Axis page is coming with GREEN color then it means that axis2 is successfully deployed. 
+
+
+
 
 [1]: http://docs.oracle.com/javase/8/docs/technotes/guides/install/install_overview.html
 [2]: https://github.com/cdparra/introsde/tree/master/lab01/Example/src
@@ -140,4 +201,6 @@ Do the same for all other binaries you will need (unless the binary folder is al
 [16]: https://drive.google.com/file/d/0B7ShzcEnCJFNd010SmJOV19IR3M/edit?usp=sharing
 [17]: https://drive.google.com/file/d/0B7ShzcEnCJFNMkU0TWhYVDdGNDQ/edit?usp=sharing
 [18]: https://github.com/cdparra/introsde/tree/master/lab01
+[19]: http://axis.apache.org/axis2/java/core/download.cgi
+
   
