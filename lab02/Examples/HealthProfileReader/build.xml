@@ -49,4 +49,14 @@
             <arg value="1986-08-38"/>
         </java>
     </target>
+	
+    <target name="execute-hprofile-args" depends="compile">
+        <java classname="HealthProfileReader" classpath="build">
+            <arg value="${command}"/>
+            <arg value="${id}"/>
+            <arg value="${name}"/>
+            <arg value="${lastname}"/>
+            <arg value="${birthdate}"/>
+        </java>
+    </target>
 </project>

@@ -1,42 +1,131 @@
-Java, ANT and Axis2
-===
-Introduction to Service Design and Engineering 2013/2014. 
-<br>*Lab session #3*
-<br>**University of Trento** 
-
----
-
-## Outline of the session
-
-* ANT and Java
-	* What's a build tool? 
-	* What's ANT?  
-	* ANT simple example: basic build file to compile a simple java program
-	* Exercise
-* Apache Axis and Tomcat 
-	* Web Service Middle ware: An overview
-	* Axis Installation
-	* Deployment of a Java Web Service (JWS)
-	* Running a Client with Dll Method
-
----
-
-## Before the lab
-Required resources: 
-* Java
-* Ant
-* Tomcat
-* Apache Axis 2
+# LAB02: More Java, Eclipse, ANT and Firs example of a service with Axis2
 
 
----
-No experience with Java?, try out a [quick tutorial](http://www.vogella.com/articles/JavaIntroduction/article.html) 
+**Introduction to Service Design and Engineering | University of Trento | [Webpage](https://sites.google.com/site/introsdeunitn/lab-sessions/lab-session-2 "Permalink to LAB02: More Java, Eclipse, ANT and Firs example of a service with Axis2")**
 
-Fetch updated lab session code from Github 
-* Steps to follow in Lab 1 [solution to the exercise 1](https://github.com/cdparra/introsde2013/blob/master/lab1/solutions/Ex1.md)
-* 
+How can we automate compiling and executing java programs? What kind of technology is behind this automation? What do we mean, in practical terms, when we speak of a "service"?.&nbsp;In this session, we will provide some answers to these questions. We will briefly introduce how will we work with Eclipse during sessions (although students are free of working with the IDE of their own choosing). We will see an example of what kind of technology is behind the automation that IDEs provide (ANT), and in turn, what language fuels that technology, which is one of the cornerstones of the SOA world (XML). The lesson will finalize with a first example of a service, using Axis2. And, if we have some time free, we will see also how to manage dependencies in easy manner with Ivy.
 
----
+## Slides &amp; Code
+
+Links: [PPT slides][1] | [PDF slides][2] | [Source code][3]
+
+## Guiding Notes
+
+The guiding notes below are a summarized version of what is already on the slides.&nbsp;
+
+* Start by pulling updates from the github repository. In your terminals, execute the following: 
+```
+$ git fetch upstream   $ git merge upstream/master
+```
+
+### Using Eclipse
+
+* Create a new *Java Project* in eclipse (File -> New -> Java Project)
+* Unmark "Use default location" and select the folder where the source code for this lab is (in your computer). Eclipse should detect the source code inside and add it to the project. 
+* Take some minutes to explore the solutions to the exercises of *Lab 01* as they appear in the new version of the HealthProfileReader. Look at:
+    * Person.java
+    * HealthProfileReader.java
+* Run the HealthProfileReader using Eclipse (see the slides to learn how to do it)
+
+### ANT: What if there is no IDE?
+
+* When implementing services, you will find yourself often at work with nothing else than a terminal, executing programs from a command line. 
+* The example so far (the HealthProfileReader) is simple, but what if you have hundreds of classes and packages? **How to provide similar automation capabilities for compilation and packaging, as the IDE provides?**. That's where ANT comes in.
+* ANT is a Java-based build tool that automates repetitive tasks (e.g. compiling source code, running tests, generating documentation) typically, without a graphical user interface directly from the command line.
+* Take a look to the *ANT build script* we have in the HealthProfileReader example (the file **build.xml**). 
+* ANT scripst define:
+    * **Ant Project:** a collection of named targets. Each build file contains one project.
+    * **Ant Target:** a fixed series of ant tasks in a specified order that can depend on other named targets.
+    * **Ant Task:** something that ant can execute jobs, such as compile, create jars, copy.
+    * **Ant properties:** immutable constants set once and used through the whole scritps
+
+
+
+### Homework: things To Do BEFORE NEXT session
+
+* If you are not familiar with git, follow the tutorial at [Try Github][7]&nbsp;(15 minutes)&nbsp;
+* Make sure to install the following tools
+    * [Git][8]&nbsp;(version 1.8 or higher)
+    * [Msysgit (for windows) ][9]&nbsp;
+    * [Ant][10]&nbsp;(version 1.9 or higher, download binaries and make them available on your PATH)&nbsp;&nbsp;
+    * [Ivy][11]&nbsp;(version 2.4 or higher,&nbsp;unpack the downloaded zip file wherever you want and copy the ivy jar file into your ant lib directory - ANT_HOME/lib) &nbsp;
+    * [Tomcat][12]&nbsp;(version 7.0.39 or higher, follow installation instructions [here][13]) &nbsp;
+    * [Eclipse for Java EE][14]&nbsp;(any, but it is recommended to download the latest: Luna)&nbsp;&nbsp;
+* Configure your Github account and repository:
+    * Create your account in [Github][15] (if you haven't)
+    * Fork the lab repository to your account (i.e., create a copy of the repository in your github account)
+    ```
+    Go to https://github.com/cdparra/introsde.git.
+    Click on "Fork" in the upper right corner of the page
+    ```
+    * Clone your fork in your local machine (i.e., download your copy to your machine)
+    ```
+    git clone https://github.com/YOUR_USERNAME/introsde.git
+    ```
+    * Add the original repository as a remote, in order to Fetch future updates on the original repository (in case there is any)
+    ```
+    git remote add upstream https://github.com/cdparra/introsde.git
+    ```.
+* Learn the&nbsp;Lab session workflow:
+    * Before each session of the Lab, pull the changes from the original repository (i.e., update your local version with changes from the original)&nbsp;
+    ```
+    git fetch upstream &nbsp; .
+    git merge upstream/master
+    ```
+    * On your local repository, inside the folder for the session, create a folder called myworkspace.&nbsp;
+    * Put your personal work in this folder. We will not push changes of our personal workspaces to github.&nbsp;
+        * If, however, you wish to push your changes to github, you will have to edit the .gitignore in the root of your local repo and remove "myworkspace" from it.
+        * Then,&nbsp;at the end of each session of work, add your changes to your repository stash
+           ```
+            git add myworkspace
+            ```
+        * Commit your changes to your local repository
+            ```
+            git commit ���m "my work for labXX"
+            ```
+        * Push your changes to your github repository
+            ```
+            git push master
+            ```
+
+## Additional notes
+
+### Setting up PATH variables:&nbsp;
+
+#### In windows:&nbsp;
+
+* Control Panel -&gt; System -&gt; Advanced tab -&gt; Environment Variables -&gt; System Variables&nbsp;
+* Edit the 'path' variable and append the location of your bin folder onto the existing value (separated by a semicolon).&nbsp;
+
+```PATH = ;C:\Program Files\Java\jdk1.6.0_02in\;```
+
+* Add the following to the file named .bash_profile (or .profile), located in your home directory
+
+```export PATH=$PATH:/path/to/your/binary/folder/```
+
+Do the same for all other binaries you will need (unless the binary folder is already added automatically) (Ant, Tomcat, etc.)&nbsp;
+
+
+[1]: http://docs.oracle.com/javase/8/docs/technotes/guides/install/install_overview.html
+[2]: https://github.com/cdparra/introsde/tree/master/lab01/Example/src
+[3]: http://introcs.cs.princeton.edu/java/11cheatsheet/
+[4]: http://www.vogella.com/tutorials/JavaIntroduction/article.html#firstjava
+[5]: http://www.mkyong.com/all-tutorials-on-mkyong-com/
+[6]: http://introcs.cs.princeton.edu/java/home/
+[7]: https://try.github.io/
+[8]: http://git-scm.com/downloads
+[9]: http://msysgit.github.io/
+[10]: http://ant.apache.org/
+[11]: http://ant.apache.org/ivy/
+[12]: http://tomcat.apache.org/
+[13]: http://tomcat.apache.org/tomcat-8.0-doc/setup.html
+[14]: http://www.eclipse.org/downloads/
+[15]: http://github.com
+[16]: https://drive.google.com/file/d/0B7ShzcEnCJFNd010SmJOV19IR3M/edit?usp=sharing
+[17]: https://drive.google.com/file/d/0B7ShzcEnCJFNMkU0TWhYVDdGNDQ/edit?usp=sharing
+[18]: https://github.com/cdparra/introsde/tree/master/lab01
+
+
 
 ## ANT and Java
 
@@ -108,10 +197,10 @@ In summary, ant scripts define:
 ---
 
 ### Exercise 1
-* First create a folder “my-solutions” under lab2 folder for your exercise solutions (do not change the lab source code, unless you want to deal with solving conflicts in the future :P)
+* First create a folder ���my-solutions��� under lab2 folder for your exercise solutions (do not change the lab source code, unless you want to deal with solving conflicts in the future :P)
 * Make a ANT project as follows
 	* Extend the HealthProfileReader adding the attribute BMI to the HealthProfile. 
-	* Executing the HealthProfileReader should now receive the name, lastname and a third parameter indicating the “Health Measure” we want to see (e.g. “weight”, “bmi”). 
+	* Executing the HealthProfileReader should now receive the name, lastname and a third parameter indicating the ���Health Measure��� we want to see (e.g. ���weight���, ���bmi���). 
 	* For the BMI formula, ask google. 
 * The directory structure should be as follow
 	* Main Directory (named after the project)
@@ -122,26 +211,12 @@ In summary, ant scripts define:
 * Make build.xml file with the following targets
 	* init: creates the build and dist directories
 	* compile: compiles your project and put the classes in build/classes
-	* archive: creates a distributable jar file in “dist”
+	* archive: creates a distributable jar file in ���dist���
 	* execute: runs the project with three integer arguments
 	* clean: goes back to the original state  
 
 Try it! ([solution](https://github.com/cdparra/introsde2013/blob/master/lab2/solutions/Ex1))
 
----
-
-### .gitignores
-A brief pause in the lab session for a reminder. Please, don't push everything in your repository. For example, compiled things do not need to be versioned. So, use .gitignore files in your repo to define what should be ignored by git. There is already one in the root of the repo with this content: 
-
-	# Compiled java classes (this is a comment)
-	*.class
-	
-	# Package Files #
-	*.jar
-	*.war
-	*.ear
-	*/build/
- 
 ---
 
 ## Axis2
@@ -216,7 +291,7 @@ It should should show you a HappyAxis page with the list of needed libraries and
 
 ---
 
-Now it’s time to test a service, 
+Now it���s time to test a service, 
 	
 	Follow this link http://localhost:8080/axis2/services/Version?method=getVersion
 
