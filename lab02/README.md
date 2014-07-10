@@ -3,7 +3,7 @@
 
 **Introduction to Service Design and Engineering | University of Trento | [Webpage](https://sites.google.com/site/introsdeunitn/lab-sessions/lab-session-2 "Permalink to LAB02: More Java, Eclipse, ANT and Firs example of a service with Axis2")**
 
-How can we automate compiling and executing java programs? What kind of technology is behind this automation? What do we mean, in practical terms, when we speak of a "service"?.&nbsp;In this session, we will provide some answers to these questions. We will briefly introduce how will we work with Eclipse during sessions (although students are free of working with the IDE of their own choosing). We will see an example of what kind of technology is behind the automation that IDEs provide (ANT), and in turn, what language fuels that technology, which is one of the cornerstones of the SOA world (XML). The lesson will finalize with a first example of a service, using Axis2. And, if we have some time free, we will see also how to manage dependencies in easy manner with Ivy.
+How can we automate compiling and executing java programs? What kind of technology is behind this automation? What do we mean, in practical terms, when we speak of a "service"?.&nbsp;In this session, we will provide some answers to these questions. We will briefly introduce how will we work with Eclipse during sessions (although students are free of working with the IDE of their own choosing). We will see an example of what kind of technology is behind the automation that IDEs provide (ANT), and in turn, what language fuels that technology, which is one of the cornerstones of the SOA world (XML). The lesson will finalize with a first example of a service, using Axis2. 
 
 ## Slides &amp; Code
 
@@ -77,9 +77,9 @@ $ git fetch upstream   $ git merge upstream/master
 ```
 	open resources/META-INF/services.xml
 ```
-** You should see this: 
+* You should see this: 
 ```
-	<service name="StockQuoteService" <!-- The name of the service -->
+    <service name="StockQuoteService" <!-- The name of the service -->
 		scope="application"
 		targetNamespace="http://quickstart.samples/"
 		<!-- Scope and nameSpace must be later matched inthe build.xml -->
@@ -193,6 +193,15 @@ Try it!
 
 ## Additional notes
 
+### Why do we need apache ant? 
+
+Can't we just use an IDE and forget about?. Yes, we can use an IDE and forget about it. The purpose for this lab, however, is to understand workflow that we follow when creating first a java program and then making it available through a service: (the generation of the service specification, the compilation of the java program, how it all works together, etc.) 
+
+### Other suggested tutorials/articles
+
+* [Java Introduction (if you have never seen it before)][6]
+* [ANT extended tutorial][7]
+
 ### Installing Tomcat and Axis2 (a copy of the notes for the first Lab)
 
 * First, install tomcat. Go to apache [tomcat website][4]. 
@@ -219,10 +228,10 @@ Try it!
 ```
 * Now, go to http://localhost:8080/ and if you see the apache tomcat cat, you are fine. 
 * **Next step:** donwload and install [axis2][5]. You can either download the war package directly, or download the binary distribution, unzip it somewhere and then build the war. Let's do the second. For this lab session, I downloaded the axis2-1.6.2-bin.zip distribution. 
-
+```
     unzip axis2-1.6.2-bin.zip  
     mv axis2-1.6.2 /opt
-
+```
 **Observation:** there might be problems with the classpath if you are using only the war distribution. One way of checking exactly what you have in the class path is running *ant SOME_EXISTING_TARGET -diagnostics*. To avoid potential problems, use the binary distribution. 
 
 * Now, you need to enter the weabpp folder in the axis home and create the package war of axis2. How? **Using ant** ;-)
@@ -259,3 +268,5 @@ Try it!
 [3]: https://drive.google.com/file/d/0B7ShzcEnCJFNNWttdGRvZmpIZUE/edit?usp=sharing
 [4]: http://tomcat.apache.org/
 [5]: http://axis.apache.org/axis2/java/core/download.cgi
+[6]: http://www.vogella.com/articles/JavaIntroduction/article.html#firstjava
+[7]: http://www.vogella.com/articles/ApacheAnt/article.html#antoverview_definition
