@@ -25,3 +25,9 @@ libraries/
 # eclipse files
 *.classpath
 *.project
+*bin/
+*build/
+build/
+bin/
+*dist/
+dist/
