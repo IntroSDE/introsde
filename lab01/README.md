@@ -38,17 +38,17 @@ Pinco Pallino's health profile is: Height=1.72, Weight=85.5
 
 * Exercises
     * In Person.java:
-    	1. Add a Long attribute to store the person’s personId (including accessor methods)
-    	2. Add a String attribute to store the person’s birthdate (including accessor methods, use as date format “YYYY-mm-dd”)
-    	3. Update the constructors accordingly to include these attributes
-    	4. Update the empty constructor to set the personId to a random number between 1 and 9999.
-    	5. [optional/advanced] Update the empty constructor to set the birthdate string to a random date between 1950 and the current Year. 
+        1. Add a Long attribute to store the person's personId (including accessor methods)
+        2. Add a String attribute to store the person's birthdate (including accessor methods, use as date format "YYYY-mm-dd")
+        3. Update the constructors accordingly to include these attributes
+        4. Update the empty constructor to set the personId to a random number between 1 and 9999.
+        5. [optional/advanced] Update the empty constructor to set the birthdate string to a random date between 1950 and the current Year. 
     * In HealthProfileReader.java:
-    	1. Change the database so that the key for each person is the personId
-    	2. Add the static method createPerson(Long personId, String firstname, String lastname, String birthdate), which creates a new person and adds it to the Database
-    	3. Add the static method displayHealthProfile(Long personId) , which should lookup the person in the database identified by personId and then print the related healthProfile.
-    	4. Add the static method updateHealthProfile(Long personId, Double height, Double weight) , which should lookup the person in the database identified by personId and update the related healthProfile with the indicated height and weight
-    	5. Replace the main program with a version that takes the method name from command-line arguments and to executes it: 
+        1. Change the database so that the key for each person is the personId
+        2. Add the static method createPerson(Long personId, String firstname, String lastname, String birthdate), which creates a new person and adds it to the Database
+        3. Add the static method displayHealthProfile(Long personId) , which should lookup the person in the database identified by personId and then print the related healthProfile.
+        4. Add the static method updateHealthProfile(Long personId, Double height, Double weight) , which should lookup the person in the database identified by personId and update the related healthProfile with the indicated height and weight
+        5. Replace the main program with a version that takes the method name from command-line arguments and to executes it: 
            ```java HealthProfileReader method_name method_parameters```
            ```Example: java HealthProfileReader displayHealthProfile 1```
 * More about Programming in Java
@@ -60,7 +60,7 @@ Pinco Pallino's health profile is: Height=1.72, Weight=85.5
 ### Homework: things To Do BEFORE NEXT session
 
 * If you are not familiar with git, follow the tutorial at [Try Github][7]&nbsp;(15 minutes)&nbsp;
-* Make sure to install the following tools
+* Make sure to install the following tools (especially, make sure that both **Tomcat** and **Axis2** are ready to use, and that both tomcat and ANT binaries are in the PATH (see additional notes below))
     * [Git][8]&nbsp;(version 1.8 or higher)
     * [Msysgit (for windows) ][9]&nbsp;
     * [Ant][10]&nbsp;(version 1.9 or higher, download binaries and make them available on your PATH)&nbsp;&nbsp;
@@ -92,17 +92,17 @@ Pinco Pallino's health profile is: Height=1.72, Weight=85.5
     * Put your personal work in this folder. We will not push changes of our personal workspaces to github.&nbsp;
         * If, however, you wish to push your changes to github, you will have to edit the .gitignore in the root of your local repo and remove "myworkspace" from it.
         * Then,&nbsp;at the end of each session of work, add your changes to your repository stash
- 	       ```
-    	    git add myworkspace
-        	```
+           ```
+            git add myworkspace
+            ```
         * Commit your changes to your local repository
-	        ```
-    	    git commit –m "my work for labXX"
-        	```
+            ```
+            git commit -m "my work for labXX"
+            ```
         * Push your changes to your github repository
-        	```
-        	git push master
-        	```
+            ```
+            git push master
+            ```
 
 ## Additional notes
 
