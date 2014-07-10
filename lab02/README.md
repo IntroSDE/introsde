@@ -3,7 +3,7 @@
 
 **Introduction to Service Design and Engineering | University of Trento | [Webpage](https://sites.google.com/site/introsdeunitn/lab-sessions/lab-session-2 "Permalink to LAB02: More Java, Eclipse, ANT and Firs example of a service with Axis2")**
 
-How can we automate compiling and executing java programs? What kind of technology is behind this automation? What do we mean, in practical terms, when we speak of a "service"?.&nbsp;In this session, we will provide some answers to these questions. We will briefly introduce how will we work with Eclipse during sessions (although students are free of working with the IDE of their own choosing). We will see an example of what kind of technology is behind the automation that IDEs provide (ANT), and in turn, what language fuels that technology, which is one of the cornerstones of the SOA world (XML). The lesson will finalize with a first example of a service, using Axis2. And, if we have some time free, we will see also how to manage dependencies in easy manner with Ivy.
+How can we automate compiling and executing java programs? What kind of technology is behind this automation? What do we mean, in practical terms, when we speak of a "service"?.&nbsp;In this session, we will provide some answers to these questions. We will briefly introduce how will we work with Eclipse during sessions (although students are free of working with the IDE of their own choosing). We will see an example of what kind of technology is behind the automation that IDEs provide (ANT), and in turn, what language fuels that technology, which is one of the cornerstones of the SOA world (XML). The lesson will finalize with a first example of a service, using Axis2. 
 
 ## Slides &amp; Code
 
@@ -72,14 +72,14 @@ $ git fetch upstream   $ git merge upstream/master
 * Now, hit the link "administration" in the axis2 home. The default user/password is admin/axis2. From here, you can deploy/undeploy other services. 
 
 * **Example:**
-    * From the "Example" folder of this Lab, open in a new project the Example "axis2-quickstart"
-    * Check the "service.xml" definition that it will be used to create a WSDL file describing a SOAP endpoint service based on the [StockQuoteService](https://github.com/cdparra/introsde/blob/master/lab02/Example/axis2-quickstart/samples/quickstart/service/pojo/StockQuoteService.java) java class. This java class takes the stock code of a company (e.g., IBM) and returns its stocks value. Check the services.xml
+    * From the "Example" folder of this Lab, create a new project with the Example "axis2-quickstart"
+    * Check the "service.xml" definition that it will be used to create a WSDL file describing a SOAP endpoint service based on the StockQuoteService java class. This java class takes the stock code of a company (e.g., IBM) and returns its stocks value. 
 ```
 	open resources/META-INF/services.xml
 ```
-** You should see this: 
+* You should see this: 
 ```
-	<service name="StockQuoteService" <!-- The name of the service -->
+    <service name="StockQuoteService" <!-- The name of the service -->
 		scope="application"
 		targetNamespace="http://quickstart.samples/"
 		<!-- Scope and nameSpace must be later matched inthe build.xml -->
@@ -116,11 +116,14 @@ $ git fetch upstream   $ git merge upstream/master
     * The other important parameters are *targetNamespace* and *schemaNamespace*, which later has to be reused in the ant build file (we will get there). 
     * What receivers will be used to process incoming messages (the standard axis2 receivers org.apache.axis2.rpc.receivers).  
 
-* Now, you need a build.xml file to get this thing done: 
-    * **build.xml**: ant build file with the following three axis2 targets:
-	   * *generate.wsdl*: This target generates the StockQuoteService.wsdl file in the build folder, using the java2wsdl command. Make sure that *targetNamespace* and *schemaTargetNamespace* is same as in service.xml file.
-	   * *generate.service*: This target generates the axis2 archive (which is nothing but a jar actually) in the build folder under the name *StockQuoteService.aar*, which includes the *services.xml* and the compiled classes. You can use this  *.aar file to deploy the service through axis2 webapp. 
-	   * *generate.client*: This target generates the client side classes. Make sure you run this after executing generate.wsdl so the MyService.wsdl file is present in the build folder.
+* To create the service and make it available, we need to do two things: 
+    * Create a WSDL (Web Service Description Language) file that describes the SOAP (Simple Object Access Protocol) endpoint. 
+    * Package all the necessary classes in a convenient way, so that it can be deployed in Axis2. 
+    * We achieve this by using an ANT script. 
+* Open the build.xml and explore it. It includes the following axis2 targets:
+    * *generate.wsdl*: This target generates the StockQuoteService.wsdl file in the build folder, using the java2wsdl command. Make sure that *targetNamespace* and *schemaTargetNamespace* is same as in service.xml file. See how we first define the command called java2wsdl, implemented by the class org.apache.ws.java2wsdl.Java2WSDLTask. This class is in the axis2 classpath.
+    * *generate.service*: This target generates the axis2 archive (which is nothing but a jar actually) in the build folder under the name *StockQuoteService.aar*, which includes the *services.xml* and the compiled classes. You can use this  *.aar file to deploy the service through axis2 webapp. The same target is followed by a simple copy of the package (StockQuoteService.aar) to the folder AXIS2_HOME/repository/services (if you use Axis2 standalone) or to the AXIS2_HOME_TOMCAT/WEB-INF/services, in our case.  This is the deployment. We can also do this manually if we wish.  
+    * *generate.client*: This target generates the client side classes. Make sure you run this after executing generate.wsdl so the MyService.wsdl file is present in the build folder.
 
 **Observation:** in the build.xml, replace the properties AXIS2_HOME and AXIS2_TOMCAT_HOME to make it point to your local installations. If you are didn't download the binary version of axis2, remove all the references to AXIS2_HOME. 
 
@@ -188,10 +191,16 @@ Try it!
 
 * Expose the HealthProfileReader through an axis2 web service
 
-### Homework: things To Do BEFORE NEXT session
-
-
 ## Additional notes
+
+### Why do we need apache ant? 
+
+Can't we just use an IDE and forget about?. Yes, we can use an IDE and forget about it. The purpose for this lab, however, is to understand workflow that we follow when creating first a java program and then making it available through a service: (the generation of the service specification, the compilation of the java program, how it all works together, etc.) 
+
+### Other suggested tutorials/articles
+
+* [Java Introduction (if you have never seen it before)][6]
+* [ANT extended tutorial][7]
 
 ### Installing Tomcat and Axis2 (a copy of the notes for the first Lab)
 
@@ -219,10 +228,10 @@ Try it!
 ```
 * Now, go to http://localhost:8080/ and if you see the apache tomcat cat, you are fine. 
 * **Next step:** donwload and install [axis2][5]. You can either download the war package directly, or download the binary distribution, unzip it somewhere and then build the war. Let's do the second. For this lab session, I downloaded the axis2-1.6.2-bin.zip distribution. 
-
+```
     unzip axis2-1.6.2-bin.zip  
     mv axis2-1.6.2 /opt
-
+```
 **Observation:** there might be problems with the classpath if you are using only the war distribution. One way of checking exactly what you have in the class path is running *ant SOME_EXISTING_TARGET -diagnostics*. To avoid potential problems, use the binary distribution. 
 
 * Now, you need to enter the weabpp folder in the axis home and create the package war of axis2. How? **Using ant** ;-)
@@ -259,3 +268,5 @@ Try it!
 [3]: https://drive.google.com/file/d/0B7ShzcEnCJFNNWttdGRvZmpIZUE/edit?usp=sharing
 [4]: http://tomcat.apache.org/
 [5]: http://axis.apache.org/axis2/java/core/download.cgi
+[6]: http://www.vogella.com/articles/JavaIntroduction/article.html#firstjava
+[7]: http://www.vogella.com/articles/ApacheAnt/article.html#antoverview_definition
