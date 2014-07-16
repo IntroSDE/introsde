@@ -36,8 +36,9 @@ $ git fetch upstream   $ git merge upstream/master
 * XPATH is one of the ways for reading a XML document tree 
 * XPath is a *query language* that uses *path expressions* to navigate the XML a query information inside them. 
 * To learn XPATH by doing, open this [online evaluator][4] and try on it each of the examples listed below. 
-* Copy the content of *books.xml* (in the Example folder) and paste it in the “Xml Field”
+* Copy the content of *books.xml* (in the Example folder) and paste it in the ���Xml Field���
 * Let's start with this example to get the node *publisher* from the first *book*
+
       ```
       /bookstore/book[1]/publisher
       ```
@@ -45,23 +46,31 @@ $ git fetch upstream   $ git merge upstream/master
   * / by itself means the whole document
   * A path without / in the beginning is a path that starts from the current element
   * Example (to try on the website):
+
     ``` 
     /bookstore/book/title
     ```
 
 * **Descendant path** is a path that begins with // an can start from anywhere
     * For example, try to selects all the title elements in the document
+
     ```
     //title
     ``` 
 
 * **Predicates** are used to find specific nodes, or nodes that contains specific values using [] (also known as filters)
-    * Examples: 
-```
-/bookstore/book[1]/bookstore/book[last()] /bookstore/book[position()<3]/bookstore/book[price>6]
-```
+    * Examples
+    
+    ```
+    /bookstore/book[1]
+    /bookstore/book[last()]
+    /bookstore/book[position()<3]
+    /bookstore/book[price>6]
+    ``` 
+    
 * **Attributes** can also be selected by themselves or to find elements that have a certain attribute value by using *@* inside predicates
     * Examples: 
+    
     ```
     //@year    //book[@year>2000]
     ```
@@ -71,17 +80,20 @@ $ git fetch upstream   $ git merge upstream/master
     * node() matches all nodes
     * text() matches all text nodes
     * Examples:
+
     ```     //*    /bookstore/*    //@*    node()    //text()
     ```
 
 * More than one path can be selected with the | operator
     * Examples:
+
     ```    //@year | //book[@year>2000]
    ``` 
     
 * An **Axis** is a set of nodes relative to a given node. 
-    * X::Y means “choose Y from the X axis”
+    * X::Y means ���choose Y from the X axis���
     * Examples:
+    
     ```     //child::book    //child::text()    //child::node()    //ancestor::book    ```
     
 ### XPATH and Java (15 min)
@@ -94,7 +106,7 @@ $ git fetch upstream   $ git merge upstream/master
 
 * Remember, put your code in your local workspace ('myworkspace'), just to avoid future conflicts if things change in the official repository. For this exercise, create a copy of the HealthProfileExample as a starting point. 
 * Make a copy of the HealthProfileReader that replaces the HashMap for people.xml and using Xpath implement:
-    * Methods like getWeight and getHeight given a person’s name and lastname
+    * Methods like getWeight and getHeight given a person���s name and lastname
     * A method that accepts name as parameter and prints persons HealthProfile
     * A method that accepts weight and an operator (=, > , <) as parameters and prints people that fulfill that condition.
 
@@ -103,7 +115,7 @@ $ git fetch upstream   $ git merge upstream/master
 ### Try XPATH to scrape content from a website 
 * Get [scraper][7] (chrome only extension)
 * Go to meteotrentino.it
-* Righclick on top of one of the temperatures and click "Scrape Similar”, which scrapes the content on the page using xpath (the HTML document it is also treated like a DOM tree)
+* Righclick on top of one of the temperatures and click "Scrape Similar���, which scrapes the content on the page using xpath (the HTML document it is also treated like a DOM tree)
 
 
 ### Other suggested resources
