@@ -1,0 +1,22 @@
+{
+  "bookstore": {
+    "book": [
+      {
+        "year": "2011",
+        "title": "A Dance with Dragons",
+        "author": "George R. R. Martin",
+        "publisher": "Voyager Books",
+        "isbn": "978-0553801477",
+        "price": "12.50"
+      },
+      {
+        "year": "2000",
+        "title": "Snow Crash",
+        "author": "Neal Stephenson",
+        "publisher": "Spectra",
+        "isbn": "0553380958",
+        "price": "14.95"
+      }
+    ]
+  }
+}
