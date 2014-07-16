@@ -112,9 +112,9 @@ $ git fetch upstream   $ git merge upstream/master
 * [XML editor with a grid view that shows you XPATH of each node][6]
 
 
-[1]: https://drive.google.com/file/d/0B7ShzcEnCJFNVi1LWERhbVFoQ3c/edit?usp=sharing
-[2]: https://github.com/cdparra/introsde/tree/master/lab02/Example/
-[3]: https://drive.google.com/file/d/0B7ShzcEnCJFNNWttdGRvZmpIZUE/edit?usp=sharing
+[1]: https://drive.google.com/file/d/0B7ShzcEnCJFNeFdGekFlX2xFb3M/edit?usp=sharing
+[2]: https://github.com/cdparra/introsde/tree/master/lab03/Examples/
+[3]: https://drive.google.com/file/d/0B7ShzcEnCJFNaXF4a0VwaF9jUkE/edit?usp=sharing
 [4]: http://xmltoolbox.appspot.com/xpathevaluator.html 
 [5]: http://www.stylusstudio.com/docs/v62/d_xpath15.html
 [6]: http://xmlgrid.net/ 
