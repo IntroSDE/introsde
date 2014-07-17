@@ -1,0 +1,38 @@
+<people>
+    <person personId="1">
+        <firstname>George R. R.</firstname>
+        <lastname>Martin</lastname>
+        <birthdate>1948-09-20</birthdate>
+        <healthprofile>
+            <weitgh>120</weitgh>
+            <height>1.65</height>
+        </healthprofile>
+    </person>
+    <person personId="2">
+        <firstname>Pinco</firstname>
+        <lastname>Pallino</lastname>
+        <birthdate>1991-01-30</birthdate>
+        <healthprofile>
+            <weitgh>80</weitgh>
+            <height>1.80</height>
+        </healthprofile>
+    </person>
+    <person personId="3">
+        <firstname>Pinco</firstname>
+        <lastname>Pallo</lastname>
+        <birthdate>1985-08-22</birthdate>
+        <healthprofile>
+            <weitgh>74</weitgh>
+            <height>1.72</height>
+        </healthprofile>
+    </person>
+    <person personId="4">
+        <firstname>Daniel</firstname>
+        <lastname>Sam</lastname>
+        <birthdate>1979-03-15</birthdate>
+        <healthprofile>
+            <weitgh>70</weitgh>
+            <height>1.70</height>
+        </healthprofile>
+    </person>
+</people>
