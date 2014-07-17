@@ -14,9 +14,11 @@ Links: [PPT slides][1] | [PDF slides][2] | [Source code][3]
 The guiding notes below are a summarized version of what is already on the slides.&nbsp;
 
 * Start by pulling updates from the github repository. In your terminals, execute the following: 
-```
-$ git fetch upstream   $ git merge upstream/master
-```
+
+    ```
+    $ git fetch upstream
+    $ git merge upstream/master
+    ```
 
 ### Using Eclipse (15 min)
 
@@ -39,24 +41,38 @@ $ git fetch upstream   $ git merge upstream/master
     * **Ant Task:** something that ant can execute jobs, such as compile, create jars, copy.
     * **Ant properties:** immutable constants set once and used through the whole scritps
 * Hands on. Follow these steps while looking at the build.xml in parallel in order to understand what does it take to execute each target.  
-    * From the command line run:       ```
-        ant compile
-      ```
-    * We have just executed the targets **init** and **compile**. Now the build folder has some compiled classes that can be execute it. 
-    * The **compile** target has a **depends** attribute equal to **init**, which is shy this target got executed first
-    * You can also execute things. Try:```
+
+* From the command line run:
+    
+    ```
+    ant compile
+    ```
+    
+* We have just executed the targets **init** and **compile**. Now the build folder has some compiled classes that can be execute it. 
+* The **compile** target has a **depends** attribute equal to **init**, which is shy this target got executed first
+* You can also execute things. Try:
+
+    ```
     ant execute-hprofile
-```
-    * Finally, classes can all be packaged in one using jar files. Try it like this.```
+    ```
+    
+* Finally, classes can all be packaged in one using jar files. Try it like this.
+
+    ```
     ant archive
-```
-    * In the build folder, there should be a jar file now (project.jar), whose main class is pointed to the *HealthProfileReader*. To execute it, run:```
+    ```
+    
+* In the build folder, there should be a jar file now (project.jar), whose main class is pointed to the *HealthProfileReader*. To execute it, run:
+
+    ```
     java -jar build/project.jar [parameters of the program]
-```
-    * How about command-line arguments?. Take a look to the target *execute-hprofile-args*. Now run it in the following way: 
-```
+    ```
+    
+* How about command-line arguments?. Take a look to the target *execute-hprofile-args*. Now run it in the following way: 
+    
+    ```
     ant execute-hprofile-args-Dcommand=createNewPerson -Did=45 -Dname=Jane -Dlastname=Doe -Dbirthdate="1987-09-23"
-```
+    ```
 
 ### First Service example with Axis2 (45 min)
 * Axis2 is a **web service** engine that implements both client and server sides of web services (originally, only SOAP; from v2 also REST). 
