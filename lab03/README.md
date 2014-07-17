@@ -110,10 +110,15 @@ The guiding notes below are a summarized version of what is already on the slide
 * Explore the **XPathTest.java** and the **XPathTestAdvance.java** examples
 * Run the programs, add some of the queries in the previous examples and then go for the exercise
 
-### XPATH and Java Exercise (30 min)
-* Remember, put your code in your local workspace ('myworkspace'), just to avoid future conflicts if things change in the official repository. For this exercise, create a copy of the HealthProfileExample as a starting point. 
+### XPATH and Java Exercise 1 (10 min)
+* Remember, put your code in your local workspace ('myworkspace'), just to avoid future conflicts if things change in the official repository. 
+* For this exercise, create a copy of the **XPathTest.java** as a starting point.
+* Modify **XPathTest.java** so that it prints out also the name of authors. 
+
+### XPATH and Java Exercise 2 (30 min)
+* For this exercise, create a copy of the HealthProfileReader example as a starting point.
 * Make a copy of the HealthProfileReader that replaces the HashMap for people.xml and using Xpath implement:
-    * Methods like getWeight and getHeight given a person's name and lastname
+    * Methods like **getWeight** and **getHeight** given a person's name and lastname
     * A method that accepts name as parameter and prints persons HealthProfile
     * A method that accepts weight and an operator (=, > , <) as parameters and prints people that fulfill that condition.
 
