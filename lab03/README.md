@@ -115,12 +115,354 @@ The guiding notes below are a summarized version of what is already on the slide
 * For this exercise, create a copy of the **XPathTest.java** as a starting point.
 * Modify **XPathTest.java** so that it prints out also the name of authors. 
 
-### XPATH and Java Exercise 2 (30 min)
+### XPATH and Java Exercise 2 (25 min)
 * For this exercise, create a copy of the HealthProfileReader example as a starting point.
 * Make a copy of the HealthProfileReader that replaces the HashMap for people.xml and using Xpath implement:
     * Methods like **getWeight** and **getHeight** given a person's name and lastname
     * A method that accepts name as parameter and prints persons HealthProfile
     * A method that accepts weight and an operator (=, > , <) as parameters and prints people that fulfill that condition.
+
+### XML Schemas Introduction (25 min)
+
+
+
+
+* An XML schema describes the structure of an XML document
+* An XML Schema is written in XML
+* It is an XMLbased alternative to DTD (document type definition - which is yet another set of markups to learn)
+* XML Schema is a W3C Recommendation: http://www.w3.org/2001/XMLSchema
+
+---
+
+## XSD: XML Schema Definition (1)
+
+* An XML Schema defines:
+    * **elements** that can appear in a document
+    * **attributes** that can appear in a document
+    * **data types** for elements and attributes
+    * which elements are **child** elements
+    * the **order** of child elements
+    * whether an element is **empty** or can include **text**
+    * **default and fixed values** for elements and attributes
+
+---
+
+## Example 1: XSD
+ 
+```xml 
+<xsd:schema 
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:complexType name="personType">
+        <xsd:sequence>
+            <xsd:element name="firstName" type="xsd:string"/>
+            <xsd:element name="lastName"  type="xsd:string"/>
+            <xsd:element name="birthDate" type="xsd:date"/>
+            <xsd:element name="age"       type="xsd:integer"
+                minOccurs="0" maxOccurs="1"/>
+            <xsd:element name="healthProfile" type="healthProfileType"
+                minOccurs="0" maxOccurs="1"/>
+        </xsd:sequence>
+        <xsd:attribute name="id" type="xsd:integer"/>
+    </xsd:complexType>
+    <xsd:complexType name="healthProfileType">
+        <xsd:sequence>
+            <xsd:element name="weight" type="xsd:decimal"/>
+            <xsd:element name="height"  type="xsd:decimal"/>
+         </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="person" type="personType"/>
+</xsd:schema>
+```
+
+---
+
+## Example 1: Validate XML against XSD (1)
+
+* Open and XML/XSD validation tool online: http://www.utilities-online.info/xsdvalidation/#.Ul0rkGRvj40
+* Copy the content [Example 1 XML Schema](https://github.com/cdparra/introsde2013/blob/master/lab4/Example1.xsd) and [Example 1 XML instance](https://github.com/cdparra/introsde2013/blob/master/lab4/Example1.xml)
+* Validate XML againsts XSD
+
+---
+
+
+## Example 1: XSD (2)
+
+```xml 
+    <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        ...
+   </xsd:schema>
+```
+
+* **xmlns:xsd=""** indicates that the elements and data types used in this schema 
+    * come from the *http://www.w3.org/2001/XMLSchema* namespace
+    * should be prefixed with xsd:
+
+---
+
+
+## XML Schema built-in data types
+
+* The most common built-in data types are:
+    * xsd:string
+    * xsd:decimal
+    * xsd:integer
+    * xsd:boolean
+    * xsd:date
+    * xsd:time
+* The complete built-in data type hierarchy
+    * http://www.w3.org/TR/xmlschema-2/#built-in-datatypes
+
+---
+
+
+## Example 1: XSD (3)
+
+* XML Elements
+```xml 
+    <firstName>George R. R.</firstName>
+    <lastName>Martin</lastName>
+    <birthDate>1970-06-21</birthDate>
+```
+
+* Corresponding XSD definitions
+```xml
+    <xsd:element name="firstName" type="xsd:string" />
+    <xsd:element name="lastName"  type="xsd:string" />
+    <xsd:element name="birthDate" type="xsd:date"   />
+```
+
+---
+
+## Complex Data Types
+
+* A complex element is an XML element that contains other elements and/or attributes. 
+* There are four kinds of complex elements:
+    * empty elements
+    * elements that contain only other elements
+    * elements that contain only text (and attributes)
+    * elements that contain both other elements and text
+* For each kind, there are many ways to write it in a XSD document. We see only one way, that is compatible with JAXB
+
+---
+
+## Example 1: XSD (4)
+
+### Empty Elements
+
+* XML Elements
+```xml 
+    <person id="12345">
+    </person>
+```
+
+* Corresponding XSD definitions
+```xml 
+    <xsd:element name="person" type="personType"/>
+    <xsd:complexType name="personType">c
+    </xsd:complexType>
+```
+
+---
+
+
+## Example 1: XSD (5)
+
+### Elements that contain only Elements 
+
+* XML Elements
+```xml 
+    <person>
+        <firstName>George R. R.</firstName>
+        <lastName>Martin</lastName>
+        <birthDate>1970-06-21</birthDate>
+    </person>
+```
+
+* Corresponding XSD definitions
+```xml 
+    <xsd:element name="person" type="personType"/>
+    <xsd:complexType name="personType">
+        <xsd:sequence>
+            <xsd:element name="firstName" type="xsd:string"/>
+            <xsd:element name="lastName"  type="xsd:string"/>
+            <xsd:element name="birthDate" type="xsd:date"/>
+         </xsd:sequence>
+    </xsd:complexType>
+```
+
+---
+
+
+## Example 2: XSD (6)
+
+### Elements that contain only Text and Attributes 
+
+* XML Elements
+```xml 
+    <shoesize country="france">35</shoesize>
+```
+
+* Corresponding XSD definitions
+```xml 
+    <xsd:element name="shoesize" type="shoesizeType"/>
+    <xsd:complexType name="shoesizeType">
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:integer">
+                <xsd:attribute name="country" type="xsd:string"/>
+            </xsd:extension>
+         </xsd:simpleContent>
+    </xsd:complexType>
+```
+
+---
+
+## Example 3: XSD (7)
+
+### Elements that contain both elements and text 
+
+* XML Elements
+```xml
+<letter>
+  Dear Mr.<name>John Smith</name>.
+  Your order <orderid>1032</orderid>
+  will be shipped on <shipdate>2001-07-13</shipdate>.
+</letter>
+```
+
+* Corresponding XSD definitions
+```xml 
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:element name="letter">
+  <xsd:complexType mixed="true">
+    <xsd:sequence>
+      <xsd:element name="name" type="xsd:string"/>
+      <xsd:element name="orderid" type="xsd:positiveInteger"/>
+      <xsd:element name="shipdate" type="xsd:date"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:element>
+</xsd:schema>
+```
+
+* **What was new here?**
+
+---
+
+## XSD Indicators
+
+* **Order indicators** are used to define the order of the elements
+    * all, choice, sequence
+* **Occurrence indicators** are used to define how often an element can occur
+    * maxOccurs, minOccurs
+* **Group indicators** are used to define related sets of elements.
+    * group name, attributeGroup name
+
+
+---
+
+## Example 4: XSD (8)
+
+### Group names
+
+```xml 
+    <xsd:group name="persongroup">
+        <xsd:sequence>
+            <xsd:element name="firstName" type="xsd:string"/>
+            <xsd:element name="lastName"  type="xsd:string"/>
+            <xsd:element name="birthDate" type="xsd:date"/>
+         </xsd:sequence>
+    </xsd:group>
+    <xsd:element name="person" type="personinfo"/>
+    <xsd:complexType name="personinfo" >
+        <xsd:sequence>
+            <xsd:group ref="persongroup"/>
+            <xsd:element name="country" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+```
+
+---
+
+
+## Example 5: XSD (9)
+
+### AttributeGroup name
+
+```xml 
+    <xsd:attributeGroup name="elementAttrGroup">
+        <xsd:attribute name="refURI" type="xsd:anyURI" use="optional">
+        </xsd:attribute>
+        <xsd:attribute name="id" type="xsd:integer">
+        </xsd:attribute>
+    </xsd:attributeGroup>
+    <xsd:complexType name="SomeEntity" >
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+                <xsd:attributeGroup ref="elementAttrGroup"/>
+            </xsd:extension>
+         </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:element name="root" type="SomeEntity"/>
+```
+
+## Exercise 0
+
+* Add a HealthProfile to the Example1.xml and make sure this is valid with respect to the Example1.xsd
+
+
+---
+
+## Exercise 1
+
+* Go to the online validator: http://www.utilities-online.info/xsdvalidation/#.Ul0rkGRvj40
+* Copy [Example 5](https://github.com/cdparra/introsde2013/blob/master/lab4/Example5.xsd) in the XSD Schema.
+* Create an XML instance of this schema that is **valid**
+
+---
+
+## Example 6: XSD (10)
+
+### Sustitution
+
+```xml 
+<xs:element name="name" type="xs:string"/>
+<xs:element name="navn" substitutionGroup="name"/>
+```
+
+```xml
+<xs:element name="name" type="xs:string"/>
+<xs:element name="navn" substitutionGroup="name"/>
+<xs:complexType name="custinfo">
+  <xs:sequence>
+    <xs:element ref="name"/>
+  </xs:sequence>
+</xs:complexType>
+<xs:element name="customer" type="custinfo"/>
+<xs:element name="kunde" substitutionGroup="customer"/>
+```
+
+* Valid XMLs
+
+```xml
+<customer>
+  <name>John Smith</name>
+</customer>
+```
+
+or
+
+```xml
+<kunde>
+  <navn>John Smith</navn>
+</kunde>
+```
+
+
+
+
+
+
+
 
 ## Additional notes
 
