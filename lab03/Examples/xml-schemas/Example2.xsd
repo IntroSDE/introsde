@@ -1,0 +1,10 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="shoesize" type="shoesizeType"/>
+    <xsd:complexType name="shoesizeType">
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:integer">
+                <xsd:attribute name="country" type="xsd:string"/>
+            </xsd:extension>
+         </xsd:simpleContent>
+    </xsd:complexType>
+</xsd:schema>

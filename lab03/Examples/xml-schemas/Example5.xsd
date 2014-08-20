@@ -1,0 +1,16 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <xsd:attributeGroup name="elementAttrGroup">
+        <xsd:attribute name="refURI" type="xsd:anyURI" use="optional">
+        </xsd:attribute>
+        <xsd:attribute name="id" type="xsd:integer">
+        </xsd:attribute>
+    </xsd:attributeGroup>
+    <xsd:complexType name="SomeEntity" >
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+                <xsd:attributeGroup ref="elementAttrGroup"/>
+            </xsd:extension>
+         </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:element name="root" type="SomeEntity"/>
+</xsd:schema>

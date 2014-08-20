@@ -1,0 +1,16 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:group name="persongroup">
+        <xsd:sequence>
+            <xsd:element name="firstName" type="xsd:string"/>
+            <xsd:element name="lastName"  type="xsd:string"/>
+            <xsd:element name="birthDate" type="xsd:date"/>
+         </xsd:sequence>
+    </xsd:group>
+    <xsd:element name="person" type="personinfo"/>
+    <xsd:complexType name="personinfo" >
+        <xsd:sequence>
+            <xsd:group ref="persongroup"/>
+            <xsd:element name="country" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>
