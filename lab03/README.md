@@ -120,12 +120,12 @@ The guiding notes below are a summarized version of what is already on the slide
 * Make a copy of the HealthProfileReader that replaces the HashMap for people.xml and using Xpath implement:
     * Methods like **getWeight** and **getHeight** given a person's name and lastname
     * A method that accepts name as parameter and prints persons HealthProfile
-    * A method that accepts weight and an operator (=, > , <) as parameters and prints people that fulfill that condition.
+    * A method that accepts weight and an operator (=, > , <) as parameters and prints people that fulfils that condition.
 
 ### XML Schemas Introduction (25 min)
 * An XML schema describes the structure of an XML document
 * An XML Schema is written in XML
-* It is an XMLbased alternative to DTD (document type definition - which is yet another set of markups to learn)
+* It is an XML-based alternative to DTD (document type definition - which is yet another set of markups to learn)
 * An XML Schema defines:
     * **elements** and **attributes** that can appear in a document
     * **data types** for elements and attributes
@@ -329,18 +329,16 @@ The guiding notes below are a summarized version of what is already on the slide
     </customer>
     ```
 
-or
-
     ```xml
-    <kunde>
-        <navn>John Smith</navn>
-    </kunde>
+        <kunde>
+            <navn>John Smith</navn>
+        </kunde>
     ```
 
 
-[1]: https://drive.google.com/file/d/0B7ShzcEnCJFNeFdGekFlX2xFb3M/edit?usp=sharing
-[2]: https://github.com/cdparra/introsde/tree/master/lab03/Examples/
-[3]: https://drive.google.com/file/d/0B7ShzcEnCJFNaXF4a0VwaF9jUkE/edit?usp=sharing
+[1]: https://drive.google.com/file/d/0B7ShzcEnCJFNVi1LWERhbVFoQ3c/edit?usp=sharing
+[2]: https://github.com/cdparra/introsde/tree/master/lab02/Example/
+[3]: https://drive.google.com/file/d/0B7ShzcEnCJFNNWttdGRvZmpIZUE/edit?usp=sharing
 [4]: http://xmltoolbox.appspot.com/xpathevaluator.html 
 [5]: http://www.stylusstudio.com/docs/v62/d_xpath15.html
 [6]: http://xmlgrid.net/ 
