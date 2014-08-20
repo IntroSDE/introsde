@@ -1,4 +1,4 @@
-# LAB03: XML & XPATH
+    # LAB03: XML & XPATH
 
 **Introduction to Service Design and Engineering | University of Trento | [Webpage](https://sites.google.com/site/introsdeunitn/lab-sessions/lab-session-3 "Permalink to LAB03: XML and XPATH")**
 
@@ -59,7 +59,7 @@ The guiding notes below are a summarized version of what is already on the slide
     ``` 
 
 * **Predicates** are used to find specific nodes, or nodes that contains specific values using [] (also known as filters). For Example:
-    
+   
     ```
     /bookstore/book[1]
     /bookstore/book[last()]
@@ -123,86 +123,47 @@ The guiding notes below are a summarized version of what is already on the slide
     * A method that accepts weight and an operator (=, > , <) as parameters and prints people that fulfill that condition.
 
 ### XML Schemas Introduction (25 min)
-
-
-
-
 * An XML schema describes the structure of an XML document
 * An XML Schema is written in XML
 * It is an XMLbased alternative to DTD (document type definition - which is yet another set of markups to learn)
-* XML Schema is a W3C Recommendation: http://www.w3.org/2001/XMLSchema
-
----
-
-## XSD: XML Schema Definition (1)
-
 * An XML Schema defines:
-    * **elements** that can appear in a document
-    * **attributes** that can appear in a document
+    * **elements** and **attributes** that can appear in a document
     * **data types** for elements and attributes
     * which elements are **child** elements
     * the **order** of child elements
     * whether an element is **empty** or can include **text**
     * **default and fixed values** for elements and attributes
 
----
+### XML Schemas Examples
+* Open Example/xml-schemas/Example1.xsd, and explore its content.  
+* You will find information on the slides what each part of the XSD file indicates (this will be further explained in detail during [one of the theoretical lectures](https://sites.google.com/site/introsdeunitn/home/introduction-to-xml))
 
-## Example 1: XSD
- 
-```xml 
-<xsd:schema 
-    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <xsd:complexType name="personType">
-        <xsd:sequence>
-            <xsd:element name="firstName" type="xsd:string"/>
-            <xsd:element name="lastName"  type="xsd:string"/>
-            <xsd:element name="birthDate" type="xsd:date"/>
-            <xsd:element name="age"       type="xsd:integer"
-                minOccurs="0" maxOccurs="1"/>
-            <xsd:element name="healthProfile" type="healthProfileType"
-                minOccurs="0" maxOccurs="1"/>
-        </xsd:sequence>
-        <xsd:attribute name="id" type="xsd:integer"/>
-    </xsd:complexType>
-    <xsd:complexType name="healthProfileType">
-        <xsd:sequence>
-            <xsd:element name="weight" type="xsd:decimal"/>
-            <xsd:element name="height"  type="xsd:decimal"/>
-         </xsd:sequence>
-    </xsd:complexType>
-    <xsd:element name="person" type="personType"/>
-</xsd:schema>
-```
-
----
-
-## Example 1: Validate XML against XSD (1)
-
-* Open and XML/XSD validation tool online: http://www.utilities-online.info/xsdvalidation/#.Ul0rkGRvj40
-* Copy the content [Example 1 XML Schema](https://github.com/cdparra/introsde2013/blob/master/lab4/Example1.xsd) and [Example 1 XML instance](https://github.com/cdparra/introsde2013/blob/master/lab4/Example1.xml)
-* Validate XML againsts XSD
-
----
+### Exercises
+* **Exercise 1**
+    * Open this [XML/XSD validation tool online][8]
+    * Copy the content of the first example Example/xml-schemas/Example1.xml and validate its against its XSD
+    * Modify the Example 1 by adding a **Health Profile** as defined in the XSD, then validate it 
+* **Exercise 2**
+    * Go to the [online validator][8] 
+    * Copy the Example 5 xsd in the examples folder into the XSD Schema.
+    * Create a valid XML instance of this schema
+* Check the other examples and the extended reference at the end of this page for more information
 
 
-## Example 1: XSD (2)
+## Additional notes and examples
 
-```xml 
-    <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-        ...
-   </xsd:schema>
-```
+### Try XPATH to scrape content from a website 
+* Get [scraper][7] (chrome only extension)
+* Go to meteotrentino.it
+* Righclick on top of one of the temperatures and click "Scrape Similar", which scrapes the content on the page using xpath (the HTML document it is also treated like a DOM tree)
 
-* **xmlns:xsd=""** indicates that the elements and data types used in this schema 
-    * come from the *http://www.w3.org/2001/XMLSchema* namespace
-    * should be prefixed with xsd:
+### Other suggested resources
+* [XPATH reference][5]
+* [XML editor with a grid view that shows you XPATH of each node][6]
 
----
+### More of XML/XSD reference and examples
 
-
-## XML Schema built-in data types
-
-* The most common built-in data types are:
+* XSD most common built-in data types are:
     * xsd:string
     * xsd:decimal
     * xsd:integer
@@ -211,160 +172,101 @@ The guiding notes below are a summarized version of what is already on the slide
     * xsd:time
 * The complete built-in data type hierarchy
     * http://www.w3.org/TR/xmlschema-2/#built-in-datatypes
+* Complex Data Types
+    * A complex element is an XML element that contains other elements and/or attributes. 
+    * There are four kinds of complex elements:
+        * empty elements
+        * elements that contain only other elements
+        * elements that contain only text (and attributes)
+        * elements that contain both other elements and text
+* Empty Elements (See XML example 1 + corresponding XSD)
 
----
+    ```xml 
+        <person id="12345">
+        </person>
+    ```
 
+    ```xml 
+        <xsd:element name="person" type="personType"/>
+        <xsd:complexType name="personType">c
+        </xsd:complexType>
+    ```
 
-## Example 1: XSD (3)
+* Elements that contain only Elements (See XML example 1 + corresponding XSD) 
+    
+    ```xml 
+        <person>
+            <firstName>George R. R.</firstName>
+            <lastName>Martin</lastName>
+            <birthDate>1970-06-21</birthDate>
+        </person>
+    ```
 
-* XML Elements
-```xml 
-    <firstName>George R. R.</firstName>
-    <lastName>Martin</lastName>
-    <birthDate>1970-06-21</birthDate>
-```
-
-* Corresponding XSD definitions
-```xml
-    <xsd:element name="firstName" type="xsd:string" />
-    <xsd:element name="lastName"  type="xsd:string" />
-    <xsd:element name="birthDate" type="xsd:date"   />
-```
-
----
-
-## Complex Data Types
-
-* A complex element is an XML element that contains other elements and/or attributes. 
-* There are four kinds of complex elements:
-    * empty elements
-    * elements that contain only other elements
-    * elements that contain only text (and attributes)
-    * elements that contain both other elements and text
-* For each kind, there are many ways to write it in a XSD document. We see only one way, that is compatible with JAXB
-
----
-
-## Example 1: XSD (4)
-
-### Empty Elements
-
-* XML Elements
-```xml 
-    <person id="12345">
-    </person>
-```
-
-* Corresponding XSD definitions
-```xml 
-    <xsd:element name="person" type="personType"/>
-    <xsd:complexType name="personType">c
-    </xsd:complexType>
-```
-
----
-
-
-## Example 1: XSD (5)
-
-### Elements that contain only Elements 
-
-* XML Elements
-```xml 
-    <person>
-        <firstName>George R. R.</firstName>
-        <lastName>Martin</lastName>
-        <birthDate>1970-06-21</birthDate>
-    </person>
-```
-
-* Corresponding XSD definitions
-```xml 
-    <xsd:element name="person" type="personType"/>
-    <xsd:complexType name="personType">
+    ```xml 
+        <xsd:element name="person" type="personType"/>
+        <xsd:complexType name="personType">
         <xsd:sequence>
             <xsd:element name="firstName" type="xsd:string"/>
             <xsd:element name="lastName"  type="xsd:string"/>
             <xsd:element name="birthDate" type="xsd:date"/>
          </xsd:sequence>
-    </xsd:complexType>
-```
+        </xsd:complexType>  
+    ```
 
----
-
-
-## Example 2: XSD (6)
-
-### Elements that contain only Text and Attributes 
+* Elements that contain only Text and Attributes (See XML example 2 + corresponding XSD)
 
 * XML Elements
-```xml 
-    <shoesize country="france">35</shoesize>
-```
 
-* Corresponding XSD definitions
-```xml 
-    <xsd:element name="shoesize" type="shoesizeType"/>
-    <xsd:complexType name="shoesizeType">
-        <xsd:simpleContent>
-            <xsd:extension base="xsd:integer">
-                <xsd:attribute name="country" type="xsd:string"/>
-            </xsd:extension>
-         </xsd:simpleContent>
-    </xsd:complexType>
-```
+    ```xml 
+        <shoesize country="france">35</shoesize>
+    ```
 
----
+    ```xml 
+        <xsd:element name="shoesize" type="shoesizeType"/>
+        <xsd:complexType name="shoesizeType">
+            <xsd:simpleContent>
+                <xsd:extension base="xsd:integer">
+                    <xsd:attribute name="country" type="xsd:string"/>
+                </xsd:extension>
+            </xsd:simpleContent>
+        </xsd:complexType>
+    ```
 
-## Example 3: XSD (7)
+* Elements that contain both elements and text (See XML example 3 + corresponding XSD)
 
-### Elements that contain both elements and text 
+    ```xml
+    <letter>
+        Dear Mr.<name>John Smith</name>.
+        Your order <orderid>1032</orderid>
+        will be shipped on <shipdate>2001-07-13</shipdate>.
+    </letter>
+    ```
 
-* XML Elements
-```xml
-<letter>
-  Dear Mr.<name>John Smith</name>.
-  Your order <orderid>1032</orderid>
-  will be shipped on <shipdate>2001-07-13</shipdate>.
-</letter>
-```
+    ```xml 
+    <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <xsd:element name="letter">
+            <xsd:complexType mixed="true">
+                <xsd:sequence>
+                    <xsd:element name="name" type="xsd:string"/>
+                    <xsd:element name="orderid" type="xsd:positiveInteger"/>
+                    <xsd:element name="shipdate" type="xsd:date"/>
+                </xsd:sequence> 
+            </xsd:complexType>
+        </xsd:element>  
+    </xsd:schema>
+    ```
+    
+* **XSD Indicators:**
+    * **Order indicators** are used to define the order of the elements
+        * all, choice, sequence 
+    * **Occurrence indicators** are used to define how often an element can occur
+        * maxOccurs, minOccurs
+    * **Group indicators** are used to define related sets of elements.
+        * group name, attributeGroup name
 
-* Corresponding XSD definitions
-```xml 
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-<xsd:element name="letter">
-  <xsd:complexType mixed="true">
-    <xsd:sequence>
-      <xsd:element name="name" type="xsd:string"/>
-      <xsd:element name="orderid" type="xsd:positiveInteger"/>
-      <xsd:element name="shipdate" type="xsd:date"/>
-    </xsd:sequence>
-  </xsd:complexType>
-</xsd:element>
-</xsd:schema>
-```
+* Group names (See XML example 4 + corresponding XSD)
 
-* **What was new here?**
-
----
-
-## XSD Indicators
-
-* **Order indicators** are used to define the order of the elements
-    * all, choice, sequence
-* **Occurrence indicators** are used to define how often an element can occur
-    * maxOccurs, minOccurs
-* **Group indicators** are used to define related sets of elements.
-    * group name, attributeGroup name
-
-
----
-
-## Example 4: XSD (8)
-
-### Group names
-
-```xml 
+    ```xml 
     <xsd:group name="persongroup">
         <xsd:sequence>
             <xsd:element name="firstName" type="xsd:string"/>
@@ -379,16 +281,11 @@ The guiding notes below are a summarized version of what is already on the slide
             <xsd:element name="country" type="xsd:string"/>
         </xsd:sequence>
     </xsd:complexType>
-```
+    ```
 
----
+* AttributeGroup name (See XML example 5 + corresponding XSD)
 
-
-## Example 5: XSD (9)
-
-### AttributeGroup name
-
-```xml 
+    ```xml 
     <xsd:attributeGroup name="elementAttrGroup">
         <xsd:attribute name="refURI" type="xsd:anyURI" use="optional">
         </xsd:attribute>
@@ -403,78 +300,42 @@ The guiding notes below are a summarized version of what is already on the slide
          </xsd:simpleContent>
     </xsd:complexType>
     <xsd:element name="root" type="SomeEntity"/>
-```
+    ```
 
-## Exercise 0
+* Sustitution
 
-* Add a HealthProfile to the Example1.xml and make sure this is valid with respect to the Example1.xsd
+    ```xml 
+    <xs:element name="name" type="xs:string"/>
+    <xs:element name="navn" substitutionGroup="name"/>
+    ```
 
-
----
-
-## Exercise 1
-
-* Go to the online validator: http://www.utilities-online.info/xsdvalidation/#.Ul0rkGRvj40
-* Copy [Example 5](https://github.com/cdparra/introsde2013/blob/master/lab4/Example5.xsd) in the XSD Schema.
-* Create an XML instance of this schema that is **valid**
-
----
-
-## Example 6: XSD (10)
-
-### Sustitution
-
-```xml 
-<xs:element name="name" type="xs:string"/>
-<xs:element name="navn" substitutionGroup="name"/>
-```
-
-```xml
-<xs:element name="name" type="xs:string"/>
-<xs:element name="navn" substitutionGroup="name"/>
-<xs:complexType name="custinfo">
-  <xs:sequence>
-    <xs:element ref="name"/>
-  </xs:sequence>
-</xs:complexType>
-<xs:element name="customer" type="custinfo"/>
-<xs:element name="kunde" substitutionGroup="customer"/>
+    ```xml
+    <xs:element name="name" type="xs:string"/>
+    <xs:element name="navn" substitutionGroup="name"/>
+    <xs:complexType name="custinfo">
+        <xs:sequence>
+            <xs:element ref="name"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="customer" type="custinfo"/>
+    <xs:element name="kunde" substitutionGroup="customer"/>
 ```
 
 * Valid XMLs
 
-```xml
-<customer>
-  <name>John Smith</name>
-</customer>
-```
+    ```xml
+    <customer>
+        <name>John Smith</name> 
+    </customer>
+    ```
 
 or
 
-```xml
-<kunde>
-  <navn>John Smith</navn>
-</kunde>
-```
-
-
-
-
-
-
-
-
-## Additional notes
-
-### Try XPATH to scrape content from a website 
-* Get [scraper][7] (chrome only extension)
-* Go to meteotrentino.it
-* Righclick on top of one of the temperatures and click "Scrape Similar", which scrapes the content on the page using xpath (the HTML document it is also treated like a DOM tree)
-
-
-### Other suggested resources
-* [XPATH reference][5]
-* [XML editor with a grid view that shows you XPATH of each node][6]
+    ```xml
+    <kunde>
+        <navn>John Smith</navn>
+    </kunde>
+    ```
 
 
 [1]: https://drive.google.com/file/d/0B7ShzcEnCJFNVi1LWERhbVFoQ3c/edit?usp=sharing
@@ -484,3 +345,4 @@ or
 [5]: http://www.stylusstudio.com/docs/v62/d_xpath15.html
 [6]: http://xmlgrid.net/ 
 [7]: https://chrome.google.com/webstore/detail/scraper/mbigbapnjcgaffohmbkdlecaccepngjd
+[8]: http://www.utilities-online.info/xsdvalidation/#.Ul0rkGRvj40
