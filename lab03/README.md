@@ -1,4 +1,4 @@
-# LAB03: XML & XPATH
+# LAB03: XML, XPATH & XML Schemas
 
 **Introduction to Service Design and Engineering | University of Trento | [Webpage](https://sites.google.com/site/introsdeunitn/lab-sessions/lab-session-3 "Permalink to LAB03: XML and XPATH")**
 
