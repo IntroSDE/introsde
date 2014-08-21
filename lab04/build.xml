@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="JAXBExample" default="compile" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant">
+	<!-- ================================= 
+	
+	   TO USE IVY IN YOUR PROJECTS IN ORDER TO GET LIBRARY DEPENDENCIES, MAKE SURE THE FOLLOWING LINES ARE
+	   IN YOUR BUILD.XML UNTILL 'IVY-END-LINE'
+	    -->
+
+	<property name="ivy.install.version" value="2.4.0-rc1" />
+	<property name="ivy.jar.dir" value="${basedir}/ivy" />
+	<property name="ivy.jar.file" value="${ivy.jar.dir}/ivy.jar" />
+	<property name="build.dir" value="build" />
+	<property name="src.dir" value="Examples/src" />
+	<property name="lib.dir" value="lib" />
+	<property name="xjc.package" value="bookstore.generated" />
+
+	<!-- Change the value of this property based on the path where you put JAXB-->
+	<property name="jaxb.home" value="/opt/jaxb-ri-2.2.6" />
+
+	<path id="ivy.lib">
+		<pathelement location="${ivy.jar.file}" />
+	</path>
+
+	<taskdef uri="antlib:fr.jayasoft.ivy.ant" resource="fr/jayasoft/ivy/ant/antlib.xml" classpathref="ivy.lib"/>
+	<!--    <taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant" classpathref="ivy.jar.file" />-->
+
+	<!-- paths used for compilation and run  -->
+	<path id="lib.path.id">
+		<fileset dir="${lib.dir}" />
+	</path>
+	<path id="run.path.id">
+		<path refid="lib.path.id" />
+		<path location="${build.dir}" />
+	</path>
+
+	<!-- ================================= 
+	          target: resolve              
+	         ================================= -->
+	<target name="resolve" description="--> retrieve dependencies with ivy">
+		<ivy:retrieve pattern="${lib.dir}/[artifact].jar"/>
+	</target>
+
+	<!-- 'IVY-END-LINE' -->
+	<target name="init" depends="resolve">
+		<echo message="Init has been called" />
+		<mkdir dir="${build.dir}" />
+		<echo message="${build.dir} has been created" />
+	</target>
+
+	<target name="clean">
+		<echo message="Clean has been called" />
+		<delete dir="${build.dir}" />
+		<echo message="${build.dir} has been deleted" />
+		<delete dir="${src.dir}/${xjc.package}" />
+		<echo message="${src.dir}/${xjc.package} has been deleted" />
+		<delete file="catalog.xml" />
+		<echo message="catalog.xml has been deleted" />
+	</target>
+
+
+	<target name="generate" depends="init">
+		<taskdef name="xjc" classname="com.sun.tools.xjc.XJCTask" classpathref="lib.path.id">
+		</taskdef>
+		<xjc schema="catalog.xsd" destdir="${src.dir}" package="${xjc.package}" />
+	</target>
+
+	<target name="compile" depends="init, generate">
+		<echo message="Compile target has been called" />
+		<javac srcdir="${src.dir}" destdir="${build.dir}" classpathref="lib.path.id" includeAntRuntime="false">
+		</javac>
+	</target>
+
+	<target name="execute.JavaToXML" depends="compile">
+		<echo message="Executing JavaToXML" />
+		<java classname="bookstore.JavaToXML" classpathref="run.path.id" >
+		</java>
+	</target>
+
+	<target name="execute.JAXBMarshaller" depends="compile">
+		<echo message="Executing JAXBMarshaller" />
+		<java classname="bookstore.JAXBMarshaller" classpathref="run.path.id" >
+		</java>
+	</target>
+
+	<target name="execute.JAXBUnMarshaller" depends="compile">
+		<echo message="Executing JAXBUnMarshaller" />
+		<java classname="bookstore.JAXBUnMarshaller" classpathref="run.path.id">
+		</java>
+	</target>
+</project>
