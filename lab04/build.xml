@@ -51,35 +51,33 @@
 		<taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant" classpathref="ivy.lib.path"/>
 	</target>
 
-	<!-- PART 2: General properties definitions (make sure "jaxb.home" points to the folder in your local installation -->
+	<!-- PART 2: General properties definitions -->
 	<property name="build.dir" value="build" />
 	<property name="src.dir" value="Examples/src" />
 	<property name="lib.dir" value="lib" />
 	<property name="xjc.package" value="bookstore.generated" />
-	<property name="jaxb.home" value="/opt/jaxb-ri-2.2.6" />
 
 	<!-- ================================= 
 	          target: resolve downloads the dependencies to your lib folder              
 	         ================================= -->
-	<target name="resolve" description="--> retrieve dependencies with ivy">
-		<ivy:retrieve pattern="${lib.dir}/[artifact].[ext]"/>
+	<target name="resolve" depends="install-ivy" description="--> retrieve dependencies with ivy">
+		<ivy:retrieve pattern="${lib.dir}/[artifact]-[type]-[revision].[ext]"/>
 	</target>
 
-
-	<!--<path id="ivy.lib">
-        <pathelement location="${ivy.jar.file}" />
-    </path>
-
-    <taskdef uri="antlib:fr.jayasoft.ivy.ant" resource="fr/jayasoft/ivy/ant/antlib.xml" classpathref="ivy.lib"/>
-    <taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant" classpathref="ivy.lib" />-->
 
 	<!-- paths where ivy libraries will be downloaded, use them as classpathref in your compilation and running tasks  -->
 	<path id="lib.path.id">
 		<fileset dir="${lib.dir}" />
 	</path>
+
+
 	<path id="run.path.id">
 		<path refid="lib.path.id" />
-		<path location="${build.dir}" />
+		<fileset dir="${build.dir}">
+			<include name="*.class" />
+			<include name="**/*.class" />
+			<exclude name="**/*Test*" />
+		</fileset>
 	</path>
 
 	<!-- PART 3: compilation and execution targets for this session -->
@@ -111,33 +109,88 @@
 		</javac>
 	</target>
 
-	<target name="execute.HPWriter" depends="compile">
+	<target name="execute.HPWriter">
 		<echo message="Executing Health Profile Writer: will produce a people.xml in home folder" />
-		<java classname="HealthProfileWriter" classpathref="run.path.id">
+		<java classname="HealthProfileWriter" classpath="${build.dir}">
+            <classpath>
+                <fileset dir="${lib.dir}">
+                    <include name="**/*.jar" />
+                    <include name="*.jar" />
+                </fileset>
+            </classpath>
 		</java>
 	</target>
 
-	<target name="execute.HPReader" depends="compile">
-        <echo message="Executing Health Profile Reader: will read the people.xml in home folder and print one at a time" />
-        <java classname="HealthProfileReader" classpathref="run.path.id">
-        </java>
-    </target>
+	<target name="execute.HPReader">
+		<echo message="Executing Health Profile Reader: will read the people.xml in home folder and print one at a time" />
+		<java classname="HealthProfileReader" classpath="${build.dir}">
+            <classpath>
+                <fileset dir="${lib.dir}">
+                    <include name="**/*.jar" />
+                    <include name="*.jar" />
+                </fileset>
+            </classpath>
+		</java>
+	</target>
 
-	<target name="execute.JavaToXML" depends="compile">
+	<target name="execute.JavaToXML">
 		<echo message="Executing JavaToXML" />
-		<java classname="bookstore.JavaToXML" classpathref="run.path.id" >
+		<java classname="bookstore.JavaToXML" classpath="${build.dir}">
+			<classpath>
+				<fileset dir="${lib.dir}">
+					<include name="**/*.jar" />
+					<include name="*.jar" />
+				</fileset>
+			</classpath>
 		</java>
 	</target>
 
-	<target name="execute.JAXBMarshaller" depends="compile">
+	<target name="execute.JAXBMarshaller">
 		<echo message="Executing JAXBMarshaller" />
-		<java classname="bookstore.JAXBMarshaller" classpathref="run.path.id" >
+		<java classname="bookstore.JAXBMarshaller" classpath="${build.dir}">
+            <classpath>
+                <fileset dir="${lib.dir}">
+                    <include name="**/*.jar" />
+                    <include name="*.jar" />
+                </fileset>
+            </classpath>
 		</java>
 	</target>
 
-	<target name="execute.JAXBUnMarshaller" depends="compile">
+	<target name="execute.JAXBUnMarshaller">
 		<echo message="Executing JAXBUnMarshaller" />
-		<java classname="bookstore.JAXBUnMarshaller" classpathref="run.path.id">
+		<java classname="bookstore.JAXBUnMarshaller" classpath="${build.dir}">
+            <classpath>
+                <fileset dir="${lib.dir}">
+                    <include name="**/*.jar" />
+                    <include name="*.jar" />
+                </fileset>
+            </classpath>
 		</java>
 	</target>
 </project>
+
+
+
+<!--
+/Users/cristhian/Dropbox/teaching/IntroSDE/Maurizio_IntroSDE/introsde-github/lab04/build/BookMain.class
+/Users/cristhian/Dropbox/teaching/IntroSDE/Maurizio_IntroSDE/introsde-github/lab04/build/HealthProfileJson.class
+/Users/cristhian/Dropbox/teaching/IntroSDE/Maurizio_IntroSDE/introsde-github/lab04/build/HealthProfileReader.class
+/Users/cristhian/Dropbox/teaching/IntroSDE/Maurizio_IntroSDE/introsde-github/lab04/build/HealthProfileWriter.class
+/Users/cristhian/Dropbox/teaching/IntroSDE/Maurizio_IntroSDE/introsde-github/lab04/build/SimplePeople.class
+/Users/cristhian/Dropbox/teaching/IntroSDE/Maurizio_IntroSDE/introsde-github/lab04/build/SimplePerson.class
+/Users/cristhian/Dropbox/teaching/IntroSDE/Maurizio_IntroSDE/introsde-github/lab04/build/bookstore/Catalog.class
+/Users/cristhian/Dropbox/teaching/IntroSDE/Maurizio_IntroSDE/introsde-github/lab04/build/bookstore/JAXBMarshaller.class
+/Users/cristhian/Dropbox/teaching/IntroSDE/Maurizio_IntroSDE/introsde-github/lab04/build/bookstore/JAXBUnMarshaller$CustomValidationEventHandler.class
+/Users/cristhian/Dropbox/teaching/IntroSDE/Maurizio_IntroSDE/introsde-github/lab04/build/bookstore/JAXBUnMarshaller.class
+/Users/cristhian/Dropbox/teaching/IntroSDE/Maurizio_IntroSDE/introsde-github/lab04/build/bookstore/JavaToXML.class
+/Users/cristhian/Dropbox/teaching/IntroSDE/Maurizio_IntroSDE/introsde-github/lab04/build/bookstore/generated/ArticleType.class
+/Users/cristhian/Dropbox/teaching/IntroSDE/Maurizio_IntroSDE/introsde-github/lab04/build/bookstore/generated/CatalogType.class
+/Users/cristhian/Dropbox/teaching/IntroSDE/Maurizio_IntroSDE/introsde-github/lab04/build/bookstore/generated/JournalType.class
+/Users/cristhian/Dropbox/teaching/IntroSDE/Maurizio_IntroSDE/introsde-github/lab04/build/bookstore/generated/ObjectFactory.class
+/Users/cristhian/Dropbox/teaching/IntroSDE/Maurizio_IntroSDE/introsde-github/lab04/build/dao/PeopleStore.class
+/Users/cristhian/Dropbox/teaching/IntroSDE/Maurizio_IntroSDE/introsde-github/lab04/build/model/Book.class
+/Users/cristhian/Dropbox/teaching/IntroSDE/Maurizio_IntroSDE/introsde-github/lab04/build/model/Bookstore.class
+/Users/cristhian/Dropbox/teaching/IntroSDE/Maurizio_IntroSDE/introsde-github/lab04/build/model/HealthProfile.class
+/Users/cristhian/Dropbox/teaching/IntroSDE/Maurizio_IntroSDE/introsde-github/lab04/build/model/Person.class
+ -->

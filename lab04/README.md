@@ -2,7 +2,7 @@
 
 **Introduction to Service Design and Engineering | University of Trento | [Webpage](https://sites.google.com/site/introsdeunitn/lab-sessions/lab-session-4 "Permalink to LAB04: Mapping XML to/from Objects")**
 
-To facilitate the lives of programmers around the world (at least for some), a long time ago we humans created object-oriented programming. But how do we go from objects to serialized representations of them in XML or JSON? And viceversa?. In this session, we will be mapping XML/JSON from and to Objects. What we covered up to here is also the base-ground we need before we start implementing actual services.  
+To facilitate the lives of programmers around the world (at least for some), a long time ago we humans created object-oriented programming. But how do we go from objects to serialized representations of them in XML or JSON? And viceversa?. In this module, we will be mapping XML/JSON from and to Objects. What we covered up to here is also the base-ground we need before we start implementing actual services.  
 
 ## Slides &amp; Code
 
@@ -21,88 +21,82 @@ For the purpose of mapping XML (and JSON) to and from Objects (i.e., serializing
     * **Information for the compiler:** to detect errors or suppress warnings.
     * **Compile-time and deployment-time processing:** software tools can process annotation information to generate code, XML files, and so forth.
     * **Runtime processing:** some annotations are available to be examined at runtime
-* **JAXB** stands for **J**ava **A**rchitecture for **X**ML **B**inding. Is a Java standard that defines how Java objects are converted **from** and **to** XML. 
+* **JAXB** stands for *Java Architecture for XML Binding*. Is a Java standard that defines how Java objects are converted **from** and **to** XML. 
 * As opposed to XPATH, it allows us to map XML to Java Classes, allowing our Java program to operate only on plain old java objects (not a document tree)
 * Using java annotations, JAXB libraries can
     * **marshal** (i.e., convert) Java objects into XML 
     * **un-marshal** XML back into Java objects
 * JAXB also includes a compiler that generates Java Classes from an XML Schema
     
-### JAXB Examples: before we start (10 min)
+### JAXB Examples: before starting (10 min)
 
 * To use JAXB, you will need to have it in your classpath (or at least in the build path of your project).
 * To solve this, we will use [**Apache Ivy**][5], a lightweight **dependency manager** that easily integrates with ant scripts (whenever possible, we will use Ivy to get libraries we need)
-* Learning ivy is beyond the scope of the lab, but it is actually very simple. You will find a simple way to use it in this session's "build.xml" file.
+* Learning ivy is beyond the scope of the lab, but it is actually very simple. You will find a simple way to use it in this modules's "build.xml" file.
 * To use IVY, you need to (1) **copy PART 1** of the build script (see comments in build.xml) to your future build scripts; and (2) have an **ivy.xml** file in your project home (same folder where the build.xml is) where you will specify the dependencies. 
-* You can use the [Maven Repository][7] website to search for libraries and to get the proper ivy dependency declarations. Below is an example from this session ivy.xml, which will bring **JAXB** API and **XJC compiler** to this session's example
+* You can use the [Maven Repository][7] website to search for libraries and to get the proper ivy dependency declarations. Below is an example from this module's ivy.xml, which will bring **JAXB** API and **XJC compiler** to this module's example
 
-    ```
+    ```xml
     <dependency org="javax.xml.bind" name="jaxb-api" rev="2.2.11"/>
     <dependency org="com.sun.xml.bind" name="jaxb-xjc" rev="2.2.7"/>
     ```
 
 * **Optionally:** 
-    
     * If you want to have ivy already installed in your computer (so that you don't need PART 1 of this session build.xml in your future scripts) you can download it from [here][5],  unpack it wherever you want and then copy the ivy jar file into your ant lib directory, ANT_HOME/lib.
       
-    ```sh
+    ```bash
     cp ivy.jar /opt/apache-ant-1.9.2/lib/
     ```
     
-    * Moreover, in the [installation guide for Eclipse][8] we have included the installation of [Apache IvyDE][6] plugin, which uses its own ivy installation to manage dependencies in eclipse projects (we will see this later when we create a project for this session) 
+    * Moreover, in the [installation guide for Eclipse][8] we have included the installation of [Apache IvyDE][6] plugin, which uses its own ivy installation to manage dependencies in eclipse projects (we will see this later when we create a project for this module) 
     * Similarly, if you want to have JAXB in your system (including xjc binary), you can download it from [here][4], unpack the it somewhere and then add its "bin" folder to your system PATH. 
 
 
 ### JAXB Examples: first run (10 min)
-* 
 
-* Remember the path to the JAXB home folder (i.e., /opt/jaxb-ri-2.2.6, C:\Program Files\jaxb-ri-2.2.6)
+* Open your terminal window in your local **lab04** folder and run the following: 
+
+    ```bash
+    ant compile
+    ant execute.HPWriter
+    ```
+* You will see that before executing the "compile" target, ivy.jar will be downloaded into an "ivy" folder, and libraries that are specified in "ivy.xml" will be downloaded to "lib" 
+* Moreover, the target **generate** would have created the folder **Examples/src/bookstore/generated** with four classes in it (we will get back to this later)
+* And finally, as a result from **execute.HPWriter**, there is a new **people.xml** in your lab04 folder. 
+* So, **what has happened here?**  
+
+### JAXB Examples: source code (20 minutes)
+
 * Open Eclipse and create a project with the location at the **lab04** folder
-* There should be an ANT script **build.xml** and another file named **ivy.xml**. 
-Since from now one our java programs will require us to use different libraries, we will  
-* 
- installed the  from Eclipse market place and also download ivy from [here][5] and
-
-  
 * Check the example on the slides to get a quick ideas of how to annotate classes with JAXB
 * Open and explore the new HealthProfileReader example to get acquainted with JAXB annotations
     * Explore **Example/src/model/Person.java** 
     * Explore **Example/src/model/HealthProfile.java**
     * Explore **Example/src/dao/PeopleStore.java** (dao stands for "data access object", a typical data accessing pattern) 
     * Explore and run **Example/src/HealthProfileWriter.java**  
-* Now, as a first exercise, let's try writing a **HealthProfileReader** that will use the "people.xml" generated by the reader.
+* **Exercise 04.01:** let's try writing ourselves the **HealthProfileReader** that will use the "people.xml" generated by the writer.
 
-### Generating classes from XML Schemas
+### JAXB Examples: generating classes from XML Schemas (20 minutes)
 
-* JAXB comes with an XML Schema binding compilation tool. 
-
-```sh
-    ant generate
-```
-
+* **Where do those generated classes we saw earlier come from?**
+* JAXB comes with an XML Schema binding compilation tool (which was invoked by the target **generate** in our build script by using a "taskdef" definition). 
 * Explore the classes under the newly created "generated folder"
 * Now, Marshal these classes into an XML
 
-```sh
-    ant execute.JAXBUnMarshaller
-```
+    ```sh
+        ant execute.JAXBUnMarshaller
+    ```
 
 * Explore catalog.xml
 * UnMarshal them into Java objects
 
-```sh
-    ant execute.JAXBUnMarshaller
-```
+    ```sh
+        ant execute.JAXBUnMarshaller    
+    ```
 
----
+* **Exercise 04.02:** What should you change in in the bookstore example to add an **element year** within each article of a journal?. 
 
-## Exercise 3
-
-* What should you change in [Example7-JAXB](https://github.com/cdparra/introsde2013/tree/master/Example7-JAXB) to add an **element year** within each article of a journal? 
-
----
-
-## Domain Objects vs Transfer Objects
+### Domain Objects vs Transfer Objects
 
 * **You have a domain model** (i.e., the model that is mapped to your database) 
 
@@ -234,11 +228,11 @@ public class PersonUI {
 
 
 
-## For next session
+## For next module
 
 * Install Eclipse: http://www.eclipse.org/downloads/packages/eclipse-standard-431/keplersr1
 * Install Maven (newly added requirement): http://maven.apache.org/download.cgi
-* Prepare yourselves for a long session: we will go till 7pm. 
+* Prepare yourselves for a long module: we will go till 7pm. 
 * Stay tunned to the list, will send a list of plugins for eclipse to add later in the week. 
 
 

@@ -1,10 +1,14 @@
 package bookstore;
 
-import javax.xml.bind.*;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.PropertyException;
 
 public class JavaToXML {
 	public void marshalXMLDocument(File xmlDocument) {
