@@ -2,7 +2,7 @@
 
 **Introduction to Service Design and Engineering | University of Trento | [Webpage](https://sites.google.com/site/introsdeunitn/lab-sessions/lab-session-3 "Permalink to LAB03: XML and XPATH")**
 
-How do services communicate? What's the language (or 'one' of their languages) in which messages traverse the realms of SOAs?. In this session, we will give a practical look to the cornerstone language of service-oriented architectures: XML. We will do so by exploring a framework for navigating the content of an xml programmatically.  
+How do services communicate? What's the language (or 'one' of their languages) in which messages traverse the realms of SOAs?. In this module, we will give a practical look to the cornerstone language of service-oriented architectures: XML. We will do so by exploring a framework for navigating the content of an xml programmatically.  
 
 ## Slides &amp; Code
 
@@ -20,7 +20,7 @@ The guiding notes below are a summarized version of what is already on the slide
     ```
 
 ### XML and JSON Intro (15 min)
-* Start by opening the *books.xml* file in the Example/Books-XPATH folder of this session   
+* Start by opening the *books.xml* file in the Example/Books-XPATH folder of this module   
 * Then open *books.json*
 * Both present the same information in two formats that are widely used in services. 
 * JSON is more widely used in RESTful services. 
@@ -112,11 +112,10 @@ The guiding notes below are a summarized version of what is already on the slide
 
 ### XPATH and Java Exercise 1 (10 min)
 * Remember, put your code in your local workspace ('myworkspace'), just to avoid future conflicts if things change in the official repository. 
-* For this exercise, create a copy of the **XPathTest.java** as a starting point.
-* Modify **XPathTest.java** so that it prints out also the name of authors. 
+* **Exercise 03.01:** create a copy of the **XPathTest.java** as a starting point. Then modify **XPathTest.java** so that it prints out also the name of authors. 
 
 ### XPATH and Java Exercise 2 (25 min)
-* For this exercise, create a copy of the HealthProfileReader example as a starting point.
+* **Exercise 03.02:** create a copy of the HealthProfileReader example as a starting point.
 * Make a copy of the HealthProfileReader that replaces the HashMap for people.xml and using Xpath implement:
     * Methods like **getWeight** and **getHeight** given a person's name and lastname
     * A method that accepts name as parameter and prints persons HealthProfile
@@ -138,7 +137,7 @@ The guiding notes below are a summarized version of what is already on the slide
 * Open Example/xml-schemas/Example1.xsd, and explore its content.  
 * You will find information on the slides what each part of the XSD file indicates (this will be further explained in detail during [one of the theoretical lectures](https://sites.google.com/site/introsdeunitn/home/introduction-to-xml))
 
-### Exercises
+### XSD Examples
 * **Exercise 1**
     * Open this [XML/XSD validation tool online][8]
     * Copy the content of the first example Example/xml-schemas/Example1.xml and validate its against its XSD
@@ -158,8 +157,12 @@ The guiding notes below are a summarized version of what is already on the slide
 * Righclick on top of one of the temperatures and click "Scrape Similar", which scrapes the content on the page using xpath (the HTML document it is also treated like a DOM tree)
 
 ### Other suggested resources
+* Learn more about XML Schemas in [W3Schools][9] or [here][10]
 * [XPATH reference][5]
 * [XML editor with a grid view that shows you XPATH of each node][6]
+* Other online XML validators 
+    * [Decisionsoft schemaValidate][11] 
+    * [Utilities-Online][12] 
 
 ### More of XML/XSD reference and examples
 
@@ -345,3 +348,7 @@ The guiding notes below are a summarized version of what is already on the slide
 [6]: http://xmlgrid.net/ 
 [7]: https://chrome.google.com/webstore/detail/scraper/mbigbapnjcgaffohmbkdlecaccepngjd
 [8]: http://www.utilities-online.info/xsdvalidation/#.Ul0rkGRvj40
+[9]: http://www.w3schools.com/schema/default.asp
+[10]: http://www.xfront.com/files/xml-schema.html
+[11]: http://tools.decisionsoft.com/schemaValidate/
+[12]: http://www.utilities-online.info/xsdvalidation/#.Ul0rkGRvj40
