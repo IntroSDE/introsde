@@ -1,6 +1,6 @@
-# LAB04: Mapping XML to/from Objects
+# LAB04: Mapping XML (and JSON) to (and from) Objects
 
-**Introduction to Service Design and Engineering | University of Trento | [Webpage](https://sites.google.com/site/introsdeunitn/lab-sessions/lab-session-4 "Permalink to LAB04: Mapping XML to/from Objects")**
+**Introduction to Service Design and Engineering | University of Trento | [Webpage](https://sites.google.com/site/introsdeunitn/lab-sessions/lab-session-4 "Permalink to LAB04: Mapping XML (and JSON) to (and from) Objects")**
 
 To facilitate the lives of programmers around the world (at least for some), a long time ago we humans created object-oriented programming. But how do we go from objects to serialized representations of them in XML or JSON? And viceversa?. In this module, we will be mapping XML/JSON from and to Objects. What we covered up to here is also the base-ground we need before we start implementing actual services.  
 
@@ -14,13 +14,14 @@ For the purpose of mapping XML (and JSON) to and from Objects (i.e., serializing
 
 ### Java Annotations and JAXB brief overview (20 min)
 
-* Annotations provide data about a program that is not part of the program itself.
+* Java Annotations provide data about a program that is not part of the program itself.
 * They have no direct effect on the operation of the code they annotate.
 * Annotations can be applied to a program's  declarations of classes, fields, methods, and other program  elements.
 * They uses include: 
     * **Information for the compiler:** to detect errors or suppress warnings.
     * **Compile-time and deployment-time processing:** software tools can process annotation information to generate code, XML files, and so forth.
     * **Runtime processing:** some annotations are available to be examined at runtime
+* In this module, we will java annotations to specify how a class must be transformed from and to XML/JSON
 * **JAXB** stands for *Java Architecture for XML Binding*. Is a Java standard that defines how Java objects are converted **from** and **to** XML. 
 * As opposed to XPATH, it allows us to map XML to Java Classes, allowing our Java program to operate only on plain old java objects (not a document tree)
 * Using java annotations, JAXB libraries can
@@ -63,7 +64,6 @@ For the purpose of mapping XML (and JSON) to and from Objects (i.e., serializing
 ### JAXB Examples: source code (20 minutes)
 
 * Open Eclipse and create a project with the location at the **lab04** folder
-* Check the example on the slides to get a quick ideas of how to annotate classes with JAXB
 * Open and explore the new HealthProfileReader example to get acquainted with JAXB annotations
     * Explore **Example/src/model/Person.java** 
     * Explore **Example/src/model/HealthProfile.java**
@@ -75,7 +75,7 @@ For the purpose of mapping XML (and JSON) to and from Objects (i.e., serializing
 
 * **Where do those generated classes we saw earlier come from?**
 * JAXB comes with an XML Schema binding compilation tool (which was invoked by the target **generate** in our build script by using a "taskdef" definition). 
-* Explore the classes under the newly created "generated folder"
+* Explore the classes under the newly created "generated folder". They are the result of generating classes based on the XML schema defined in catalog.xsd
 * Now, Marshal these classes into an XML
 
     ```sh
@@ -136,16 +136,23 @@ For the purpose of mapping XML (and JSON) to and from Objects (i.e., serializing
 
 ### Dozer Example (30 min)
 
-* Chek the package **dozerproject** in the examples of this module.
-* The basic idea is that you have two create classes in different packages:
-    * **entity classes**: here we put pure domain objects
-    * **transfer classes**: here we put objects as they are going to be mapped to the presentation layer (xml, json)
-* Dozer maps domain objects (entities) into jaxb objects (transfer objects), that can later be marshalled to xml. 
+* Chek the package **dozerproject** in the examples of this module. Exlore the files:
+    * dozerproject.entity.Person.java
+    * dozerproject.transfer.PersonBean.java
+    * dozerproject.delegate.PersonBeanDelegate.java
+
+* The basic idea is that you have create:
+    * **entity classes** to represent your domain model (i.e., your data model)
+    * **transfer classes** to manage what and how the domain model is going to be mapped to the presentation layer (xml, json)
+* Additionally, we can create **delegate classes** to manage the mapping operation (i.e., instantiating the dozer mapper and setting up the operation). 
+* Dozer maps domain objects (entities) into (transfer objects) that can be implemented with jaxb annotations, facilitating their serialization
 * The marshalling is then separated from the management of the data objects (and therefore, JAXB annotations are not mixed with the data, but only with presentation objects)
 * Mapping from **entities** to **transfer objects** can be defined via an **xml mapping file** (e.g., Example/dozerMappings.xml) or via its more experimental version with **java annotations** in the transfer classes.
 * A third mapping option is by using dozer API programmatically (we will not cover this, but you can check it out [here][11]) 
+* **Exercise 04.03: ** Let's add to our Dozer example the HealthProfile class (using annotations) and in such a way that the BMI calculation is only included in the transfer bean.
 
 ### Dozer Example: XML Mapping
+
 
     ```xml
     <?xml version="1.0" encoding="UTF-8"?>
@@ -169,6 +176,7 @@ For the purpose of mapping XML (and JSON) to and from Objects (i.e., serializing
     ```
 
 ### Dozer Example: Mapping Example
+
 
     ```java
     public static void main (String argus[]){        
@@ -197,11 +205,15 @@ For the purpose of mapping XML (and JSON) to and from Objects (i.e., serializing
 
 ### Final Example: Serializing to JSON
 
+* Finally, although XML is one of the cornerstones of service oriented computing, nowadays, JSON is the most common language for message exchange.  
+* The main reason behind this comes from the advent of mobile computing: JSON is less complex to process, thereby requiring less computation resources, and less **battery**. 
+* One way of having both (XML and JSON) to coexist (which they do in most web services implementation frameworks) is **reusing annotations**. 
+* A library that supports reusing JAXB annotations for mapping also to and from JSON is [Jackson][12]. 
+* Open and run **HealthProfileJson** Example to see how it works
+
 ## Additional notes
 
-### Other suggested resources
-* JAXB
-* Dozer 
+* Checkout the details of [Assignment 1][13] and stay tune for the deadline announcement in the hands-on session. 
 
 [1]: https://drive.google.com/open?id=0B7ShzcEnCJFNSGEzdWltNUtIa3M
 [2]: https://drive.google.com/file/d/0B7ShzcEnCJFNTTUwcy1QcGZMRjg/edit?usp=sharing
@@ -214,3 +226,5 @@ For the purpose of mapping XML (and JSON) to and from Objects (i.e., serializing
 [9]: https://github.com/DozerMapper/dozer/archive/v5.4.0.zip
 [10]: http://dozer.sourceforge.net/dependencies.html
 [11]: http://dozer.sourceforge.net/documentation/apimappings.html
+[12]: http://jackson.codehaus.org
+[13]: https://sites.google.com/site/introsdeunitn/assignments/assighment-1

@@ -1,3 +1,5 @@
+import java.io.File;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.module.jaxb.JaxbAnnotationModule;
@@ -23,7 +25,11 @@ public class HealthProfileJson {
 	public static void main(String[] args) throws Exception {
 		
 		initializeDB();
+		
+		// Jackson Object Mapper 
 		ObjectMapper mapper = new ObjectMapper();
+		
+		// Adding the Jackson Module to process JAXB annotations
         JaxbAnnotationModule module = new JaxbAnnotationModule();
         
 		// configure as necessary
@@ -33,8 +39,6 @@ public class HealthProfileJson {
 
         String result = mapper.writeValueAsString(people);
         System.out.println(result);
-        //mapper.writeValue(new File("people.json"), people);
-     
-        
+        mapper.writeValue(new File("people.json"), people);
     }
 }
