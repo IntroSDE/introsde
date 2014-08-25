@@ -153,6 +153,7 @@ For the purpose of mapping XML (and JSON) to and from Objects (i.e., serializing
 
 ### Dozer Example: XML Mapping
 
+* Below is an example of an XML mapping file for Dozer
 
     ```xml
     <?xml version="1.0" encoding="UTF-8"?>
@@ -177,6 +178,7 @@ For the purpose of mapping XML (and JSON) to and from Objects (i.e., serializing
 
 ### Dozer Example: Mapping Example
 
+* Below is an example of an Java program that uses Dozer to map beans
 
     ```java
     public static void main (String argus[]){        
