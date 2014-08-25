@@ -43,11 +43,6 @@ For the purpose of mapping XML (and JSON) to and from Objects (i.e., serializing
 
 * **Optionally:** 
     * If you want to have ivy already installed in your computer (so that you don't need PART 1 of this session build.xml in your future scripts) you can download it from [here][5],  unpack it wherever you want and then copy the ivy jar file into your ant lib directory, ANT_HOME/lib.
-      
-    ```bash
-    cp ivy.jar /opt/apache-ant-1.9.2/lib/
-    ```
-    
     * Moreover, in the [installation guide for Eclipse][8] we have included the installation of [Apache IvyDE][6] plugin, which uses its own ivy installation to manage dependencies in eclipse projects (we will see this later when we create a project for this module) 
     * Similarly, if you want to have JAXB in your system (including xjc binary), you can download it from [here][4], unpack the it somewhere and then add its "bin" folder to your system PATH. 
 
@@ -96,112 +91,86 @@ For the purpose of mapping XML (and JSON) to and from Objects (i.e., serializing
 
 * **Exercise 04.02:** What should you change in in the bookstore example to add an **element year** within each article of a journal?. 
 
-### Domain Objects vs Transfer Objects
+### Domain Objects vs Transfer Objects (10 min)
 
 * **You have a domain model** (i.e., the model that is mapped to your database) 
 
-```java
-public class PersonDB {  
-    private String firstName;
-    private String lastName;
-    private String address;
-    private String dbID;
-```
+    ```java
+    public class PersonDB {  
+        private String firstName;
+        private String lastName;
+        private String address;
+        private String dbID;
+    ```
 
 * **What if your client is waiting this, and it does not care about ids?** 
 
-```xml
-<person>
-    <fName>Cristhian</fName>
-    <lName>Parra</lName>
-    <address>Povo Trento</address>
-</person>
-```
+    ```xml
+    <person>
+        <fName>Cristhian</fName>
+        <lName>Parra</lName>
+        <address>Povo Trento</address>
+    </person>
+    ```
 
-* In other words, we want to keep domain objects separate from the logics that manage the transformation into XML/JSON representations of the resources in our model
-* To do se, we need **Transfer Objects** in the middle
+* In other words, we want to keep domain objects separated from the logic that manages the transformation into XML/JSON representations of the resources in our model
+* A design pattern to achieve this is to use **Transfer Objects** in the middle (i.e., the objects that are actually exchanged between client and server) 
 
----
-
-## Dozer basics
-
-* Dozer is a Java Bean to Java Bean mapper that recursively copies data from one object to another
-* Dozer supports mapping between attribute names and between types.
+### The Dozer Library (5 min) 
+* **Dozer** is a *Java Bean* to *Java Bean* mapper that recursively copies data from one object to another
+* It supports mapping between attribute names and between types.
 * Standard conversions are provided automatically
 * You are allowed to specify custom conversions via XML
 * With Dozer, your internal domain objects are not exposed to external presentation layers or to external consumers.
 * Dozer maps your domain objects to external APIs calls and vice-versa.
-* Dozer can works both with XML and JSON 
+* Dozer can work both with XML and JSON 
+* You can install it in your project via **ivy**
 
----
+    ```xml
+        <!-- Ivy dependency declaration for Dozer --> 
+        <dependency org="net.sf.dozer" name="dozer" rev="5.5.1"/>
+    ```
 
-## Dozer Installation
+* If you do not use ivy, you can download it from [github][9], unpack it and add **${dozer.home}/dist/dozer.jar** to your classpath.
+* You will also need to add required [thirdparty runtime jars][10] to your classpath 
 
-* Download Dozer and extract the archive: https://github.com/DozerMapper/dozer/archive/v5.4.0.zip
-* Add ${dozer.home}/dist/dozer.jar to your classpath.
-* Add required thirdparty runtime jars to your classpath http://dozer.sourceforge.net/dependencies.html
+### Dozer Example (30 min)
 
----
+* Chek the package **dozerproject** in the examples of this module.
+* The basic idea is that you have two create classes in different packages:
+    * **entity classes**: here we put pure domain objects
+    * **transfer classes**: here we put objects as they are going to be mapped to the presentation layer (xml, json)
+* Dozer maps domain objects (entities) into jaxb objects (transfer objects), that can later be marshalled to xml. 
+* The marshalling is then separated from the management of the data objects (and therefore, JAXB annotations are not mixed with the data, but only with presentation objects)
+* Mapping from **entities** to **transfer objects** can be defined via an **xml mapping file** (e.g., Example/dozerMappings.xml) or via its more experimental version with **java annotations** in the transfer classes.
+* A third mapping option is by using dozer API programmatically (we will not cover this, but you can check it out [here][11]) 
 
-## Dozer Example (1)
+### Dozer Example: XML Mapping
 
-* Open [Example8-Dozer](https://github.com/cdparra/introsde2013/tree/master/Example8-Dozer)
-* The basic idea is that you have two set of classes in different packages:
-    * **[entity classes](https://github.com/cdparra/introsde2013/tree/master/Example8-Dozer/src/dozerproject/entity)**: here we put pure domain objects
-    * **[transfer classes](https://github.com/cdparra/introsde2013/tree/master/Example8-Dozer/src/dozerproject/entity)**: here we put objects as they are going to be mapped to the presentation layer (xml, json)
-* Dozer maps domain objects into jaxb objects, that can later be marshalled to xml
+    ```xml
+    <?xml version="1.0" encoding="UTF-8"?>
+    <mappings xmlns="http://dozer.sourceforge.net"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://dozer.sourceforge.net
+              http://dozer.sourceforge.net/schema/beanmapping.xsd">          
+      <mapping> 
+        <class-a>dozerproject.PersonDB</class-a>
+        <class-b>lsde.lab4.presentation.PersonUI</class-b>   
+        <field>
+          <a>firstName</a>
+          <b>fName</b>
+        </field>
+        <field>
+          <a>lastName</a>
+          <b>lName</b>
+        </field>
+      </mapping>  
+    </mappings>
+    ```
 
+### Dozer Example: Mapping Example
 
-## Dozer Example (2)
-```java
-package dozerproject.entity;
-public class PersonDB {
-    private String firstName;
-    private String lastName;
-    private String address;
-    private String dbID;
-```
-
-```java
-package dozerproject.transfer;
-@XmlRootElement(name="person")
-public class PersonUI {
-    private String fName;
-    private String lName;
-    private String address;
-    // getters and setters
-```
-
----
-
-## Dozer Example (3)
-
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<mappings xmlns="http://dozer.sourceforge.net"
-          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xsi:schemaLocation="http://dozer.sourceforge.net
-          http://dozer.sourceforge.net/schema/beanmapping.xsd">          
-  <mapping> 
-    <class-a>dozerproject.PersonDB</class-a>
-    <class-b>lsde.lab4.presentation.PersonUI</class-b>   
-    <field>
-      <a>firstName</a>
-      <b>fName</b>
-    </field>
-    <field>
-      <a>lastName</a>
-      <b>lName</b>
-    </field>
-  </mapping>  
-</mappings>
-```
-
----
-
-## Dozer Example (4)
-
-```java
+    ```java
     public static void main (String argus[]){        
         DozerMapper mapper = new DozerMapper();
         PersonDB pdb = getPersonFromDB(); 
@@ -224,35 +193,15 @@ public class PersonUI {
         } catch (IOException e) {
          
         }
-```
+    ```
 
-
-
-## For next module
-
-* Install Eclipse: http://www.eclipse.org/downloads/packages/eclipse-standard-431/keplersr1
-* Install Maven (newly added requirement): http://maven.apache.org/download.cgi
-* Prepare yourselves for a long module: we will go till 7pm. 
-* Stay tunned to the list, will send a list of plugins for eclipse to add later in the week. 
-
-
----
-
-## References:
-
-* XML Schemas
-    * http://www.w3schools.com/schema/default.asp
-    * http://www.xfront.com/files/xml-schema.html
-    * Validators: 
-        * http://tools.decisionsoft.com/schemaValidate/
-        * http://www.utilities-online.info/xsdvalidation/#.Ul0rkGRvj40
-* JAXB
-* Dozer 
+### Final Example: Serializing to JSON
 
 ## Additional notes
 
 ### Other suggested resources
-
+* JAXB
+* Dozer 
 
 [1]: https://drive.google.com/open?id=0B7ShzcEnCJFNSGEzdWltNUtIa3M
 [2]: https://drive.google.com/file/d/0B7ShzcEnCJFNTTUwcy1QcGZMRjg/edit?usp=sharing
@@ -262,3 +211,6 @@ public class PersonUI {
 [6]: http://ant.apache.org/ivy/ivyde/ 
 [7]: http://maven-repository.com/
 [8]: https://sites.google.com/site/introsdeunitn/lab-sessions/lab-sessions-starting-up
+[9]: https://github.com/DozerMapper/dozer/archive/v5.4.0.zip
+[10]: http://dozer.sourceforge.net/dependencies.html
+[11]: http://dozer.sourceforge.net/documentation/apimappings.html
