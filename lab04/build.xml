@@ -107,29 +107,34 @@
 		<echo message="Compile target has been called" />
 		<javac srcdir="${src.dir}" destdir="${build.dir}" classpathref="lib.path.id" includeAntRuntime="false">
 		</javac>
+		<copy todir="${build.dir}" overwrite="true">
+			<fileset dir="${src.dir}">
+				<include name="*.xml" />
+			</fileset>
+		</copy>
 	</target>
 
 	<target name="execute.HPWriter">
 		<echo message="Executing Health Profile Writer: will produce a people.xml in home folder" />
 		<java classname="HealthProfileWriter" classpath="${build.dir}">
-            <classpath>
-                <fileset dir="${lib.dir}">
-                    <include name="**/*.jar" />
-                    <include name="*.jar" />
-                </fileset>
-            </classpath>
+			<classpath>
+				<fileset dir="${lib.dir}">
+					<include name="**/*.jar" />
+					<include name="*.jar" />
+				</fileset>
+			</classpath>
 		</java>
 	</target>
 
 	<target name="execute.HPReader">
 		<echo message="Executing Health Profile Reader: will read the people.xml in home folder and print one at a time" />
 		<java classname="HealthProfileReader" classpath="${build.dir}">
-            <classpath>
-                <fileset dir="${lib.dir}">
-                    <include name="**/*.jar" />
-                    <include name="*.jar" />
-                </fileset>
-            </classpath>
+			<classpath>
+				<fileset dir="${lib.dir}">
+					<include name="**/*.jar" />
+					<include name="*.jar" />
+				</fileset>
+			</classpath>
 		</java>
 	</target>
 
@@ -148,49 +153,48 @@
 	<target name="execute.JAXBMarshaller">
 		<echo message="Executing JAXBMarshaller" />
 		<java classname="bookstore.JAXBMarshaller" classpath="${build.dir}">
-            <classpath>
-                <fileset dir="${lib.dir}">
-                    <include name="**/*.jar" />
-                    <include name="*.jar" />
-                </fileset>
-            </classpath>
+			<classpath>
+				<fileset dir="${lib.dir}">
+					<include name="**/*.jar" />
+					<include name="*.jar" />
+				</fileset>
+			</classpath>
 		</java>
 	</target>
 
 	<target name="execute.JAXBUnMarshaller">
 		<echo message="Executing JAXBUnMarshaller" />
 		<java classname="bookstore.JAXBUnMarshaller" classpath="${build.dir}">
-            <classpath>
-                <fileset dir="${lib.dir}">
-                    <include name="**/*.jar" />
-                    <include name="*.jar" />
-                </fileset>
-            </classpath>
+			<classpath>
+				<fileset dir="${lib.dir}">
+					<include name="**/*.jar" />
+					<include name="*.jar" />
+				</fileset>
+			</classpath>
+		</java>
+	</target>
+
+	<target name="execute.dozerExample">
+		<echo message="Executing Dozer Example" />
+		<java classname="dozerproject.DozerMapperTest" classpath="${build.dir}">
+			<classpath>
+				<fileset dir="${lib.dir}">
+					<include name="**/*.jar" />
+					<include name="*.jar" />
+				</fileset>
+			</classpath>
+		</java>
+	</target>
+
+	<target name="execute.HPJson">
+		<echo message="Executing Health Profile Writer for Json" />
+		<java classname="HealthProfileJson" classpath="${build.dir}">
+			<classpath>
+				<fileset dir="${lib.dir}">
+					<include name="**/*.jar" />
+					<include name="*.jar" />
+				</fileset>
+			</classpath>
 		</java>
 	</target>
 </project>
-
-
-
-<!--
-/Users/cristhian/Dropbox/teaching/IntroSDE/Maurizio_IntroSDE/introsde-github/lab04/build/BookMain.class
-/Users/cristhian/Dropbox/teaching/IntroSDE/Maurizio_IntroSDE/introsde-github/lab04/build/HealthProfileJson.class
-/Users/cristhian/Dropbox/teaching/IntroSDE/Maurizio_IntroSDE/introsde-github/lab04/build/HealthProfileReader.class
-/Users/cristhian/Dropbox/teaching/IntroSDE/Maurizio_IntroSDE/introsde-github/lab04/build/HealthProfileWriter.class
-/Users/cristhian/Dropbox/teaching/IntroSDE/Maurizio_IntroSDE/introsde-github/lab04/build/SimplePeople.class
-/Users/cristhian/Dropbox/teaching/IntroSDE/Maurizio_IntroSDE/introsde-github/lab04/build/SimplePerson.class
-/Users/cristhian/Dropbox/teaching/IntroSDE/Maurizio_IntroSDE/introsde-github/lab04/build/bookstore/Catalog.class
-/Users/cristhian/Dropbox/teaching/IntroSDE/Maurizio_IntroSDE/introsde-github/lab04/build/bookstore/JAXBMarshaller.class
-/Users/cristhian/Dropbox/teaching/IntroSDE/Maurizio_IntroSDE/introsde-github/lab04/build/bookstore/JAXBUnMarshaller$CustomValidationEventHandler.class
-/Users/cristhian/Dropbox/teaching/IntroSDE/Maurizio_IntroSDE/introsde-github/lab04/build/bookstore/JAXBUnMarshaller.class
-/Users/cristhian/Dropbox/teaching/IntroSDE/Maurizio_IntroSDE/introsde-github/lab04/build/bookstore/JavaToXML.class
-/Users/cristhian/Dropbox/teaching/IntroSDE/Maurizio_IntroSDE/introsde-github/lab04/build/bookstore/generated/ArticleType.class
-/Users/cristhian/Dropbox/teaching/IntroSDE/Maurizio_IntroSDE/introsde-github/lab04/build/bookstore/generated/CatalogType.class
-/Users/cristhian/Dropbox/teaching/IntroSDE/Maurizio_IntroSDE/introsde-github/lab04/build/bookstore/generated/JournalType.class
-/Users/cristhian/Dropbox/teaching/IntroSDE/Maurizio_IntroSDE/introsde-github/lab04/build/bookstore/generated/ObjectFactory.class
-/Users/cristhian/Dropbox/teaching/IntroSDE/Maurizio_IntroSDE/introsde-github/lab04/build/dao/PeopleStore.class
-/Users/cristhian/Dropbox/teaching/IntroSDE/Maurizio_IntroSDE/introsde-github/lab04/build/model/Book.class
-/Users/cristhian/Dropbox/teaching/IntroSDE/Maurizio_IntroSDE/introsde-github/lab04/build/model/Bookstore.class
-/Users/cristhian/Dropbox/teaching/IntroSDE/Maurizio_IntroSDE/introsde-github/lab04/build/model/HealthProfile.class
-/Users/cristhian/Dropbox/teaching/IntroSDE/Maurizio_IntroSDE/introsde-github/lab04/build/model/Person.class
- -->
