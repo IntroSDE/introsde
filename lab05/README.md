@@ -261,7 +261,7 @@ Links: [PPT slides][1] | [PDF slides][2] | [Source code][3]
         public static void main(String[] args) throws IllegalArgumentException, IOException, URISyntaxException
         {
             String protocol = "http://";
-            String port = ":5900/";
+            String port = ":5700/";
             String hostname = InetAddress.getLocalHost().getHostAddress();
             if (hostname.equals("127.0.0.1"))
             {
