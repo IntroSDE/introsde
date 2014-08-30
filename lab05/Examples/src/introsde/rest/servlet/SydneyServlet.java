@@ -27,9 +27,11 @@ import org.w3c.dom.Element;
 
 @WebServlet(name = "SydneyServlet", urlPatterns = "/sydney/places/*")
 public class SydneyServlet extends HttpServlet {
-	
-	private static final long serialVersionUID = 1L;
-	
+		
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2584369106699691304L;
 	private static final String[] places = {
         "Harbour Bridge",
         "Circular Quay",
@@ -45,27 +47,40 @@ public class SydneyServlet extends HttpServlet {
 			try {
 				jsonReply(response);
 			} catch (JSONException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
+				errorReply(response, e, new Error("JSON Exception"));
 			}
 		} else if ("/csv".equals(request.getPathInfo())) {
 			csvReply(response);
-		} else {
+		} else if ("/xml".equals(request.getPathInfo())) {
 			try {
 				xmlReply(response);
 			} catch (TransformerFactoryConfigurationError e) {
-				// TODO Auto-generated catch block
+				errorReply(response, null, e);
 				e.printStackTrace();
 			} catch (ParserConfigurationException e) {
-				// TODO Auto-generated catch block
+				errorReply(response, e, null);
 				e.printStackTrace();
 			} catch (TransformerException e) {
-				// TODO Auto-generated catch block
+				errorReply(response, e, null);
 				e.printStackTrace();
 			}
+		} else {
+			htmlReply(response);
 		}
 	}
 	
+	private void htmlReply(HttpServletResponse response) throws IOException {
+		String html = "<html><head><title>Sydney Places</title></head><body><ol>";
+		
+		for (String placeName : places) {
+			html = html + "<li>"+placeName+"</li>";
+		}
+		html = html + "</ol></body></html>";
+		response.setContentType("text/html");
+		response.getWriter().write(html);	
+	}
+
 	private void xmlReply(HttpServletResponse response) throws TransformerFactoryConfigurationError, ParserConfigurationException, TransformerException, IOException {
 		response.setContentType("text/xml");
 		
@@ -115,6 +130,7 @@ public class SydneyServlet extends HttpServlet {
 	
 	private void jsonReply(HttpServletResponse response) throws IOException, JSONException {
 		response.setContentType("text/json");
+		
 		JSONObject obj = new JSONObject();
 		obj.put("city", "Sydney");
 		JSONArray jsonPlaces = new JSONArray();
@@ -124,5 +140,10 @@ public class SydneyServlet extends HttpServlet {
 		obj.put("places",jsonPlaces);
 		System.out.println(obj.toString());
 		response.getWriter().write(obj.toString());
+	}
+	
+	private void errorReply(HttpServletResponse response, Exception e, Error err) throws IOException, JSONException {
+		String errorMsg = err == null ? e.getMessage() : err.getMessage();
+		response.sendError(500, errorMsg);;
 	}
 }
