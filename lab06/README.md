@@ -12,10 +12,6 @@ Links: [PPT slides][1] | [PDF slides][2] | [Source code][3]
 
 * In the firtst part of the REST Services module, we revisited the principles behind the REST architectural style and went through some initial read-only examples of how to implement these services. In this module, we will extend those examples to have a complete CRUD API for our HealthProfile service Design
 
-### CRUD RESTful: The HealthProfile Service Design (15 min)
-
-
-
 ### CRUD RESTful Example: Setting up the project (10 min) 
 
 * Start by creating a Web Dynamic Project (as in the last session) in your local workspace, using the the name **sdelab06-local** 
