@@ -48,7 +48,7 @@ public class SydneyServlet extends HttpServlet {
 		System.out.println("--> "+pathInfo);
 		System.out.println("Getting request query parameters...");
 		String indexParam = request.getParameter("index");
-		Integer index = new Integer(indexParam);
+		Integer index = indexParam == null ? null : new Integer(indexParam);
 		
 		System.out.println("--> "+index+" (before conversion --> "+indexParam+")");
 	
