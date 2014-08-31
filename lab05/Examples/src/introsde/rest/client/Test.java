@@ -17,16 +17,16 @@ public class Test {
 		
 		// // GET BASEURL/rest/helloworld
 		// // Accept: text/plain
-		System.out.println(service.path("helloworld").request().accept(MediaType.TEXT_PLAIN).get().readEntity(String.class));
+		System.out.println(service.path("salutation").request().accept(MediaType.TEXT_PLAIN).get().readEntity(String.class));
 		// // Get plain text
-		System.out.println(service.path("helloworld")
+		System.out.println(service.path("salutation")
 				.request().accept(MediaType.TEXT_PLAIN).get().readEntity(String.class));
 		// Get XML
-		System.out.println(service.path("helloworld")
+		System.out.println(service.path("salutation")
 				.request()
 				.accept(MediaType.TEXT_XML).get().readEntity(String.class));
 		// // The HTML
-		System.out.println(service.path("helloworld").request()
+		System.out.println(service.path("salutation").request()
 				.accept(MediaType.TEXT_HTML).get().readEntity(String.class));
 
 	}

@@ -7,7 +7,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
-@Path("/helloworld")
+@Path("/salutation")
 public class HelloWorld {
 
 	// This method is called if TEXT_PLAIN is request
@@ -38,7 +38,7 @@ public class HelloWorld {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public String sayHelloJson() {
-		return "{ 'msg': 'Hello World in REST' }";
+		return "{ 'salutation': 'Hello World in REST' }";
 	}
 	
  	// When client wants HTML
