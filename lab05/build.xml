@@ -15,7 +15,7 @@
        # The target "download-ivy" and "install-ivy" will download the ivy jar and place it in the "ivy" folder
        # 
 -->
-<project name="JAXBExample" default="compile" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant">
+<project name="sdelab05" default="compile" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant">
 
 	<!-- PART 1: Ivy properties, download, installation and configuration -->
 	<property name="ivy.install.version" value="2.4.0-rc1" />
@@ -54,14 +54,14 @@
 	<!-- PART 2: General properties definitions -->
 	<property name="build.dir" value="build" />
 	<property name="src.dir" value="Examples/src" />
-	<property name="lib.dir" value="lib" />
-	<property name="xjc.package" value="bookstore.generated" />
+	<property name="lib.dir" value="WebContent/WEB-INF/lib" />
+	<property name="web.dir" value="." />
 
 	<!-- ================================= 
 	          target: resolve downloads the dependencies to your lib folder              
 	         ================================= -->
 	<target name="resolve" depends="install-ivy" description="--> retrieve dependencies with ivy">
-		<ivy:retrieve pattern="${lib.dir}/[artifact]-[type]-[revision].[ext]"/>
+		<ivy:retrieve pattern="${lib.dir}/[type]s-[artifact]-[revision].[ext]"/>
 	</target>
 
 
@@ -108,5 +108,12 @@
 		</copy>
 	</target>
 
-
+	<target name="create.war" depends="compile">
+		<war destfile="sdelab05.war" webxml="${web.dir}/WebContent/WEB-INF/web.xml">
+			<fileset dir="${web.dir}/WebContent">
+				<include name="**/*.*"/>
+			</fileset>
+			<classes dir="${build.dir}"/>
+		</war>
+	</target>
 </project>

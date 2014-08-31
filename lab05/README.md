@@ -313,9 +313,13 @@ Links: [PPT slides][1] | [PDF slides][2] | [Source code][3]
         http://your_domain:port/display-name/url-pattern/path_from_rest_class 
     ```
     
-## Exercise (40 min) 
+### Exercise (40 min) 
 
 * **Exercise 05.03:** Based on the the examples from previous modules, add the Person and HealthProfile resources to the project under the package **introsde.rest.ehealth**
+
+### Final note: ant
+
+* You can also use ant to create the example project's war and then manually deploy it using Tomcat's manager. Check the build.xml for the "create.war" target to see how. 
 
 ## Additional notes
 
@@ -348,6 +352,7 @@ Links: [PPT slides][1] | [PDF slides][2] | [Source code][3]
 * [Sinatra][16] - a ruby lightweight framework for implementing REST Services
 * [Djanjo REST framework][17] - REST development framework for the python language
 * [Python EVE][18] - another python-based REST framework  
+* [Expressjs][20] - a web application framework for NodeJS
 
 [1]: https://drive.google.com/open?id=0B7ShzcEnCJFNWENNN1RpYU9xeUk&authuser=0
 [2]: https://drive.google.com/open?id=0B7ShzcEnCJFNQ2FfR21FUUk1Y1E&authuser=0
@@ -368,4 +373,4 @@ Links: [PPT slides][1] | [PDF slides][2] | [Source code][3]
 [17]: http://www.django-rest-framework.org/
 [18]: http://python-eve.org/
 [19]: http://docs.helloworld66.apiary.io/
-
+[20]: http://expressjs.com/
