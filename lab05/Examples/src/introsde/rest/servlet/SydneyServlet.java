@@ -43,18 +43,27 @@ public class SydneyServlet extends HttpServlet {
     };
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if ("/json".equals(request.getPathInfo())) {
+		System.out.println("Getting request path parameters...");
+		String pathInfo = request.getPathInfo();
+		System.out.println("--> "+pathInfo);
+		System.out.println("Getting request query parameters...");
+		String indexParam = request.getParameter("index");
+		Integer index = new Integer(indexParam);
+		
+		System.out.println("--> "+index+" (before conversion --> "+indexParam+")");
+	
+		if ("/json".equals(pathInfo)) {
 			try {
-				jsonReply(response);
+				jsonReply(response, index);
 			} catch (JSONException e) {
 				e.printStackTrace();
 				errorReply(response, e, new Error("JSON Exception"));
 			}
-		} else if ("/csv".equals(request.getPathInfo())) {
-			csvReply(response);
-		} else if ("/xml".equals(request.getPathInfo())) {
+		} else if ("/csv".equals(pathInfo)) {
+			csvReply(response, index);
+		} else if ("/xml".equals(pathInfo)) {
 			try {
-				xmlReply(response);
+				xmlReply(response,index);
 			} catch (TransformerFactoryConfigurationError e) {
 				errorReply(response, null, e);
 				e.printStackTrace();
@@ -66,22 +75,30 @@ public class SydneyServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		} else {
-			htmlReply(response);
+			htmlReply(response,index);
 		}
 	}
 	
-	private void htmlReply(HttpServletResponse response) throws IOException {
+	private void htmlReply(HttpServletResponse response, Integer index) throws IOException {
+		System.out.println("Preparing HTML reply...");
 		String html = "<html><head><title>Sydney Places</title></head><body><ol>";
 		
-		for (String placeName : places) {
+		if (index==null) {
+			for (String placeName : places) {
+				html = html + "<li>"+placeName+"</li>";
+			}			
+		} else {
+			String placeName = places[index];
 			html = html + "<li>"+placeName+"</li>";
 		}
 		html = html + "</ol></body></html>";
 		response.setContentType("text/html");
-		response.getWriter().write(html);	
+		response.getWriter().write(html);
+		System.out.println("--> "+html);
 	}
 
-	private void xmlReply(HttpServletResponse response) throws TransformerFactoryConfigurationError, ParserConfigurationException, TransformerException, IOException {
+	private void xmlReply(HttpServletResponse response, Integer index) throws TransformerFactoryConfigurationError, ParserConfigurationException, TransformerException, IOException {
+		System.out.println("Preparing XML reply...");
 		response.setContentType("text/xml");
 		
 		DocumentBuilder docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -96,12 +113,21 @@ public class SydneyServlet extends HttpServlet {
 		root.appendChild(city);
 		
 		Element list = doc.createElement("places");
-		for (String placeName : places) {
+		
+		if (index==null) {
+			for (String placeName : places) {
+				Element place = doc.createElement("place");
+				place.setTextContent(placeName);
+				
+				list.appendChild(place);
+			}		
+		} else {
+			String placeName = places[index];
 			Element place = doc.createElement("place");
 			place.setTextContent(placeName);
-			
 			list.appendChild(place);
 		}
+		
 		root.appendChild(list);
 		
 		Transformer transformer = TransformerFactory.newInstance().newTransformer();
@@ -114,32 +140,49 @@ public class SydneyServlet extends HttpServlet {
 		String xmlString = sw.toString();
 		
 		response.getWriter().write(xmlString);
+		System.out.println("--> "+xmlString);
 	}
 	
-	private void csvReply(HttpServletResponse response) throws IOException {
+	private void csvReply(HttpServletResponse response, Integer index) throws IOException {
+		System.out.println("Preparing CSV reply...");
 		response.setContentType("text/csv");
 		String output = "City,Place\r\n";
-		for (String place : places) {
-			output = output + "Sydney," + place + "\r\n";
-			
+		
+		if (index==null) {
+			for (String placeName : places) {
+				output = output + "Sydney," + placeName + "\r\n";	
+			}	
+		} else {
+			String placeName = places[index];
+			output = output + "Sydney," + placeName + "\r\n";	
 		}
-	    getServletContext().log(output);
+		
+		getServletContext().log(output);
 		System.out.println(output);
 		response.getWriter().write(output);
+		System.out.println("--> "+output);
 	}
 	
-	private void jsonReply(HttpServletResponse response) throws IOException, JSONException {
+	private void jsonReply(HttpServletResponse response, Integer index) throws IOException, JSONException {
+		System.out.println("Preparing JSON reply...");
 		response.setContentType("text/json");
 		
 		JSONObject obj = new JSONObject();
 		obj.put("city", "Sydney");
 		JSONArray jsonPlaces = new JSONArray();
-		for (String place : places) {
-			jsonPlaces.put(place);
+		
+		if (index==null) {
+			for (String placeName : places) {
+				jsonPlaces.put(placeName);
+			}
+		} else {
+			String placeName = places[index];
+			jsonPlaces.put(placeName);
 		}
+		
 		obj.put("places",jsonPlaces);
-		System.out.println(obj.toString());
 		response.getWriter().write(obj.toString());
+		System.out.println("--> "+obj.toString());
 	}
 	
 	private void errorReply(HttpServletResponse response, Exception e, Error err) throws IOException, JSONException {
