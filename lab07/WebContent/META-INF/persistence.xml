@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="introsde-jpa">
+	    <class>introsde.rest.ehealth.model.HealthMeasureHistory</class>
+        <class>introsde.rest.ehealth.model.LifeStatus</class>
+        <class>introsde.rest.ehealth.model.MeasureDefaultRange</class>
+        <class>introsde.rest.ehealth.model.MeasureDefinition</class>
+        <class>introsde.rest.ehealth.model.Person</class>
+        <properties>
+            <!-- Scan for annotated classes and Hibernate mapping XML files -->
+            <property name="hibernate.archive.autodetection" value="class, hbm"/>
+            <property name="javax.persistence.jdbc.driver" value="org.sqlite.JDBC" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:sqlite:lifecoach.sqlite" />
+            <property name="eclipselink.logging.level" value="ALL" />
+            <!-- <property name="eclipselink.ddl-generation" value="create-tables" /> -->
+        </properties>
+    </persistence-unit>
+</persistence>
