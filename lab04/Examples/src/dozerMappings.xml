@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://dozer.sourceforge.net
+          http://dozer.sourceforge.net/schema/beanmapping.xsd">          
+          
+          
+  <mapping> 
+    <class-a>dozerproject.entity.Person</class-a>
+    <class-b>dozerproject.transfer.PersonBean</class-b>   
+    <field>
+      <a>firstName</a>
+      <b>fName</b>
+    </field>
+    <field>
+      <a>lastName</a>
+      <b>lName</b>
+    </field>
+    <field copy-by-reference="true">
+      <a>birthdate</a>
+      <b>birthdate</b>
+    </field>
+  </mapping>  
+  
+  <mapping> 
+    <class-a>dozerproject.entity.Person</class-a>
+    <class-b>dozerproject.transfer.PersonAnnotationBean</class-b>   
+    <field copy-by-reference="true">
+      <a>birthdate</a>
+      <b>birthdate</b>
+    </field>
+  </mapping>  
+</mappings>
+        
