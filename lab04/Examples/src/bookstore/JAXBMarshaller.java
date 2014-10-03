@@ -13,7 +13,7 @@ public class JAXBMarshaller {
 	public void generateXMLDocument(File xmlDocument) {
 		try {
 
-			JAXBContext jaxbContext = JAXBContext.newInstance("generated");
+			JAXBContext jaxbContext = JAXBContext.newInstance("bookstore.generated");
 			Marshaller marshaller = jaxbContext.createMarshaller();
 			marshaller.setProperty("jaxb.formatted.output", new Boolean(true));
 			bookstore.generated.ObjectFactory factory = new bookstore.generated.ObjectFactory();

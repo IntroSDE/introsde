@@ -15,7 +15,7 @@ public class JAXBUnMarshaller {
 	public void unMarshall(File xmlDocument) {
 		try {
 
-			JAXBContext jaxbContext = JAXBContext.newInstance("generated");
+			JAXBContext jaxbContext = JAXBContext.newInstance("bookstore.generated");
 
 			Unmarshaller unMarshaller = jaxbContext.createUnmarshaller();
 			SchemaFactory schemaFactory = SchemaFactory
