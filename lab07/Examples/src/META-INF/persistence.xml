@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="2.1"
-	xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+<persistence version="2.0"
+	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 	<persistence-unit name="introsde-jpa">
-
 		<class>introsde.rest.ehealth.model.HealthMeasureHistory</class>
 		<class>introsde.rest.ehealth.model.LifeStatus</class>
 		<class>introsde.rest.ehealth.model.MeasureDefaultRange</class>
@@ -27,20 +26,40 @@
 				value="database" />
 		</properties>
 	</persistence-unit>
+
+	<persistence-unit name="introsde-mongodb"
+		transaction-type="RESOURCE_LOCAL">
+		<class>introsde.rest.ehealth.model.PersonMongoDB</class>
+		<class>introsde.rest.ehealth.model.LifeStatusMongoDB</class>
+		<class>introsde.rest.ehealth.model.MeasureDefinitionMongoDB</class>
+		<properties>
+			<property name="eclipselink.target-database"
+				value="org.eclipse.persistence.nosql.adapters.mongo.MongoPlatform" />
+			<property name="eclipselink.nosql.connection-spec"
+				value="org.eclipse.persistence.nosql.adapters.mongo.MongoConnectionSpec" />
+			<property name="eclipselink.nosql.property.mongo.port"
+				value="27017" />
+			<property name="eclipselink.nosql.property.mongo.host"
+				value="localhost" />
+			<property name="eclipselink.nosql.property.mongo.db" value="lifecoach" />
+			<property name="eclipselink.logging.level" value="FINEST" />
+		</properties>
+	</persistence-unit>
+
 	<persistence-unit name="introsde-jpa-h2">
-        <class>model.HealthMeasureHistory</class>
-        <class>model.LifeStatus</class>
-        <class>model.MeasureDefaultRange</class>
-        <class>model.MeasureDefinition</class>
-        <class>model.Person</class>
-        <properties>
-            <property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
-            <property name="javax.persistence.jdbc.url" value="jdbc:h2:~/lifecoach" />           
-            <property name="javax.persistence.jdbc.user" value="lifecoach" />
-            <property name="javax.persistence.jdbc.password" value="" />
-            <property name="eclipselink.logging.level" value="ALL" />
-            <property name="eclipselink.ddl-generation" value="create-tables" />
-        </properties>
-    </persistence-unit>
-    
+		<class>introsde.rest.ehealth.model.HealthMeasureHistory</class>
+		<class>introsde.rest.ehealth.model.LifeStatus</class>
+		<class>introsde.rest.ehealth.model.MeasureDefaultRange</class>
+		<class>introsde.rest.ehealth.model.MeasureDefinition</class>
+		<class>introsde.rest.ehealth.model.Person</class>
+		<properties>
+			<property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:h2:~/lifecoach" />
+			<property name="javax.persistence.jdbc.user" value="lifecoach" />
+			<property name="javax.persistence.jdbc.password" value="" />
+			<property name="eclipselink.logging.level" value="ALL" />
+			<property name="eclipselink.ddl-generation" value="create-tables" />
+		</properties>
+	</persistence-unit>
+
 </persistence>
