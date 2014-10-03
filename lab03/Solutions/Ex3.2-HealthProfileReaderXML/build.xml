@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Assigment1" default="generate.xml" basedir=".">
+
+	<property name="build.dir" value="build" />
+	<property name="lib.dir" value="lib" />
+	<property name="src.dir" value="src" />
+	<property name="xjc.package" value="generated" />
+	<!-- Change the value of this property based on the path where you put JAXB-->
+	<property name="jaxb.home" value="/opt/jaxb-ri-2.2.6" />
+	<property name="schemafile" value="people.xsd" />
+	
+	<target name="init">
+		<echo message="Init has been called" />
+		<mkdir dir="${build.dir}" />
+		<echo message="${build.dir} has been created" />
+	</target>
+	
+	<target name="clean">
+		<echo message="Clean has been called" />
+		<delete dir="${build.dir}" />
+		<echo message="${build.dir} has been deleted" />
+		<delete dir="${src.dir}/${xjc.package}" />
+		<echo message="${src.dir}/${xjc.package} has been deleted" />
+		<delete file="people.xml" />
+		<echo message="people.xml has been deleted" />
+		<delete file="people2.xml" />
+		<echo message="people2.xml has been deleted" />
+	</target>
+	
+	<target name="generate.xml" depends="init, compile">
+	    <echo message="Generating xml.." />
+		<java classname="PeopleXMLGenerator" classpath="${build.dir}">
+			<classpath>
+				<fileset dir="${lib.dir}">
+					<include name="**/*.jar" />
+				</fileset>
+			</classpath>
+		</java>
+		<echo message="File people.xml has been generated" />
+	</target>
+	
+	<taskdef name="xjc" classname="com.sun.tools.xjc.XJCTask">
+		<classpath>
+			<fileset dir="${jaxb.home}/lib" includes="*.jar" />
+		</classpath>
+	</taskdef>
+	<target name="generate.class" depends="init">
+		<xjc schema="${schemafile}" destdir="${src.dir}" package="${xjc.package}" />
+	</target>
+	
+	<target name="compile" depends="init, generate.class">
+		<echo message="Compile target has been called" />
+		<javac srcdir="${src.dir}" destdir="${build.dir}">
+			<classpath>
+				<fileset dir="${lib.dir}">
+					<include name="**/*.jar" />
+				</fileset>
+			</classpath>
+		</javac>
+	</target>
+	
+	<target name="execute.part1" depends="generate.xml">
+	    <echo message="Executing part1.." />
+		<java classname="HealthProfileReader" classpath="${build.dir}">
+			<classpath>
+				<fileset dir="${lib.dir}">
+					<include name="**/*.jar" />
+				</fileset>
+			</classpath>
+		</java>
+	</target>
+	
+	<target name="execute.part2" depends="compile">
+	    <echo message="Executing part2.." />
+		<java classname="MarshallAndUnMarshall" classpath="${build.dir}">
+			<classpath>
+				<fileset dir="${lib.dir}">
+					<include name="**/*.jar" />
+				</fileset>
+			</classpath>
+		</java>
+	</target>
+</project>
