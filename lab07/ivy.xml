@@ -66,6 +66,7 @@
         <dependency org="javax.ejb" name="javax.ejb-api" rev="3.2"/>
         <dependency org="org.eclipse.persistence" name="javax.persistence" rev="2.1.0"/>
         <dependency org="org.eclipse.persistence" name="org.eclipse.persistence.jpa" rev="2.5.2"/>
+        <dependency org="org.eclipse.persistence" name="org.eclipse.persistence.nosql" rev="2.5.2"/>
         
         
         
