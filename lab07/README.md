@@ -4,9 +4,9 @@
 
 To close the loop of our service design, we will need to store (i.e., persist) data in real databases. Nowadays, there are two major flavours of databases: **relational** and **non-relational** (also known as **NoSQL**). In this module, we will add database access to our RESTful services using the Java Persistence API (JPA). We will do so using SQLite as the exemplary relational database and MongoDB as the exemplary non-relational database. 
 
-## Slides &amp; Code
+## Code
 
-Links: [PPT slides][1] | [PDF slides][2] | [Source code][3]
+Links: [Source code][3]
 
 ## Guiding Notes
 
@@ -14,25 +14,7 @@ Links: [PPT slides][1] | [PDF slides][2] | [Source code][3]
 
 * Download and Install [SQLite][4]
 * Download [SQLite Browswer][5]
-* Download [MongoDB][6] and install 
- * For windows, download the appropriate installer
- * For *nix systems, download the binaries and upack the compressed file somwhere in your PATH. 
- * For *nix systems you can also use the [packaged versions][7] through package managers
- 
-    ```sh
-    # Homebrew (Mac)
-    brew install mongodb
-    
-    # Macports (Mac)
-    sudo port install mongodb
-    
-    # apt-get (Ubuntu)
-    sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
-    echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/mongodb.list
-    sudo apt-get update
-    sudo apt-get install mongodb-org
-    ```
-    
+
 ### JPA Overview 
 
 * JPA stands for **Java Persistence API**
@@ -480,7 +462,7 @@ Links: [PPT slides][1] | [PDF slides][2] | [Source code][3]
  * If eclipse is unable to locat the jar of the driver, go to the tab *JAR List*, remove the current jar and add the SQLite JDBC driver you have downloaded  
 * **Configure the connection**
  * Database = lifecoach
- * Database Location = PATH_TO_YOUR_LOCAL_LIFECOACH_SQLITE_FILE
+ * Database Location = PATH_TO_YOUR_LOCAL_LIFECOACH_SQLITE_FILE (the file browser might not allow you to select the file, so make sure you complete the path manually)
 * Right click on your project and select **JPA tools --> Generate Entities from Tables**
 * Select the connection, get the list of tables and select the tables that you want to use to generate entities (everything but Person and LifeStatus) 
 * The second step for generating entities is to specify **Table Associations** between entities to map relationship between tables. Add a relationship between *LifeStatus* and *MeasureDefinition* 
@@ -811,11 +793,6 @@ Links: [PPT slides][1] | [PDF slides][2] | [Source code][3]
     }
     ```
 
-### JPA Tutorial Bonus: MongoDB example
-
-
-
-
 ## Additional notes
 
 ### Other Resources
@@ -823,7 +800,26 @@ Links: [PPT slides][1] | [PDF slides][2] | [Source code][3]
 * [JUnit Tutorial][13]
 * [JPA tutorial from where we took some of the explanations][14]
 * Checkout also [Mashape][15] and signup with your GitHub account (we will try to use an API from there in the future sessions)
-
+* To try a non-relational database, download [MongoDB][6] and install 
+ * For windows, download the appropriate installer
+ * For *nix systems, download the binaries and upack the compressed file somwhere in your PATH. 
+ * For *nix systems you can also use the [packaged versions][7] through package managers
+ * For how to use JPA+MongoDB, see [this tutorial][16]
+ 
+    ```sh
+    # Homebrew (Mac)
+    brew install mongodb
+    
+    # Macports (Mac)
+    sudo port install mongodb
+    
+    # apt-get (Ubuntu)
+    sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+    echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/mongodb.list
+    sudo apt-get update
+    sudo apt-get install mongodb-org
+    ```
+    
 [1]: https://drive.google.com/open?id=0B7ShzcEnCJFNWENNN1RpYU9xeUk&authuser=0
 [2]: https://drive.google.com/open?id=0B7ShzcEnCJFNQ2FfR21FUUk1Y1E&authuser=0
 [3]: https://github.com/cdparra/introsde/tree/master/lab07/Examples
@@ -839,3 +835,4 @@ Links: [PPT slides][1] | [PDF slides][2] | [Source code][3]
 [13]: http://www.vogella.com/articles/JUnit/article.html
 [14]: http://www.vogella.com/articles/JavaPersistenceAPI/article.html
 [15]: http://ww.mashape.com
+[16]: http://www.datanucleus.org/products/datanucleus/jpa/guides/tutorial_mongodb.html
