@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="2.0"
+<persistence version="2.1"
 	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="introsde-jpa">
 		<class>introsde.rest.ehealth.model.HealthMeasureHistory</class>
 		<class>introsde.rest.ehealth.model.LifeStatus</class>
@@ -26,7 +26,7 @@
 				value="database" />
 		</properties>
 	</persistence-unit>
-
+<!-- 
 	<persistence-unit name="introsde-mongodb"
 		transaction-type="RESOURCE_LOCAL">
 		<class>introsde.rest.ehealth.model.PersonMongoDB</class>
@@ -60,6 +60,5 @@
 			<property name="eclipselink.logging.level" value="ALL" />
 			<property name="eclipselink.ddl-generation" value="create-tables" />
 		</properties>
-	</persistence-unit>
-
+	</persistence-unit> -->
 </persistence>

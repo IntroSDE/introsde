@@ -9,9 +9,6 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.eclipse.persistence.nosql.annotations.DataFormatType;
-import org.eclipse.persistence.nosql.annotations.NoSql;
-
 import java.util.Date;
 import java.util.List;
 
@@ -21,10 +18,9 @@ import java.util.List;
  * 
  */
 @Entity
-@Table(name="Person")
+@Table(name="\"Person\"")
 @NamedQuery(name="Person.findAll", query="SELECT p FROM Person p")
 @XmlRootElement
-@NoSql(dataFormat=DataFormatType.MAPPED)
 public class Person implements Serializable {
 	private static final long serialVersionUID = 1L;
 

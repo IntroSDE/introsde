@@ -2,7 +2,7 @@
 
 **Introduction to Service Design and Engineering | University of Trento | [Webpage](https://sites.google.com/site/introsdeunitn/lab-sessions/lab-session-7 "Permalink to LAB07: Reading and writing from Databases & JPA (Java Persistence API)")**
 
-To close the loop of our service design, we will need to store (i.e., persist) data in real databases. Nowadays, there are two major flavours of databases: **relational** and **non-relational** (also known as **NoSQL**). In this module, we will add database access to our RESTful services using the Java Persistence API (JPA). We will do so using SQLite as the exemplary relational database and MongoDB as the exemplary non-relational database. 
+To close the loop of our service design, we will need to store (i.e., persist) data in real databases. Nowadays, there are two major flavours of databases: **relational** and **non-relational** (also known as **NoSQL**). In this module, we will add database access to our RESTful services using the Java Persistence API (JPA). We will do so using SQLite as an exemple of relational database. 
 
 ## Code
 
@@ -835,4 +835,4 @@ Links: [Source code][3]
 [13]: http://www.vogella.com/articles/JUnit/article.html
 [14]: http://www.vogella.com/articles/JavaPersistenceAPI/article.html
 [15]: http://ww.mashape.com
-[16]: http://www.datanucleus.org/products/datanucleus/jpa/guides/tutorial_mongodb.html
+[16]: http://java.dzone.com/articles/nosql-jpa
