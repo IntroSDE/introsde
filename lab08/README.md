@@ -71,45 +71,37 @@ There are two ways to structure a SOAP message
     }
     ```
 
-### JAX-WS Tutorial - RPC Style (2)
+* Now, you can create the *Web Service Endpoint Implementation*, which as the name implies, implements the interface we created before. Notice how we reference the interface class with the *@WebService* annotation. 
 
-* Create the *Web Service Endpoint Implementation*
-
-```java
-package introsde.ws;
-import javax.jws.WebService;
-//Service Implementation
-@WebService(endpointInterface = "introsde.ws.HelloWorld")
-public class HelloWorldImpl implements HelloWorld {
-	@Override
-	public String getHelloWorldAsString(String name) {
-		return "Hello World JAX-WS " + name;
-	}
-}
-```
-
----
-
-## JAX-WS Tutorial - RPC Style (3)
-
-* Create the package **introsde.endpoint**
-* Create the *Web Service Endpoint Publisher* in this package
-* Run your first JAX-WS Service as a Java application
-* Test that is working by accessing: http://localhost:6900/ws/hello?wsdl
-
-```java
-package introsde.endpoint;
-import javax.xml.ws.Endpoint;
-import introsde.ws.HelloWorldImpl;
-//Endpoint publisher
-public class HelloWorldPublisher{
-	public static void main(String[] args) {
-	   Endpoint.publish("http://localhost:6900/ws/hello", new HelloWorldImpl());
+    ```java
+    package introsde.ws;
+    import javax.jws.WebService;
+    //Service Implementation
+    @WebService(endpointInterface = "introsde.ws.HelloWorld")
+    public class HelloWorldImpl implements HelloWorld {
+    	@Override
+    	public String getHelloWorldAsString(String name) {
+    		return "Hello World JAX-WS " + name;
+    	}
     }
-}
-```
+    ```
 
----
+* Now, in order to publish this web service entpoint, create a package **introsde.endpoint** and the following Java class in it. This is the *Web Service Endpoint Publisher*. This is the equivalent to our **Standalone HTTP Server** in jersey examples. 
+
+    ```java
+    package introsde.endpoint;
+    import javax.xml.ws.Endpoint;
+    import introsde.ws.HelloWorldImpl;
+    //Endpoint publisher
+    public class HelloWorldPublisher{
+    	public static void main(String[] args) {
+    	   Endpoint.publish("http://localhost:6900/ws/hello", new HelloWorldImpl());
+        }
+    }
+    ```
+
+* Run your first JAX-WS Service as a Java application
+* Test that is working by accessing the following in your browser: http://localhost:6900/ws/hello?wsdl
 
 ## JAX-WS Tutorial - RPC Style (4)
 
