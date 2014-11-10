@@ -69,7 +69,7 @@ There are two ways to structure a SOAP message
     @WebService
     @SOAPBinding(style = Style.RPC)
     public interface HelloWorld{ 
-    	@WebMethod String getHelloWorldAsString(String name);
+        @WebMethod String getHelloWorldAsString(String name);
     }
     ```
 
@@ -81,10 +81,10 @@ There are two ways to structure a SOAP message
     //Service Implementation
     @WebService(endpointInterface = "introsde.ws.HelloWorld")
     public class HelloWorldImpl implements HelloWorld {
-    	@Override
-    	public String getHelloWorldAsString(String name) {
-    		return "Hello World JAX-WS " + name;
-    	}
+        @Override
+        public String getHelloWorldAsString(String name) {
+            return "Hello World JAX-WS " + name;
+        }
     }
     ```
 
@@ -96,8 +96,8 @@ There are two ways to structure a SOAP message
     import introsde.ws.HelloWorldImpl;
     //Endpoint publisher
     public class HelloWorldPublisher{
-    	public static void main(String[] args) {
-    	   Endpoint.publish("http://localhost:6900/ws/hello", new HelloWorldImpl());
+        public static void main(String[] args) {
+           Endpoint.publish("http://localhost:6900/ws/hello", new HelloWorldImpl());
         }
     }
     ```
@@ -154,15 +154,15 @@ There are two ways to structure a SOAP message
     import javax.xml.ws.Service;
     import introsde.ws.HelloWorld;
     public class HelloWorldClient {
-    	public static void main(String[] args) throws Exception {
-    		URL url = new URL("http://localhost:6900/ws/hello?wsdl");
-    		// 1st argument service URI, refer to wsdl document above
-    		// 2nd argument is service name, refer to wsdl document above
-    		QName qname = new QName("http://ws.introsde/", "HelloWorldImplService");
-    		Service service = Service.create(url, qname);
-    		HelloWorld hello = service.getPort(HelloWorld.class);
-    		System.out.println(hello.getHelloWorldAsString("Pinco"));
-    	}
+        public static void main(String[] args) throws Exception {
+            URL url = new URL("http://localhost:6900/ws/hello?wsdl");
+            // 1st argument service URI, refer to wsdl document above
+            // 2nd argument is service name, refer to wsdl document above
+            QName qname = new QName("http://ws.introsde/", "HelloWorldImplService");
+            Service service = Service.create(url, qname);
+            HelloWorld hello = service.getPort(HelloWorld.class);
+            System.out.println(hello.getHelloWorldAsString("Pinco"));
+        }
     }
     ```
 
@@ -288,13 +288,14 @@ There are two ways to structure a SOAP message
     import introsde.ws.HelloWorld;
     import introsde.ws.HelloWorldImplService;
     public class HelloWorldClient{
-     	public static void main(String[] args) {
-    		HelloWorldImplService helloService = new HelloWorldImplService();
-    		HelloWorld hello = helloService.getHelloWorldImplPort();
-    		System.out.println(hello.getHelloWorldAsString("Pinco"));
+        public static void main(String[] args) {
+            HelloWorldImplService helloService = new HelloWorldImplService();
+            HelloWorld hello = helloService.getHelloWorldImplPort();
+            System.out.println(hello.getHelloWorldAsString("Pinco"));
         }
     }
     ```
+    
 * Notice how we simply create an instance of the service implementation class, and then use it to execute the method we are interested in. Then we get the port of the service, represented by the interface of the endpoint. With this, we can effectively call the service. 
 * Run this client either from eclipse, or if you want directly from the command line. 
     
@@ -335,7 +336,7 @@ There are two ways to structure a SOAP message
     @WebService
     @SOAPBinding(style = Style.DOCUMENT, use=Use.LITERAL) //optional
     public interface HelloWorld{
-    	@WebMethod String getHelloWorldAsString(String name);
+        @WebMethod String getHelloWorldAsString(String name);
     }
 
 * Create the Web Service Endpoint Implementation **HelloWorldImpl.java** (no changes here)
@@ -346,10 +347,10 @@ There are two ways to structure a SOAP message
     //Service Implementation
     @WebService(endpointInterface = "introsde.document.ws.HelloWorld")
     public class HelloWorldImpl implements HelloWorld{
-    	@Override
-    	public String getHelloWorldAsString(String name) {
-    		return "Hello World JAX-WS " + name;
-    	}
+        @Override
+        public String getHelloWorldAsString(String name) {
+            return "Hello World JAX-WS " + name;
+        }
     }
 
 * Create the Endpoint Publisher **HelloWorldPublisher.java**
@@ -360,8 +361,8 @@ There are two ways to structure a SOAP message
     import introsde.document.ws.HelloWorldImpl;
     //Endpoint publisher
     public class HelloWorldPublisher{
-     	public static void main(String[] args) {
-    	   Endpoint.publish("http://localhost:6901/ws/hello", new HelloWorldImpl());
+        public static void main(String[] args) {
+           Endpoint.publish("http://localhost:6901/ws/hello", new HelloWorldImpl());
         }
     }
     ```
@@ -392,7 +393,7 @@ There are two ways to structure a SOAP message
 * These two classes are the **documents** that will be inserted in the body of the SOAP message. They can be seen as the equivalents to the **model** in Jersey. 
 * Copy these two classes to your **src/introsde/ws/jaxws** folder, in order to reference them.
 
-**GetHelloWorldAsString.java.** Since the HelloWorld service returns a string, this is a class whose only property is a string. 
+* **GetHelloWorldAsString.java.** Since the HelloWorld service returns a string, this is a class whose only property is a string.
 
     ```java
     package introsde.document.ws.jaxws;
@@ -416,8 +417,7 @@ There are two ways to structure a SOAP message
     }
     ```
 
-
-**GetHelloWorldAsStringResponse.java.** Similarly, the document to be sent in responses of the service is also a class whose only property is a string. 
+* **GetHelloWorldAsStringResponse.java.** Similarly, the document to be sent in responses of the service is also a class whose only property is a string. 
 
     ```java
     package introsde.document.ws.jaxws;
@@ -454,10 +454,10 @@ There are two ways to structure a SOAP message
     import javax.xml.ws.Service;
     import introsde.document.ws.HelloWorld;
     public class HelloWorldClient{
-    	public static void main(String[] args) throws Exception {
-    		URL url = new URL("http://localhost:6901/ws/hello?wsdl");
+        public static void main(String[] args) throws Exception {
+            URL url = new URL("http://localhost:6901/ws/hello?wsdl");
             //1st argument service URI, refer to wsdl document above
-    		//2nd argument is service name, refer to wsdl document above
+            //2nd argument is service name, refer to wsdl document above
             QName qname = new QName("http://ws.document.introsde/", "HelloWorldImplService");
             Service service = Service.create(url, qname);
             HelloWorld hello = service.getPort(HelloWorld.class);
