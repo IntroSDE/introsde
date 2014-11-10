@@ -22,12 +22,14 @@ Links: [Source code][1]
 * The developer also codes one or more classes that implement those methods. 
 * A client creates a proxy (a local object representing the service) and then simply invokes methods on the proxy. 
 * The developer does not generate or parse SOAP messages. JAX-WS runtime system converts API calls and responses to and from SOAP messages
+
 ![][6]
 
 There are two ways to structure a SOAP message 
 * **RPC Style** web service uses the names of the method and its parameters to generate XML structures that represent a methods call stack. In the early versions of SOAP (before it was publicly published),  When using RPC style, the contents of the SOAP Body must conform to a structure that indicates the method name and contains a set of parameters.
 * **Document style** indicates that the SOAP body contains a XML document which can be validated against pre-defined XML schema document. When using Document style, you can structure the contents of the SOAP Body any way you like.
 * The response message has a similar structure containing the return value and any output parameters. For example, you can pass a **purchase order** as a document or as a parameter in a method called placeOrder. 
+
 * **Document style:**
 
     ```xml
@@ -301,189 +303,217 @@ There are two ways to structure a SOAP message
     java introsde/client/HelloWorldClient
     ```
 
+* The example client project is also in the github repository of this lab (see the **Client Examples** folder)
+
 ### JAX-WS Tutorial - Document style
 
-* Create a new Web Dynamic Project
-* Create the packages introsde.ws, introsde.document.client, introsde.document.endpoint, introsde.document.ws.jaxws
+* As we have seen earlier, another way of implementing SOAP web services is to not include a service invocation insde of the soap message, but only make reference to a **document**. 
+
+    ```xml
+    <env:Body> 
+        <m:purchaseOrder xmlns:m="someURI"> [purchase order document] </m:purchaseOrder> 
+    </env:Body> 
+    ```
+
+* From a development point of view, these style requires a bit more of work. In the following we will create a web service following this message style.
+* In the service project, create the packages 
+ * **introsde.document.ws**
+ * **introsde.document.client**
+ * **introsde.document.endpoint**
+ * **introsde.document.ws.jaxws**
+ 
 * Create the Web Service Endpoint Interface **HelloWorld** as follows (the only change is the SOAPBinding annotation):
 
-```java
-package introsde.document.ws; 
-import javax.jws.WebMethod;
-import javax.jws.WebService;
-import javax.jws.soap.SOAPBinding;
-import javax.jws.soap.SOAPBinding.Style;
-//Service Endpoint Interface
-@WebService
-@SOAPBinding(style = Style.DOCUMENT, use=Use.LITERAL) //optional
-public interface HelloWorld{
-	@WebMethod String getHelloWorldAsString(String name);
-}
-
----
-
-## JAX-WS Tutorial - Document Style (2)
+    ```java
+    package introsde.document.ws; 
+    import javax.jws.WebMethod;
+    import javax.jws.WebService;
+    import javax.jws.soap.SOAPBinding;
+    import javax.jws.soap.SOAPBinding.Style;
+    import javax.jws.soap.SOAPBinding.Use;
+    //Service Endpoint Interface
+    @WebService
+    @SOAPBinding(style = Style.DOCUMENT, use=Use.LITERAL) //optional
+    public interface HelloWorld{
+    	@WebMethod String getHelloWorldAsString(String name);
+    }
 
 * Create the Web Service Endpoint Implementation **HelloWorldImpl.java** (no changes here)
 
-```java
-package introsde.document.ws;
-import javax.jws.WebService;
-//Service Implementation
-@WebService(endpointInterface = "introsde.document.ws.HelloWorld")
-public class HelloWorldImpl implements HelloWorld{
-	@Override
-	public String getHelloWorldAsString(String name) {
-		return "Hello World JAX-WS " + name;
-	}
-}
-
----
-
-## JAX-WS Tutorial - Document Style (3)
+    ```java
+    package introsde.document.ws;
+    import javax.jws.WebService;
+    //Service Implementation
+    @WebService(endpointInterface = "introsde.document.ws.HelloWorld")
+    public class HelloWorldImpl implements HelloWorld{
+    	@Override
+    	public String getHelloWorldAsString(String name) {
+    		return "Hello World JAX-WS " + name;
+    	}
+    }
 
 * Create the Endpoint Publisher **HelloWorldPublisher.java**
-* Run it to ensure that all classes are compiled
 
-```java
-package introsde.document.endpoint;
-import javax.xml.ws.Endpoint;
-import introsde.document.ws.HelloWorldImpl;
-//Endpoint publisher
-public class HelloWorldPublisher{
- 	public static void main(String[] args) {
-	   Endpoint.publish("http://localhost:6901/ws/hello", new HelloWorldImpl());
+    ```java
+    package introsde.document.endpoint;
+    import javax.xml.ws.Endpoint;
+    import introsde.document.ws.HelloWorldImpl;
+    //Endpoint publisher
+    public class HelloWorldPublisher{
+     	public static void main(String[] args) {
+    	   Endpoint.publish("http://localhost:6901/ws/hello", new HelloWorldImpl());
+        }
     }
-}
-```
+    ```
 
----
+* If you run this at is service, you will encounter the following error either at starting it, or when calling a service
 
-## JAX-WS Tutorial - Document Style - Generating Artifacts (1)
+    ```java
+    Wrapper class introsde.document.ws.jaxws.GetHelloWorldAsString is not found. 
+        Have you run APT to generate them?. 
+    ```
 
-* You can use **wsgen** to generate all necessary Java artifacts (mapping classes, wsdl or xsd schema). 
-* Run the following command on build/classes (where the compiled classes are):
+* To avoid this, we need to generate the requeste class
 
-```sh
-wsgen -keep -cp . introsde.document.ws.HelloWorldImpl
-```
+### JAX-WS Tutorial - Document Style - Generating Artifacts 
 
-* It will generate two classes in build/classes/introsde/ws/jaxws, 
-* Copy them to your **src/introsde/ws/jaxws** folder.
-* These can be seen as the equivalents to the **model** in Jersey. 
+* In the same way we refere to **resources** in jersey to serve representations of our model through web services, in the document style we need to create the **document artifacts** that will be served through this service.  
+* We can use **wsgen** to generate all necessary **Java artifacts** that fulfil this purpose (mapping classes, wsdl or xsd schema).
+* Before we generate the classes, make sure all the classes are compiled. To ensure this, disable Eclipse's **Project -> Build Automatically** option and then run **Project -> Build Project**  
+* Run the following command on **build/classes** (where the compiled classes are):
 
----
+    ```sh
+    wsgen -keep -cp . introsde.document.ws.HelloWorldImpl
+    ```
 
-## JAX-WS Tutorial - Document Style - Generating Artifacts (2)
+* It will generate two classes in **build/classes/introsde/ws/jaxws**
+ * GetHelloWorldAsString.java
+ * GetHelloWorldAsStringResponse.java
+* These two classes are the **documents** that will be inserted in the body of the SOAP message. They can be seen as the equivalents to the **model** in Jersey. 
+* Copy these two classes to your **src/introsde/ws/jaxws** folder, in order to reference them.
 
-* GetHelloWorldAsString.java
+**GetHelloWorldAsString.java.** Since the HelloWorld service returns a string, this is a class whose only property is a string. 
 
-```java
-package introsde.document.ws.jaxws;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
-@XmlRootElement(name = "getHelloWorldAsString", namespace = "http://ws.document.introsde/")
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "getHelloWorldAsString", namespace = "http://ws.document.introsde/")
-public class GetHelloWorldAsString {
-    @XmlElement(name = "arg0", namespace = "")
-    private String arg0;
-    public String getArg0() {
-        return this.arg0;
+    ```java
+    package introsde.document.ws.jaxws;
+    import javax.xml.bind.annotation.XmlAccessType;
+    import javax.xml.bind.annotation.XmlAccessorType;
+    import javax.xml.bind.annotation.XmlElement;
+    import javax.xml.bind.annotation.XmlRootElement;
+    import javax.xml.bind.annotation.XmlType;
+    @XmlRootElement(name = "getHelloWorldAsString", namespace = "http://ws.document.introsde/")
+    @XmlAccessorType(XmlAccessType.FIELD)
+    @XmlType(name = "getHelloWorldAsString", namespace = "http://ws.document.introsde/")
+    public class GetHelloWorldAsString {
+        @XmlElement(name = "arg0", namespace = "")
+        private String arg0;
+        public String getArg0() {
+            return this.arg0;
+        }
+        public void setArg0(String arg0) {
+            this.arg0 = arg0;
+        } 
     }
-    public void setArg0(String arg0) {
-        this.arg0 = arg0;
-    } 
-}
-```
+    ```
 
----
 
-## JAX-WS Tutorial - Document Style - Generating Artifacts (3)
+**GetHelloWorldAsStringResponse.java.** Similarly, the document to be sent in responses of the service is also a class whose only property is a string. 
 
-* GetHelloWorldAsStringResponse.java
-
-```java
-package introsde.document.ws.jaxws;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
-@XmlRootElement(name = "getHelloWorldAsStringResponse", namespace = "http://ws.document.introsde/")
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "getHelloWorldAsStringResponse", namespace = "http://ws.document.introsde/")
-public class GetHelloWorldAsStringResponse {
-    @XmlElement(name = "return", namespace = "")
-    private String _return;
-    public String getReturn() {
-        return this._return;
+    ```java
+    package introsde.document.ws.jaxws;
+    import javax.xml.bind.annotation.XmlAccessType;
+    import javax.xml.bind.annotation.XmlAccessorType;
+    import javax.xml.bind.annotation.XmlElement;
+    import javax.xml.bind.annotation.XmlRootElement;
+    import javax.xml.bind.annotation.XmlType;
+    @XmlRootElement(name = "getHelloWorldAsStringResponse", namespace = "http://ws.document.introsde/")
+    @XmlAccessorType(XmlAccessType.FIELD)
+    @XmlType(name = "getHelloWorldAsStringResponse", namespace = "http://ws.document.introsde/")
+    public class GetHelloWorldAsStringResponse {
+        @XmlElement(name = "return", namespace = "")
+        private String _return;
+        public String getReturn() {
+            return this._return;
+        }
+        public void setReturn(String _return) {
+            this._return = _return;
+        }
     }
-    public void setReturn(String _return) {
-        this._return = _return;
-    }
-}
-```
+    ```
 
----
+* Now, try to run your service again. 
 
-## JAX-WS Tutorial - Document Style client (3)
+## JAX-WS Tutorial - Document Style client
 
 * Create the Web Service Client
 
-```java
-package introsde.document.client;
-import java.net.URL;
-import javax.xml.namespace.QName;
-import javax.xml.ws.Service;
-import introsde.document.ws.HelloWorld;
-public class HelloWorldClient{
-	public static void main(String[] args) throws Exception {
-		URL url = new URL("http://localhost:6901/ws/hello?wsdl");
-        //1st argument service URI, refer to wsdl document above
-		//2nd argument is service name, refer to wsdl document above
-        QName qname = new QName("http://ws.document.introsde/", "HelloWorldImplService");
-        Service service = Service.create(url, qname);
-        HelloWorld hello = service.getPort(HelloWorld.class);
-        System.out.println(hello.getHelloWorldAsString("Pinco"));
+    ```java
+    package introsde.document.client;
+    import java.net.URL;
+    import javax.xml.namespace.QName;
+    import javax.xml.ws.Service;
+    import introsde.document.ws.HelloWorld;
+    public class HelloWorldClient{
+    	public static void main(String[] args) throws Exception {
+    		URL url = new URL("http://localhost:6901/ws/hello?wsdl");
+            //1st argument service URI, refer to wsdl document above
+    		//2nd argument is service name, refer to wsdl document above
+            QName qname = new QName("http://ws.document.introsde/", "HelloWorldImplService");
+            Service service = Service.create(url, qname);
+            HelloWorld hello = service.getPort(HelloWorld.class);
+            System.out.println(hello.getHelloWorldAsString("Pinco"));
+        }
     }
-}
-```
+    ```
 
----
+* Run this client and then use the POSTMAN client to send the same HTTP POST request we used for the first RPC example. Use the address (http://localhost:6901/ws/hello) with the following body. Make sure the encoding is **text/xml**
 
-## Assignment #3: Part 1 (1)
+    ```xml
+    <soap:Envelope
+    xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    soap:encodingStyle="http://www.w3.org/2001/12/soap-encoding">
+      <soap:Body xmlns:m="http://ws.introsde/">
+      <m:getHelloWorldAsString>
+        <arg0>Pinco</arg0>
+      </m:getHelloWorldAsString>
+    </soap:Body>
+    </soap:Envelope>
+    ```
 
-* Using JAX-WS, implement CRUD services for the following model including the following operations
-    * readPerson(int personId) (returns the Person)
-    * createPerson(Person p) (returns the personId of the new Person, or a negative number representing an error)
-    * updatePerson(Person p) (returns the personId of the updated Person, or a negative number representing an error)
-        * [OPTION A] If p includes changes to the "healthProfile" you can should 1) replace the current profile with a new one if no hpId is specified (in which case, the old health profile should be part of the history now) or 2) update the corrisponding health profile if an hpId is given  
-    * deletePerson(int id) (returns 0, or a negative number representing an error)
-    * updatePersonHealthProfile(int personId, HealthProfile hp) (returns the id of the health profile updated, or a negative number representing an error). If no health profile exists yet, create it. In any other case, you should only update the health profile which is given by the hpId inside hp. 
-    * [OPTION B] addPersonHealthProfile(int personId, HealthProfile hp) (adds a new health profile to replace the current one, which should pass to the history). When creating new health profiles, you can use either option A or B, the one you prefer.  
+* Although in this particular example, the difference between both styles is not really noticeable, there is a difference in between the **RPC** and the **Document** styles. 
+* In the first, the SOAP message body contains an XML representation of a method call and uses the names of the method and its parameters to generate XML structures that represent a method's call stack.
+* In the second,the SOAP body contains a XML document which can be completely validated against a pre-defined XML schema document.  
+* The document/literal approach, in this sense, can be easier if there are XML Schemas describing exactly what the SOAP message looks like. 
+* If you compare the **WSDL** of both styles, you will see that the latter has as schema definition on it under the element **type** and pointing to the following url: http://localhost:6901/ws/hello?xsd=1
 
-// Person & HealthProfile
-```xml
-<person>
-    <personId>1</personId>
-    <firstname>Chuck</name>
-    <lastname>Norris</lastname>
-    <birthdate>1945-01-01</birthdate>
-    <healthProfile>
-        <hpId>999</hpId>
-        <date>2013-12-05</date>
-        <weight>78.9</weight>
-        <height>172</height>
-        <steps>5000</steps>
-        <calories>2120</calories>
-    </healthProfile>
-</person>
-```
+    ```xml
+    ...
+    <types>
+        <xsd:schema>
+        <xsd:import namespace="http://ws.document.introsde/" schemaLocation="http://localhost:6901/ws/hello?xsd=1"/>
+        </xsd:schema>
+    </types>
+    ...
+    ```
+    
+    ```xml
+    <xs:schema xmlns:tns="http://ws.document.introsde/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://ws.document.introsde/">
+        <xs:element name="getHelloWorldAsString" type="tns:getHelloWorldAsString"/>
+        <xs:element name="getHelloWorldAsStringResponse" type="tns:getHelloWorldAsStringResponse"/>
+        <xs:complexType name="getHelloWorldAsString">
+            <xs:sequence>
+                <xs:element name="arg0" type="xs:string" minOccurs="0"/>    
+            </xs:sequence>
+        </xs:complexType>   
+        <xs:complexType name="getHelloWorldAsStringResponse">
+            <xs:sequence>
+                <xs:element name="return" type="xs:string" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:schema>
+    ```
 
+* So the main advantage of the **Document Style** is easier to validate while for **RPC style** the it is not very easy to do so since there is no complete schema defined for it. This means the schema alone does not tell you what the message body contains because some of the soap:body contents comes from WSDL definitions. Because of this, schema describing an RPC/literal message is not sufficient to validate that message
 
 ## Additional Notes
 
