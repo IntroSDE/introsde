@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ================================= 
+    Introduction to Service Design and Engineering Laboratory
+    Description: ANT build script for the session on JAXB and Dozer 
+    Author: cdparra
+    
+    Notes: 
+    
+    * This build file includes targets to download and install in your local project the Apache IVY jar
+    * IVY is used to manage dependencies on projects (e.g., jaxb libraries, jackson libraries for json, etc.) 
+    * 
+       TO USE IVY IN YOUR PROJECTS IN ORDER TO GET MANAGE DEPENDENCIES, MAKE SURE THE FOLLOWING LINES ARE
+       IN YOUR BUILD.XML UNTILL 'IVY-END-LINE'
+       
+       # The target "download-ivy" and "install-ivy" will download the ivy jar and place it in the "ivy" folder
+       # 
+-->
+<project name="sdelab08" default="compile" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant">
+
+	<!-- PART 1: Ivy properties, download, installation and configuration -->
+	<property name="ivy.install.version" value="2.4.0-rc1" />
+	<property name="ivy.jar.dir" value="${basedir}/ivy" />
+	<property name="ivy.jar.file" value="${ivy.jar.dir}/ivy.jar" />
+
+	<!-- this targe will donwload ivy.jar if its inot in the "ivy" folder yet -->
+	<target name="download-ivy" unless="skip.download">
+		<mkdir dir="${ivy.jar.dir}"/>
+		<!-- download Ivy from web site so that it can be used even without any special installation -->
+		<echo message="installing ivy..."/>
+		<get src="http://repo1.maven.org/maven2/org/apache/ivy/ivy/${ivy.install.version}/ivy-${ivy.install.version}.jar" dest="${ivy.jar.file}" usetimestamp="true"/>
+	</target>
+
+	<!--
+			 ================================= 
+			          target: install-ivy         
+			            this target is not necessary if you put ivy.jar in your ant lib directory
+			            if you already have ivy in your ant lib, you can simply remove this
+			            target and the dependency the 'init' target has on it
+			         ================================= 
+			-->
+	<target name="install-ivy" depends="download-ivy" description="--> install ivy">
+		<!--
+			 try to load ivy here from local ivy dir, in case the user has not already dropped
+			              it into ant's lib dir (note that the latter copy will always take precedence).
+			              We will not fail as long as local lib dir exists (it may be empty) and
+			              ivy is in at least one of ant's lib dir or the local lib dir. 
+			-->
+		<path id="ivy.lib.path">
+			<fileset dir="${ivy.jar.dir}" includes="*.jar"/>
+		</path>
+		<taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant" classpathref="ivy.lib.path"/>
+	</target>
+
+	<!-- PART 2: General properties definitions -->
+	<property name="build.dir" value="build" />
+	<property name="src.dir" value="Examples/src" />
+	<property name="lib.dir" value="WebContent/WEB-INF/lib" />
+	<property name="web.dir" value="." />
+
+	<!-- ================================= 
+	          target: resolve downloads the dependencies to your lib folder              
+	         ================================= -->
+	<target name="resolve" depends="install-ivy" description="--> retrieve dependencies with ivy">
+		<ivy:retrieve pattern="${lib.dir}/[type]s-[artifact]-[revision].[ext]"/>
+	</target>
+
+
+	<!-- paths where ivy libraries will be downloaded, use them as classpathref in your compilation and running tasks  -->
+	<path id="lib.path.id">
+		<fileset dir="${lib.dir}" />
+	</path>
+
+
+	<path id="run.path.id">
+		<path refid="lib.path.id" />
+		<fileset dir="${build.dir}">
+			<include name="*.class" />
+			<include name="**/*.class" />
+			<exclude name="**/*Test*" />
+		</fileset>
+	</path>
+
+	<!-- PART 3: compilation and execution targets for this session -->
+	<target name="init" depends="install-ivy, resolve">
+		<echo message="Init has been called" />
+		<mkdir dir="${build.dir}" />
+		<echo message="${build.dir} has been created" />
+	</target>
+
+	<target name="clean">
+		<echo message="Clean has been called" />
+		<delete dir="${build.dir}" />
+		<echo message="${build.dir} has been deleted" />
+		<delete dir="${src.dir}/${xjc.package}" />
+		<echo message="${src.dir}/${xjc.package} has been deleted" />
+		<delete file="catalog.xml" />
+		<echo message="catalog.xml has been deleted" />
+	</target>
+
+	<target name="compile">
+		<echo message="Compile target has been called" />
+		<javac srcdir="${src.dir}" destdir="${build.dir}" classpathref="lib.path.id" includeAntRuntime="false">
+		</javac>
+		<copy todir="${build.dir}" overwrite="true">
+			<fileset dir="${src.dir}">
+				<include name="*.xml" />
+			</fileset>
+		</copy>
+	</target>
+
+	<!-- make sure you have created first the WebContent folder, including a META-INF folder, WEB-INF/web.xml file and WEB-INF/lib folder --> 
+	<target name="create.war" depends="compile">
+		<war destfile="sdelab08.war" webxml="${web.dir}/WebContent/WEB-INF/web.xml">
+			<fileset dir="${web.dir}/WebContent">
+				<include name="**/*.*"/>
+			</fileset>
+			<classes dir="${build.dir}"/>
+		</war>
+	</target>
+</project>

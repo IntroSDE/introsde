@@ -173,8 +173,8 @@ There are two ways to structure a SOAP message
 * If you are not the service developer and you don't have access to its **Web Service Endpoint Interface class**, you can use **wsimport** command to parse the **wsdl** of the service and generate client **stub files** to access the published web service. 
 * With wsimport, you will generate a local stub of the remote service that will serve you as a proxy.  
 * wsimport should be in JDK_PATH/bin folder. If not, download the full JAX-WS bundle from [here][7], unzip the compressed file and copy the binaries from **bin** folder inside somewhere in your path.
-* To generate the **stub files**, create another **Dynamic Web Project** with the same ivy.xml and build.xml. 
-* Then execute the following from the command line inside the **src** folder of this new project
+* To generate the **stub files**, create another **Dynamic Web Project** with the **sdelab08-clients**, copying inside the same **ivy.xml** and **build.xml** of our service project. 
+* Then execute the following on the command line, inside the **src** folder of this new project
 
     ```sh
     wsimport -keep http://localhost:6900/ws/hello?wsdl
@@ -185,12 +185,10 @@ There are two ways to structure a SOAP message
     Compiling code...
     ```
 
-* You should now have an interface and a service implementation in your **introsde.ws** package. 
- * **introsde/ws/HelloWorldImplService.class** 
+* You should now have an interface and a service implementation in the **introsde.ws** package of the new project (including its compiled versions). The newly generated classes follow. 
  * **introsde/ws/HelloWorldImplService.java**
- * **introsde/ws/HelloWorld.class** 
+ * **introsde/ws/HelloWorld.java**
  
-
     ```java
     package introsde.ws;
     import javax.jws.WebMethod;
@@ -281,29 +279,29 @@ There are two ways to structure a SOAP message
     }
     ```
 
-* To use this stub, create the following program in the file **introsde/client/HelloWorldClient.java**:
+* To use this stub, you can create the **introsde.client** package in your new project and then put the following class in it (**introsde/client/HelloWorldClient.java**):
 
-```java
-package introsde.client;
-import introsde.ws.HelloWorld;
-import introsde.ws.HelloWorldImplService;
-public class HelloWorldClient{
- 	public static void main(String[] args) {
-		HelloWorldImplService helloService = new HelloWorldImplService();
-		HelloWorld hello = helloService.getHelloWorldImplPort();
-		System.out.println(hello.getHelloWorldAsString("Pinco"));
+    ```java
+    package introsde.client;
+    import introsde.ws.HelloWorld;
+    import introsde.ws.HelloWorldImplService;
+    public class HelloWorldClient{
+     	public static void main(String[] args) {
+    		HelloWorldImplService helloService = new HelloWorldImplService();
+    		HelloWorld hello = helloService.getHelloWorldImplPort();
+    		System.out.println(hello.getHelloWorldAsString("Pinco"));
+        }
     }
-}
-```
+    ```
+* Notice how we simply create an instance of the service implementation class, and then use it to execute the method we are interested in. Then we get the port of the service, represented by the interface of the endpoint. With this, we can effectively call the service. 
+* Run this client either from eclipse, or if you want directly from the command line. 
+    
+    ```sh
+    javac introsde/client/HelloWorldClient.java
+    java introsde/client/HelloWorldClient
+    ```
 
-```sh
-javac introsde/client/HelloWorldClient.java
-java introsde/client/HelloWorldClient
-```
-
----
-
-## JAX-WS Tutorial - Document style (1)
+### JAX-WS Tutorial - Document style
 
 * Create a new Web Dynamic Project
 * Create the packages introsde.ws, introsde.document.client, introsde.document.endpoint, introsde.document.ws.jaxws
