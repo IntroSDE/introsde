@@ -101,192 +101,185 @@ There are two ways to structure a SOAP message
     ```
 
 * Run your first JAX-WS Service as a Java application
-* Test that is working by accessing the following in your browser: http://localhost:6900/ws/hello?wsdl
+* Test that is working by accessing the following in your browser: http://localhost:6900/ws/hello?wsdl 
+* The former shows you the description XML of your SOAP web service. Notice the line where your service is declared with the name **HelloWorldImplService**. We will use that later. 
 
-## JAX-WS Tutorial - RPC Style (4)
+    ```xml
+        <service name="HelloWorldImplService">
+            <port name="HelloWorldImplPort" binding="tns:HelloWorldImplPortBinding">
+                <soap:address location="http://localhost:6900/ws/hello"/>   
+            </port>
+        </service>
+    ```
+ 
+* Now, using the service **address location**, let's call the service with an **HTTP POST request** on that address (http://localhost:6900/ws/hello) with the following body (the SOAP invocation message). Make sure the encoding is **text/xml**
 
-* Call the service via an HTTP POST request on localhost:6900/ws/hello with body
-
-```xml
-<soap:Envelope
-xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
-soap:encodingStyle="http://www.w3.org/2001/12/soap-encoding">
-  <soap:Body xmlns:m="http://ws.introsde/">
-  <m:getHelloWorldAsString>
-    <arg0>Pinco</arg0>
-  </m:getHelloWorldAsString>
-</soap:Body>
-</soap:Envelope>
-```
+    ```xml
+    <soap:Envelope
+    xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+    soap:encodingStyle="http://www.w3.org/2001/12/soap-encoding">
+      <soap:Body xmlns:m="http://ws.introsde/">
+      <m:getHelloWorldAsString>
+        <arg0>Pinco</arg0>
+      </m:getHelloWorldAsString>
+    </soap:Body>
+    </soap:Envelope>
+    ```
 
 * This should be the response
 
-```xml
-<?xml version="1.0" ?>
-<S:Envelope
-    xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
-    <S:Body>
-        <ns2:getHelloWorldAsStringResponse
-            xmlns:ns2="http://ws.introsde/">
-            <return>Hello World JAX-WS Pinco</return>
-        </ns2:getHelloWorldAsStringResponse>
-    </S:Body>
-</S:Envelope>
-```
+    ```xml
+    <?xml version="1.0" ?>
+    <S:Envelope
+        xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+        <S:Body>
+            <ns2:getHelloWorldAsStringResponse
+                xmlns:ns2="http://ws.introsde/">
+                <return>Hello World JAX-WS Pinco</return>
+            </ns2:getHelloWorldAsStringResponse>
+        </S:Body>
+    </S:Envelope>
+    ```
 
----
+### JAX-WS Tutorial - Implementing Clients 
 
-## JAX-WS Tutorial - Implementing Clients 
+* Create a package **introsde.client** and add the following class. Notice how we **QName** clase is used to reference the service class we are calling. The package of the Service implementation is reversed (**ws.introsde**) and the second argument refers to the name of the service as define in the WSDL (**HelloWorldImplService**)
 
-* Create a package **introsde.client** and add the following class
+    ```java
+    package introsde.client;
+    import java.net.URL;
+    import javax.xml.namespace.QName;
+    import javax.xml.ws.Service;
+    import introsde.ws.HelloWorld;
+    public class HelloWorldClient {
+    	public static void main(String[] args) throws Exception {
+    		URL url = new URL("http://localhost:6900/ws/hello?wsdl");
+    		// 1st argument service URI, refer to wsdl document above
+    		// 2nd argument is service name, refer to wsdl document above
+    		QName qname = new QName("http://ws.introsde/", "HelloWorldImplService");
+    		Service service = Service.create(url, qname);
+    		HelloWorld hello = service.getPort(HelloWorld.class);
+    		System.out.println(hello.getHelloWorldAsString("Pinco"));
+    	}
+    }
+    ```
 
-```java
-package introsde.client;
-import java.net.URL;
-import javax.xml.namespace.QName;
-import javax.xml.ws.Service;
-import introsde.ws.HelloWorld;
-public class HelloWorldClient {
-	public static void main(String[] args) throws Exception {
-		URL url = new URL("http://localhost:6900/ws/hello?wsdl");
-		// 1st argument service URI, refer to wsdl document above
-		// 2nd argument is service name, refer to wsdl document above
-		QName qname = new QName("http://ws.introsde/", "HelloWorldImplService");
-		Service service = Service.create(url, qname);
-		HelloWorld hello = service.getPort(HelloWorld.class);
-		System.out.println(hello.getHelloWorldAsString("Pinco"));
-	}
-}
-```
+* Run the client. You should see only the output of the service, not the full SOAP message as we have seen before. Notice that you are invoking the service in as simple Java method. So whatever that method returns, you can manipulate it as an standar java object. 
+* Notice also how to implement the client, we need the **Web Service Endpoint Interface class**
+* Since we are also creating the service, the **HelloWorld.class** is in our build path. **But what if we are not the service developer? What if we are working in a fully different project?**
 
----
+### JAX-WS Tutorial - Implementing Clients - Automatic generation 
 
-## JAX-WS Tutorial - Implementing Clients - Automatic (1)
-
-* You can also use **wsimport** to parse the wsdl file and generate client files (stub) to access the published web service.
-* This is usefuls if you don't have the webservice interface (HelloWorld) locally available as part of some library.
+* If you are not the service developer and you don't have access to its **Web Service Endpoint Interface class**, you can use **wsimport** command to parse the **wsdl** of the service and generate client **stub files** to access the published web service. 
 * With wsimport, you will generate a local stub of the remote service that will serve you as a proxy.  
-* wsimport should be in JDK_PATH/bin folder.
-* Create a **my-solutions** folder on your local copy of lab10.
-* From the command line, execute the following inside that new folder
+* wsimport should be in JDK_PATH/bin folder. If not, download the full JAX-WS bundle from [here][7], unzip the compressed file and copy the binaries from **bin** folder inside somewhere in your path.
+* To generate the **stub files**, create another **Dynamic Web Project** with the same ivy.xml and build.xml. 
+* Then execute the following from the command line inside the **src** folder of this new project
 
-```sh
-wsimport -keep http://localhost:6900/ws/hello?wsdl
-```
+    ```sh
+    wsimport -keep http://localhost:6900/ws/hello?wsdl
+    
+    Output: 
+    parsing WSDL...
+    Generating code...
+    Compiling code...
+    ```
 
----
+* You should now have an interface and a service implementation in your **introsde.ws** package. 
+ * **introsde/ws/HelloWorldImplService.class** 
+ * **introsde/ws/HelloWorldImplService.java**
+ * **introsde/ws/HelloWorld.class** 
+ 
 
-## JAX-WS Tutorial -  Implementing Clients - Automatic (2)
+    ```java
+    package introsde.ws;
+    import javax.jws.WebMethod;
+    import javax.jws.WebParam;
+    import javax.jws.WebResult;
+    import javax.jws.WebService;
+    import javax.jws.soap.SOAPBinding;
+    import javax.xml.ws.Action;
+    @WebService(name = "HelloWorld", targetNamespace = "http://ws.introsde/")
+    @SOAPBinding(style = SOAPBinding.Style.RPC)
+    public interface HelloWorld {
+        @WebMethod
+        @WebResult(partName = "return")
+        @Action(input = "http://ws.introsde/HelloWorld/getHelloWorldAsStringRequest", 
+            output = "http://ws.introsde/HelloWorld/getHelloWorldAsStringResponse")
+        public String getHelloWorldAsString(
+            @WebParam(name = "arg0", partName = "arg0")
+            String arg0);
+    }
+    ```
 
-* You should now have an interface and a service implementation as follows:
-* File **introsde/ws/HelloWorld.java**
-
-```java
-package introsde.ws;
-import javax.jws.WebMethod;
-import javax.jws.WebParam;
-import javax.jws.WebResult;
-import javax.jws.WebService;
-import javax.jws.soap.SOAPBinding;
-import javax.xml.ws.Action;
-@WebService(name = "HelloWorld", targetNamespace = "http://ws.introsde/")
-@SOAPBinding(style = SOAPBinding.Style.RPC)
-public interface HelloWorld {
-    @WebMethod
-    @WebResult(partName = "return")
-    @Action(input = "http://ws.introsde/HelloWorld/getHelloWorldAsStringRequest", 
-        output = "http://ws.introsde/HelloWorld/getHelloWorldAsStringResponse")
-    public String getHelloWorldAsString(
-        @WebParam(name = "arg0", partName = "arg0")
-        String arg0);
-}
-```
-
----
-
-## JAX-WS Tutorial -  Implementing Clients - Automatic (3)
-
-* File **introsde/ws/HelloWorldImplService.java**
-
-```java
-package introsde.ws;
-import java.net.MalformedURLException;
-import java.net.URL;
-import javax.xml.namespace.QName;
-import javax.xml.ws.Service;
-import javax.xml.ws.WebEndpoint;
-import javax.xml.ws.WebServiceClient;
-import javax.xml.ws.WebServiceException;
-import javax.xml.ws.WebServiceFeature;
-@WebServiceClient(name = "HelloWorldImplService", 
-    targetNamespace = "http://ws.introsde/", 
-    wsdlLocation = "http://localhost:6900/ws/hello?wsdl")
-public class HelloWorldImplService extends Service
-{
-    private final static URL HELLOWORLDIMPLSERVICE_WSDL_LOCATION;
-    private final static WebServiceException HELLOWORLDIMPLSERVICE_EXCEPTION;
-    private final static QName HELLOWORLDIMPLSERVICE_QNAME = 
-        new QName("http://ws.introsde/", "HelloWorldImplService");
-    static {
-        URL url = null;
-        WebServiceException e = null;
-        try {
-            url = new URL("http://localhost:6900/ws/hello?wsdl");
-        } catch (MalformedURLException ex) {
-            e = new WebServiceException(ex);
+    ```java
+    package introsde.ws;
+    import java.net.MalformedURLException;
+    import java.net.URL;
+    import javax.xml.namespace.QName;
+    import javax.xml.ws.Service;
+    import javax.xml.ws.WebEndpoint;
+    import javax.xml.ws.WebServiceClient;
+    import javax.xml.ws.WebServiceException;
+    import javax.xml.ws.WebServiceFeature;
+    @WebServiceClient(name = "HelloWorldImplService", 
+        targetNamespace = "http://ws.introsde/", 
+        wsdlLocation = "http://localhost:6900/ws/hello?wsdl")
+    public class HelloWorldImplService extends Service
+    {
+        private final static URL HELLOWORLDIMPLSERVICE_WSDL_LOCATION;
+        private final static WebServiceException HELLOWORLDIMPLSERVICE_EXCEPTION;
+        private final static QName HELLOWORLDIMPLSERVICE_QNAME = 
+            new QName("http://ws.introsde/", "HelloWorldImplService");
+        static {
+            URL url = null;
+            WebServiceException e = null;
+            try {
+                url = new URL("http://localhost:6900/ws/hello?wsdl");
+            } catch (MalformedURLException ex) {
+                e = new WebServiceException(ex);
+            }
+            HELLOWORLDIMPLSERVICE_WSDL_LOCATION = url;
+            HELLOWORLDIMPLSERVICE_EXCEPTION = e;
         }
-        HELLOWORLDIMPLSERVICE_WSDL_LOCATION = url;
-        HELLOWORLDIMPLSERVICE_EXCEPTION = e;
-    }
-    //continues
-```
-
----
-
-## JAX-WS Tutorial -  Implementing Clients - Automatic (3)
-
-```java
-    public HelloWorldImplService() {
-        super(__getWsdlLocation(), HELLOWORLDIMPLSERVICE_QNAME);
-    }
-    public HelloWorldImplService(WebServiceFeature... features) {
-        super(__getWsdlLocation(), HELLOWORLDIMPLSERVICE_QNAME, features);
-    }
-    public HelloWorldImplService(URL wsdlLocation) {
-        super(wsdlLocation, HELLOWORLDIMPLSERVICE_QNAME);
-    }
-    public HelloWorldImplService(URL wsdlLocation, WebServiceFeature... features) {
-        super(wsdlLocation, HELLOWORLDIMPLSERVICE_QNAME, features);
-    }
-    public HelloWorldImplService(URL wsdlLocation, QName serviceName) {
-        super(wsdlLocation, serviceName);
-    }
-    public HelloWorldImplService(URL wsdlLocation, QName serviceName, 
-        WebServiceFeature... features) {
-        super(wsdlLocation, serviceName, features);
-    }
-    @WebEndpoint(name = "HelloWorldImplPort")
-    public HelloWorld getHelloWorldImplPort() {
-        return super.getPort(new QName("http://ws.introsde/", "HelloWorldImplPort"), 
-            HelloWorld.class);
-    }
-    @WebEndpoint(name = "HelloWorldImplPort")
-    public HelloWorld getHelloWorldImplPort(WebServiceFeature... features) {
-        return super.getPort(new QName("http://ws.introsde/", "HelloWorldImplPort"), 
-            HelloWorld.class, features);
-    }
-    private static URL __getWsdlLocation() {
-        if (HELLOWORLDIMPLSERVICE_EXCEPTION!= null) {
-            throw HELLOWORLDIMPLSERVICE_EXCEPTION;
+    
+        public HelloWorldImplService() {
+            super(__getWsdlLocation(), HELLOWORLDIMPLSERVICE_QNAME);
         }
-        return HELLOWORLDIMPLSERVICE_WSDL_LOCATION;
+        public HelloWorldImplService(WebServiceFeature... features) {
+            super(__getWsdlLocation(), HELLOWORLDIMPLSERVICE_QNAME, features);
+        }
+        public HelloWorldImplService(URL wsdlLocation) {
+            super(wsdlLocation, HELLOWORLDIMPLSERVICE_QNAME);
+        }
+        public HelloWorldImplService(URL wsdlLocation, WebServiceFeature... features) {
+            super(wsdlLocation, HELLOWORLDIMPLSERVICE_QNAME, features);
+        }
+        public HelloWorldImplService(URL wsdlLocation, QName serviceName) {
+            super(wsdlLocation, serviceName);
+        }
+        public HelloWorldImplService(URL wsdlLocation, QName serviceName, 
+            WebServiceFeature... features) {
+            super(wsdlLocation, serviceName, features);
+        }
+        @WebEndpoint(name = "HelloWorldImplPort")
+        public HelloWorld getHelloWorldImplPort() {
+            return super.getPort(new QName("http://ws.introsde/", "HelloWorldImplPort"), 
+                HelloWorld.class);
+        }
+        @WebEndpoint(name = "HelloWorldImplPort")
+        public HelloWorld getHelloWorldImplPort(WebServiceFeature... features) {
+            return super.getPort(new QName("http://ws.introsde/", "HelloWorldImplPort"), 
+                HelloWorld.class, features);
+        }
+        private static URL __getWsdlLocation() {
+            if (HELLOWORLDIMPLSERVICE_EXCEPTION!= null) {
+                throw HELLOWORLDIMPLSERVICE_EXCEPTION;
+            }
+            return HELLOWORLDIMPLSERVICE_WSDL_LOCATION;
+        }
     }
-}
-```
-
----
-
-## JAX-WS Tutorial -  Implementing Clients - Automatic (4)
+    ```
 
 * To use this stub, create the following program in the file **introsde/client/HelloWorldClient.java**:
 
@@ -520,3 +513,4 @@ public class HelloWorldClient{
 [4]: http://java.globinch.com/enterprise-java/web-services/soap-binding-document-rpc-style-web-services-difference/#document_style_rpc_style
 [5]: http://www.middlewareguru.com/mw/?p=795
 [6]: http://docs.oracle.com/javaee/5/tutorial/doc/figures/jaxws-simpleClientAndService.gif
+[7]: http://repo.maven.apache.org/maven2/com/sun/xml/ws/jaxws-ri/2.2.8/jaxws-ri-2.2.8.zip
