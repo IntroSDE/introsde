@@ -4,7 +4,7 @@
 
 ## Pre-Requisites
 
-**Lab Modulse:** 
+**Lab Modules:** 
 * Lab Session 04: [Webpage][1] | [Source Code][2] 
 * Lab Session 05: [Webpage][3] | [Source Code][4] 
 * Lab Session 06: [Webpage][5] | [Source Code][6] 
