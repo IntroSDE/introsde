@@ -129,29 +129,6 @@ Links: [Source code][1]
             Person.updatePerson(person);
             return person.getIdPerson();
         }
-    
-        @Override
-        public int deletePerson(int id) {
-            Person p = Person.getPersonById(id);
-            if (p!=null) {
-                Person.removePerson(p);
-                return 0;
-            } else {
-                return -1;
-            }
-        }
-    
-        @Override
-        public int updatePersonHP(int id, LifeStatus hp) {
-            LifeStatus ls = LifeStatus.getLifeStatusById(hp.getIdMeasure());
-            if (ls.getPerson().getIdPerson() == id) {
-                LifeStatus.updateLifeStatus(hp);
-                return hp.getIdMeasure();
-            } else {
-                return -1;
-            }
-        }
-    
     }
     ```
 
@@ -181,7 +158,15 @@ Links: [Source code][1]
     }
     ```
 
-* And then the Client, also similar to the example from Lab 08
+### JAX-WS + JPA - The Web Services - Exercise 
+
+* As you might have noticed, there are two methods defined in the interface but not implementated in the implementation class. **Implement them**.  
+
+
+
+### JAX-WS + JPA - The Client
+
+* The Client is also similar to the example from Lab 08
 * **PeopleClient.java**
 
     ```java
@@ -216,16 +201,46 @@ Links: [Source code][1]
 
 * Now we can try run the publisher and then client to see if it works. 
 
-### Exercise JAX-WS + JPA: Generating Stubs for the Client
+### JAX-WS + JPA: Generating Stubs for the Client
 
-* How can we create the client if we do not have the model classes? 
+* How can we create the client if we do not have the model classes?
+* Create another **Dynamic Web Project** with the name sdelab09-client, adding both **ivy.xml** and **build.xml** 
+* From the command line, inside of the src folder, run the following command
 
     ```sh
     wsimport -keep http://localhost:6902/ws/people?wsdl
     ```
     
-* Use generated sources to create another client as part of another project that does not have the model inside
+* Refresh the project 
+* Use generated sources to create another client as part of another project that does not have the model inside in the following way
 
+    ```java
+    
+    package client;
+    
+    import java.util.List;
+    
+    import introsde.document.ws.PeopleService;
+    import introsde.document.ws.People;
+    import introsde.document.ws.Person;
+     
+    public class PeopleClient{
+        public static void main(String[] args) throws Exception {
+            PeopleService service = new PeopleService();
+            People people = service.getPeopleImplPort();
+            Person p = people.readPerson(1);
+            List<Person> pList = people.getPeopleList();
+            System.out.println("Result ==> "+p);
+            System.out.println("Result ==> "+pList);
+            System.out.println("First Person in the list ==> "+pList.get(0).getName());
+        }
+    }
+    ```
+    
+### JAX-WS + JPA: Generating Stubs for the Client - Exercise 
+
+* Using postman and the request examples from the last session, try to send requests via HTTP
+* Complete the client above implemented the call to all the other methods in the class
 
 ## Additional Notes
 
