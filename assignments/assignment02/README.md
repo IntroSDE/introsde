@@ -28,7 +28,7 @@
 
 * To clients, the model should look like as follows: 
 
-**Person**
+* **Person**
 
     ```json
     {
@@ -42,7 +42,7 @@
     }
     ```
 
-**History of one measure (e.g., weight)**
+* **History of one measure (e.g., weight)**
 
     ```json
     [ 
@@ -64,7 +64,7 @@
     ]
     ```
 
-**Person in XML**
+* **Person in XML**
 
     ```xml
     <person>
@@ -78,7 +78,7 @@
     </person>
     ```
 
-**History of one measure in XML (e.g., weight)**
+* **History of one measure in XML (e.g., weight)**
 
     ```xml
     <measure-history> 
