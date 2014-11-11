@@ -32,104 +32,199 @@ Links: [Source code][1]
 * To enable Eclipse JPA extensions, you may want to Rigth click your project -> Configure -> Convert to JPA project. 
 * You can now run the test class JPAStarterTest to check that everything is working correctly (don't worry if the tests fail, probably we have changed too many things already in that small database)
 
-* Using classes as parameters is straightforward. 
-* Using the same JAX-WS examples of last session, create a package **introsde.ws.model** 
-* Add the following **Person** class to the model package
+### JAX-WS + JPA - The Web Services 
 
-```java
-package introsde.ws.model;
-import javax.xml.bind.annotation.XmlRootElement;
-@XmlRootElement
-public class Person {
-	private String firstname;
-	private String lastname;
-	public Person() {
-	}
-	public Person(String fname, String lname) {
-		this.firstname=fname;
-		this.lastname=lname;
-	}
-	public String getFirstname() {
-		return firstname;
-	}
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
-	}
-	public String getLastname() {
-		return lastname;
-	}
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
-	}	
-	public String toString() {
-		return this.firstname+" "+this.lastname;
-	}
-}
-```
+* Now, using the document style services of lab 08 as examples, we can create the **Web Service Endpoint Interface**, its **implementation** and its **publisher**.
+* Add the following two classes in the **introsde.document.ws** package, and the third one to **introsde.document.endpoint**
 
----
+* **People.java**
 
-## JAX-WS with models (2)
+    ```java
+    package introsde.document.ws;
+    import introsde.document.model.LifeStatus;
+    import introsde.document.model.Person;
+    
+    import java.util.List;
+    
+    import javax.jws.WebMethod;
+    import javax.jws.WebParam;
+    import javax.jws.WebService;
+    import javax.jws.WebResult;
+    import javax.jws.soap.SOAPBinding;
+    import javax.jws.soap.SOAPBinding.Style;
+    import javax.jws.soap.SOAPBinding.Use;
+    
+    @WebService
+    @SOAPBinding(style = Style.DOCUMENT, use=Use.LITERAL) //optional
+    public interface People {
+        @WebMethod(operationName="readPerson")
+        @WebResult(name="person") 
+        public Person readPerson(@WebParam(name="personId") int id);
+     
+        @WebMethod(operationName="getPeopleList")
+        @WebResult(name="people") 
+        public List<Person> getPeople();
+     
+        @WebMethod(operationName="createPerson")
+        @WebResult(name="personId") 
+        public int addPerson(@WebParam(name="person") Person person);
+     
+        @WebMethod(operationName="updatePerson")
+        @WebResult(name="personId") 
+        public int updatePerson(@WebParam(name="person") Person person);
+        
+        @WebMethod(operationName="deletePerson")
+        @WebResult(name="personId") 
+        public int deletePerson(@WebParam(name="personId") int id);
+        
+        @WebMethod(operationName="updatePersonHealthProfile")
+        @WebResult(name="hpId") 
+        public int updatePersonHP(@WebParam(name="personId") int id, @WebParam(name="healthProfile") LifeStatus hp);
+    }
+    ```
 
-* Add the following services to the HelloWorld interface
+* **PeopleImpl.java** 
+    
+    ```java
+    package introsde.document.ws;
+    
+    import introsde.document.model.LifeStatus;
+    import introsde.document.model.Person;
+    
+    import java.util.List;
+    
+    import javax.jws.WebService;
+    
+    //Service Implementation
+    
+    @WebService(endpointInterface = "introsde.document.ws.People",
+        serviceName="PeopleService")
+    public class PeopleImpl implements People {
+    
+        @Override
+        public Person readPerson(int id) {
+            System.out.println("---> Reading Person by id = "+id);
+            Person p = Person.getPersonById(id);
+            if (p!=null) {
+                System.out.println("---> Found Person by id = "+id+" => "+p.getName());
+            } else {
+                System.out.println("---> Didn't find any Person with  id = "+id);
+            }
+            return p;
+        }
+    
+        @Override
+        public List<Person> getPeople() {
+            return Person.getAll();
+        }
+    
+        @Override
+        public int addPerson(Person person) {
+            Person.savePerson(person);
+            return person.getIdPerson();
+        }
+    
+        @Override
+        public int updatePerson(Person person) {
+            Person.updatePerson(person);
+            return person.getIdPerson();
+        }
+    
+        @Override
+        public int deletePerson(int id) {
+            Person p = Person.getPersonById(id);
+            if (p!=null) {
+                Person.removePerson(p);
+                return 0;
+            } else {
+                return -1;
+            }
+        }
+    
+        @Override
+        public int updatePersonHP(int id, LifeStatus hp) {
+            LifeStatus ls = LifeStatus.getLifeStatusById(hp.getIdMeasure());
+            if (ls.getPerson().getIdPerson() == id) {
+                LifeStatus.updateLifeStatus(hp);
+                return hp.getIdMeasure();
+            } else {
+                return -1;
+            }
+        }
+    
+    }
+    ```
 
-```java
-@WebMethod String sayHelloTo(@WebParam(name="person") Person person);
-@WebMethod @WebResult(name="person") Person readPerson(@WebParam(name="personId") int personId);
-```
+* **PeoplePublisher.java**
 
-* And implement them on the implementaion class
+    ```java
+    package introsde.document.enpoint;
+    import introsde.document.ws.PeopleImpl;
+    
+    import javax.xml.ws.Endpoint;
+    
+    public class PeoplePublisher {
+        public static String SERVER_URL = "http://localhost";
+        public static String PORT = "6902";
+        public static String BASE_URL = "/ws/people";
+        
+        public static String getEndpointURL() {
+            return SERVER_URL+":"+PORT+BASE_URL;
+        }
+     
+        public static void main(String[] args) {
+            String endpointUrl = getEndpointURL();
+            System.out.println("Starting People Service...");
+            System.out.println("--> Published at = "+endpointUrl);
+            Endpoint.publish(endpointUrl, new PeopleImpl());
+        }
+    }
+    ```
 
-```java
-package introsde.ws;
-import introsde.ws.model.Person;
-import javax.jws.WebService;
-//Service Implementation
-@WebService(endpointInterface = "introsde.ws.HelloWorld")
-public class HelloWorldImpl implements HelloWorld {
-	@Override
-	public String getHelloWorldAsString(String name) {
-		return "Hello World JAX-WS " + name;
-	}
-	@Override
-	public String sayHelloTo(Person person) {
-		return "Hello " + person.getFirstname() + " " + person.getLastname();
-	}
-	@Override
-	public Person readPerson(int personId) { 
-		return new Person("Person","Test");
-	}
-}
-```
+* And then the Client, also similar to the example from Lab 08
+* **PeopleClient.java**
 
----
+    ```java
+    package introsde.document.client;
+     
+    import introsde.document.model.Person;
+    import introsde.document.ws.People;
+    
+    import java.net.URL;
+    import java.util.List;
+    
+    import javax.xml.namespace.QName;
+    import javax.xml.ws.Service;
+     
+    public class PeopleClient{
+        public static void main(String[] args) throws Exception {
+            URL url = new URL("http://localhost:6902/ws/people?wsdl");
+            //1st argument service URI, refer to wsdl document above
+            //2nd argument is service name, refer to wsdl document above
+            QName qname = new QName("http://ws/", "PeopleService");
+            Service service = Service.create(url, qname);
+            
+            People people = service.getPort(People.class);
+            Person p = people.readPerson(1);
+            List<Person> pList = people.getPeople();
+            System.out.println("Result ==> "+p);
+            System.out.println("Result ==> "+pList);
+            System.out.println("First Person in the list ==> "+pList.get(0).getName());
+        }
+    }
+    ```
 
-## JAX-WS with models (3) 
+* Now we can try run the publisher and then client to see if it works. 
 
-* Test the new service in the client by adding:
+### Exercise JAX-WS + JPA: Generating Stubs for the Client
 
-```java
-    String response = hello.sayHelloTo(new Person("Person","Test"));
-    System.out.println("Response from the service to 'sayHelloTo': " + response);
-    Person person = hello.readPerson(0);
-    System.out.println("Response from the service to 'sayHelloTo': " + person.toString()); 
-```
+* How can we create the client if we do not have the model classes? 
 
-
-
-
-
----
-
-## JAX-WS with models
-
-* Generating stubs for the client
-
-```sh
-wsimport -keep http://localhost:6902/ws/people?wsdl
-```
-
-* Use generated sources to create your client
+    ```sh
+    wsimport -keep http://localhost:6902/ws/people?wsdl
+    ```
+    
+* Use generated sources to create another client as part of another project that does not have the model inside
 
 
 ## Additional Notes
