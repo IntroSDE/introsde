@@ -472,7 +472,7 @@ There are two ways to structure a SOAP message
     <soap:Envelope
     xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
     soap:encodingStyle="http://www.w3.org/2001/12/soap-encoding">
-      <soap:Body xmlns:m="http://ws.introsde/">
+      <soap:Body xmlns:m="http://ws.document.introsde/">
       <m:getHelloWorldAsString>
         <arg0>Pinco</arg0>
       </m:getHelloWorldAsString>
