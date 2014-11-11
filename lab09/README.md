@@ -212,7 +212,7 @@ Links: [Source code][1]
     ```
     
 * Refresh the project 
-* Use generated sources to create another client as part of another project that does not have the model inside in the following way
+* Use generated sources to create the client class in the following way
 
     ```java
     
