@@ -77,27 +77,27 @@
             </healthProfile>
     </person>
     ```
-In case you keep healthProfile *static* (stays with weight and height only, even if other measures are available) the structure is:
-```xml
-<healthProfile>
-        <weight>78.9</weight>
-        <height>172</height>
-</healthProfile>
-```
-In case you have healthProfile build *dynamicly* (according to measureTypes - you get extra points for that),
-then the structure is approximately like this (it can be different and it is fine, as this part is not checked by **Client**):
-```xml
-<healthProfile>
-	<measureType>
-		<measure>Height</measure>
-		<value>172</value>
-	</measureType>
-	<measureType>
-		<measure>Weight</measure>
-		<value>78.9</value>
-	</measureType>
-</healthProfile>
-```
+	In case you keep healthProfile *static* (stays with weight and height only, even if other measures are available) the 	structure is:
+	```xml
+	<healthProfile>
+	        <weight>78.9</weight>
+	        <height>172</height>
+	</healthProfile>
+	```
+	In case you have healthProfile build *dynamicly* (according to measureTypes - you get extra points for that),
+	then the structure is approximately like this (**it can be different and it is fine**, as this part is not checked by 		**Client**):
+	```xml
+	<healthProfile>
+		<measureType>
+			<measure>Height</measure>
+			<value>172</value>
+		</measureType>
+		<measureType>
+			<measure>Weight</measure>
+			<value>78.9</value>
+		</measureType>
+	</healthProfile>
+	```
 * **History of one measure in XML (e.g., weight)**
 
     ```xml
