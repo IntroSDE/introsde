@@ -120,7 +120,7 @@ There are two ways to structure a SOAP message
     <soap:Envelope
     xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
     soap:encodingStyle="http://www.w3.org/2001/12/soap-encoding">
-      <soap:Body xmlns:m="http://ws.introsde/">
+      <soap:Body xmlns:m="http://ws.document.introsde/">
       <m:getHelloWorldAsString>
         <arg0>Pinco</arg0>
       </m:getHelloWorldAsString>
@@ -136,7 +136,7 @@ There are two ways to structure a SOAP message
         xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
         <S:Body>
             <ns2:getHelloWorldAsStringResponse
-                xmlns:ns2="http://ws.introsde/">
+                xmlns:ns2="http://ws.document.introsde/">
                 <return>Hello World JAX-WS Pinco</return>
             </ns2:getHelloWorldAsStringResponse>
         </S:Body>
@@ -145,7 +145,7 @@ There are two ways to structure a SOAP message
 
 ### JAX-WS Tutorial - Implementing Clients 
 
-* Create a package **introsde.client** and add the following class. Notice how we **QName** clase is used to reference the service class we are calling. The package of the Service implementation is reversed (**ws.introsde**) and the second argument refers to the name of the service as define in the WSDL (**HelloWorldImplService**)
+* Create a package **introsde.client** and add the following class. Notice how we **QName** clase is used to reference the service class we are calling. The package of the Service implementation is reversed (**ws.document.introsde**) and the second argument refers to the name of the service as define in the WSDL (**HelloWorldImplService**)
 
     ```java
     package introsde.client;
@@ -158,7 +158,7 @@ There are two ways to structure a SOAP message
             URL url = new URL("http://localhost:6900/ws/hello?wsdl");
             // 1st argument service URI, refer to wsdl document above
             // 2nd argument is service name, refer to wsdl document above
-            QName qname = new QName("http://ws.introsde/", "HelloWorldImplService");
+            QName qname = new QName("http://ws.document.introsde/", "HelloWorldImplService");
             Service service = Service.create(url, qname);
             HelloWorld hello = service.getPort(HelloWorld.class);
             System.out.println(hello.getHelloWorldAsString("Pinco"));
@@ -199,13 +199,13 @@ There are two ways to structure a SOAP message
     import javax.jws.WebService;
     import javax.jws.soap.SOAPBinding;
     import javax.xml.ws.Action;
-    @WebService(name = "HelloWorld", targetNamespace = "http://ws.introsde/")
+    @WebService(name = "HelloWorld", targetNamespace = "http://ws.document.introsde/")
     @SOAPBinding(style = SOAPBinding.Style.RPC)
     public interface HelloWorld {
         @WebMethod
         @WebResult(partName = "return")
-        @Action(input = "http://ws.introsde/HelloWorld/getHelloWorldAsStringRequest", 
-            output = "http://ws.introsde/HelloWorld/getHelloWorldAsStringResponse")
+        @Action(input = "http://ws.document.introsde/HelloWorld/getHelloWorldAsStringRequest", 
+            output = "http://ws.document.introsde/HelloWorld/getHelloWorldAsStringResponse")
         public String getHelloWorldAsString(
             @WebParam(name = "arg0", partName = "arg0")
             String arg0);
@@ -223,14 +223,14 @@ There are two ways to structure a SOAP message
     import javax.xml.ws.WebServiceException;
     import javax.xml.ws.WebServiceFeature;
     @WebServiceClient(name = "HelloWorldImplService", 
-        targetNamespace = "http://ws.introsde/", 
+        targetNamespace = "http://ws.document.introsde/", 
         wsdlLocation = "http://localhost:6900/ws/hello?wsdl")
     public class HelloWorldImplService extends Service
     {
         private final static URL HELLOWORLDIMPLSERVICE_WSDL_LOCATION;
         private final static WebServiceException HELLOWORLDIMPLSERVICE_EXCEPTION;
         private final static QName HELLOWORLDIMPLSERVICE_QNAME = 
-            new QName("http://ws.introsde/", "HelloWorldImplService");
+            new QName("http://ws.document.introsde/", "HelloWorldImplService");
         static {
             URL url = null;
             WebServiceException e = null;
@@ -264,12 +264,12 @@ There are two ways to structure a SOAP message
         }
         @WebEndpoint(name = "HelloWorldImplPort")
         public HelloWorld getHelloWorldImplPort() {
-            return super.getPort(new QName("http://ws.introsde/", "HelloWorldImplPort"), 
+            return super.getPort(new QName("http://ws.document.introsde/", "HelloWorldImplPort"), 
                 HelloWorld.class);
         }
         @WebEndpoint(name = "HelloWorldImplPort")
         public HelloWorld getHelloWorldImplPort(WebServiceFeature... features) {
-            return super.getPort(new QName("http://ws.introsde/", "HelloWorldImplPort"), 
+            return super.getPort(new QName("http://ws.document.introsde/", "HelloWorldImplPort"), 
                 HelloWorld.class, features);
         }
         private static URL __getWsdlLocation() {
