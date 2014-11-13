@@ -319,7 +319,7 @@ Links: [PPT slides][1] | [PDF slides][2] | [Source code][3]
 
 * **Exercise 06.03:** Let's extend our HealthProfile API to manage the history of measure udpates. 
  * Add a List attribute named "history" to the "HealthProfile", where a new value will be added every time the health profile is updated
- * Add a service enpoint to get the health profile history of a person
+ * Add a service endpoint to get the health profile history of a person
  * **Where should these services go?**
  * **What should I do if I don't want the health profile to be included in the person resource?** 
 

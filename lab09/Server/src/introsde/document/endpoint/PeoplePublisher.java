@@ -1,4 +1,4 @@
-package introsde.document.enpoint;
+package introsde.document.endpoint;
 import introsde.document.ws.PeopleImpl;
 
 import javax.xml.ws.Endpoint;
