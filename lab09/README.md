@@ -17,7 +17,7 @@ Links: [Source code][1]
 * First, create the following packages to your newly created project
  * introsde.document.client
  * introsde.document.dao
- * introsde.document.enpoint
+ * introsde.document.endpoint
  * introsde.document.model
  * introsde.document.test
  * introsde.document.ws
@@ -135,7 +135,7 @@ Links: [Source code][1]
 * **PeoplePublisher.java**
 
     ```java
-    package introsde.document.enpoint;
+    package introsde.document.endpoint;
     import introsde.document.ws.PeopleImpl;
     
     import javax.xml.ws.Endpoint;

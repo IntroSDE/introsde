@@ -54,7 +54,7 @@ There are two ways to structure a SOAP message
 * Copy both *build.xml* and *ivy.xml* files from the lab's repository to your project
 * Add ivy to your project (see *Additional notes* at the end of the guiding notes) 
 * Create a package named **introsde.ws**
-* Create a Java Class that will serve as a *Web Service Enpoint Interface*
+* Create a Java Class that will serve as a *Web Service Endpoint Interface*
  * A web service endpoint is a service that is published for users to access
  * The web service client is the party who access the published service
  * In this case, a **HelloWorld** java interface like the following
