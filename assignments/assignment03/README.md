@@ -34,7 +34,7 @@
      Long id;
      String firstname;
      String lastname;
-     List<Measure> healthProfile; // one for each type of measure
+     List<Measure> currentHealth; // one for each type of measure
      List<Measure> healthHistory; // all measurements
    }
    
@@ -47,56 +47,59 @@
    }
    ```
    // Person & HealthProfile
-    ```xml
-    <person>
-        <personId>1</personId>
-        <firstname>Chuck</name>
-        <lastname>Norris</lastname>
-        <birthdate>1945-01-01</birthdate>
-        <healthProfile>
-            <hpId>999</hpId>
-            <date>2013-12-05</date>
-            <weight>78.9</weight>
-            <height>172</height>
-            <steps>5000</steps>
-            <calories>2120</calories>
-        </healthProfile>
-    </person>
-    ```
+  ```xml
+  <person>
+      <personId>1</personId>
+      <firstname>Chuck</name>
+      <lastname>Norris</lastname>
+      <birthdate>1945-01-01</birthdate>
+      <healthProfile>
+          <hpId>999</hpId>
+          <date>2013-12-05</date>
+          <weight>78.9</weight>
+          <height>172</height>
+          <steps>5000</steps>
+          <calories>2120</calories>
+      </healthProfile>
+  </person>
+  ```
 
 * **Extra #1**: Having a real database in sqlite
 * **Extra #2** (Method #10): updatePersonMeasure(Long id, String measureType, Long mid) => Measure | should update the value for the {measureType} (e.g., weight) identified by {mid}, related to the Person identified by {id}
 * **Extra #3** (Method #11): readPersonMeasureByDates(Long id, String measureType, Date before, Date after) => List<Measure> | should return the history of {measureType} (e.g., weight) for Person {id} in the specified range of date
 * **Extra #4** (Method #12): readPersonListByMeasurement(String measureType, String maxValue, String minValue) | retrieves people whose {measureType} (e.g., weight) value is in the [{min},{max}] range (if only one for the query params is provided, use only that)
-    // History of the health profile
-    ```xml
-    <healthProfile-history> 
-        <healthProfile>
-            <hpId>999</hpId>
-            <date>2013-12-05</date>
-            <weight>78.9</weight>
-            <height>172</height>
-            <steps>5000</steps>
-            <calories>2120</calories>
-        </healthProfile>
-        <healthProfile>
-            <hpId>998</hpId>
-            <date>2013-11-29</date>
-            <weight>null</weight>
-            <height>null</height>
-            <steps>6430</steps>
-            <height>null</height>
-        </healthProfile>
-        <healthProfile>
-            <hpId>1000</hpId>
-            <date>2013-11-05</date>
-            <weight>null</weight>
-            <height>null</height>
-            <steps>12083</steps>
-            <height>null</height>
-        </healthProfile>
-    </healthProfile-history> 
-    ```
+  
+  
+  // History of the health profile
+  
+  ```xml
+  <healthProfile-history> 
+      <healthProfile>
+          <hpId>999</hpId>
+          <date>2013-12-05</date>
+          <weight>78.9</weight>
+          <height>172</height>
+          <steps>5000</steps>
+          <calories>2120</calories>
+      </healthProfile>
+      <healthProfile>
+          <hpId>998</hpId>
+          <date>2013-11-29</date>
+          <weight>null</weight>
+          <height>null</height>
+          <steps>6430</steps>
+          <height>null</height>
+      </healthProfile>
+      <healthProfile>
+          <hpId>1000</hpId>
+          <date>2013-11-05</date>
+          <weight>null</weight>
+          <height>null</height>
+          <steps>12083</steps>
+          <height>null</height>
+      </healthProfile>
+  </healthProfile-history> 
+  ```
 
 ## Assignment #3: Part 2 
 
@@ -129,7 +132,7 @@
 * Rename the Zip file to: your **student_name_assignmentNumber.zip**. As **student_name**, use your name as registered in [this spreadsheet][10], replacing spaces by "_" (e.g.,"Ans-Riaz-2.zip"
 * Follow [this link for uploading your file][9]
 * Password will be given and class and sent to the group
-* The assignment is due on **27-Nov (Mid-Night)**. 
+* The assignment is due on **24-Nov (Mid-Night)** for server part and **27-Nov (Mid-Night)** for client part. 
 * On 28-Nov, the **VIVA Session** will be held where we will randomly pair servers and clients to check that they work.
 
 [1]: https://sites.google.com/site/introsdeunitn/lab-sessions/lab-session-7
