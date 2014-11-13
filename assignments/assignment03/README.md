@@ -16,17 +16,37 @@
 * JPA
 
 ## Assignment #3
-
+* **Comment**: please use introsde.assignment.soap as a package for your service interface
 * Using JAX-WS, implement CRUD services for the following model including the following operations
-    * readPerson(int personId) (returns the Person)
-    * createPerson(Person p) (returns the personId of the new Person, or a negative number representing an error)
-    * updatePerson(Person p) (returns the personId of the updated Person, or a negative number representing an error)
-        * [OPTION A] If p includes changes to the "healthProfile" you can should 1) replace the current profile with a new one if no hpId is specified (in which case, the old health profile should be part of the history now) or 2) update the corrisponding health profile if an hpId is given  
-    * deletePerson(int id) (returns 0, or a negative number representing an error)
-    * updatePersonHealthProfile(int personId, HealthProfile hp) (returns the id of the health profile updated, or a negative number representing an error). If no health profile exists yet, create it. In any other case, you should only update the health profile which is given by the hpId inside hp. 
-    * [OPTION B] addPersonHealthProfile(int personId, HealthProfile hp) (adds a new health profile to replace the current one, which should pass to the history). When creating new health profiles, you can use either option A or B, the one you prefer.  
+   * **Method #1**: readPersonList() => List<Person> | should list all the people in the database (see below Person model to know what data to return here) in your database (wrapped under the root element "people")
+   * **Method #2**: readPerson(Long id) => Person | should give all the Personal information plus current measures of one Person identified by {id} (e.g., current measures means current healthProfile)
+   * **Method #3**: updatePerson(Long id) => Person | should update the Personal information of the Person identified by {id} (e.g., only the Person's information, not the measures of the health profile)
+   * **Method #4**: createPerson(Person p) => Person | should create a new Person and return the newly created Person with its assigned id (if a health profile is included, create also those measurements for the new Person).
+   * **Method #5**: deletePerson(Long id) should delete the Person identified by {id} from the system
+   * **Method #6**: readPersonHistory(Long id, String measureType) => List<Measure> should return the list of values (the history) of {measureType} (e.g. weight) for Person identified by {id}
+   * **Method #7**: readPersonMeasurement(Long id, String measureType, Long mid) => Measure should return the value of {measureType} (e.g. weight) identified by {mid} for Person identified by {id}
+   * **Method #8**: savePersonMeasurement(Long id, String measureType) => Measure should save a new value for the {measureType} (e.g. weight) of Person identified by {id} and archive the old value in the history
+   * **Method #9**: readMeasureTypes() => List<String> should return the list of measures 
 
-    // Person & HealthProfile
+   The minimal model supported by your service should include: 
+   ```java
+   public class Person {
+     Long id;
+     String firstname;
+     String lastname;
+     List<Measure> healthProfile; // one for each type of measure
+     List<Measure> healthHistory; // all measurements
+   }
+   
+   public class Measure {
+     Date dateRegistered;
+     Date dateUpdated; 
+     String measureType;
+     String measureValue;
+     String measureValueType; // string, integer, real
+   }
+   ```
+   // Person & HealthProfile
     ```xml
     <person>
         <personId>1</personId>
@@ -44,10 +64,10 @@
     </person>
     ```
 
-
-* **Extra points:** Include also the service getHealthProfileHistory(int personId)
-* **Extra points:** Connect to a database. 
-
+* **Extra #1**: Having a real database in sqlite
+* **Extra #2** (Method #10): updatePersonMeasure(Long id, String measureType, Long mid) => Measure | should update the value for the {measureType} (e.g., weight) identified by {mid}, related to the Person identified by {id}
+* **Extra #3** (Method #11): readPersonMeasureByDates(Long id, String measureType, Date before, Date after) => List<Measure> | should return the history of {measureType} (e.g., weight) for Person {id} in the specified range of date
+* **Extra #4** (Method #12): readPersonListByMeasurement(String measureType, String maxValue, String minValue) | retrieves people whose {measureType} (e.g., weight) value is in the [{min},{max}] range (if only one for the query params is provided, use only that)
     // History of the health profile
     ```xml
     <healthProfile-history> 
