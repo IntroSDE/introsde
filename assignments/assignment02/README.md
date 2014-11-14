@@ -34,7 +34,7 @@
     {
           "firstname"     : "Chuck",
           "lastname"      : "Norris",
-          "birthdate"     : "1945-01-01"
+          "birthdate"     : "1945-01-01",
           "healthProfile" : {
                     "weight"  : 78.9,
                     "height"  : 172
@@ -68,7 +68,7 @@
 
     ```xml
     <person>
-        <firstname>Chuck</name>
+        <firstname>Chuck</firstname>
             <lastname>Norris</lastname>
             <birthdate>1945-01-01</birthdate>
             <healthProfile>
