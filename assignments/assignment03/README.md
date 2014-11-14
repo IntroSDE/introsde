@@ -40,7 +40,6 @@
    
    public class Measure {
      Date dateRegistered;
-     Date dateUpdated; 
      String measureType;
      String measureValue;
      String measureValueType; // string, integer, real
@@ -56,11 +55,10 @@
       <currentHealth>
         <measure>
           <value>999</value>
-          <dateRegistered>...</dateRegistered>
-          <dateUpdated>...</dateUpdated> 
-          <measureType>...</measureType>
-          <measureValue>...</measureValue>
-          <measureValueType></measureValueType>
+          <dateRegistered>2014-01-03</dateRegistered> 
+          <measureType>weight</measureType>
+          <measureValue>80</measureValue>
+          <measureValueType>Int</measureValueType>
         </measure>
         ....
       </currentHealth>
@@ -79,21 +77,21 @@
   <healthProfile-history> 
       <measure>
           <value>999</value>
-          <dateUpdated>2014-01-03</dateUpdated> 
+          <dateRegistered>2014-01-03</dateRegistered> 
           <measureType>weight</measureType>
           <measureValue>80</measureValue>
           <measureValueType>Int</measureValueType>
         </measure>
       <measure>
           <value>1000</value>
-          <dateUpdated>2014-01-02</dateUpdated> 
+          <dateRegistered>2014-01-02</dateRegistered> 
           <measureType>weight</measureType>
           <measureValue>82</measureValue>
           <measureValueType>Int</measureValueType>
         </measure>
       <measure>
           <value>1001</value>
-          <dateUpdated>2014-01-01</dateUpdated> 
+          <dateRegistered>2014-01-01</dateRegistered> 
           <measureType>weight</measureType>
           <measureValue>81</measureValue>
           <measureValueType>Int</measureValueType>
