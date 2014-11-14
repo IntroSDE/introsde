@@ -53,14 +53,17 @@
       <firstname>Chuck</name>
       <lastname>Norris</lastname>
       <birthdate>1945-01-01</birthdate>
-      <healthProfile>
-          <hpId>999</hpId>
-          <date>2013-12-05</date>
-          <weight>78.9</weight>
-          <height>172</height>
-          <steps>5000</steps>
-          <calories>2120</calories>
-      </healthProfile>
+      <currentHealth>
+        <measure>
+          <value>999</value>
+          <dateRegistered>...</dateRegistered>
+          <dateUpdated>...</dateUpdated> 
+          <measureType>...</measureType>
+          <measureValue>...</measureValue>
+          <measureValueType></measureValueType>
+        </measure>
+        ....
+      </currentHealth>
   </person>
   ```
 
@@ -74,30 +77,27 @@
   
   ```xml
   <healthProfile-history> 
-      <healthProfile>
-          <hpId>999</hpId>
-          <date>2013-12-05</date>
-          <weight>78.9</weight>
-          <height>172</height>
-          <steps>5000</steps>
-          <calories>2120</calories>
-      </healthProfile>
-      <healthProfile>
-          <hpId>998</hpId>
-          <date>2013-11-29</date>
-          <weight>null</weight>
-          <height>null</height>
-          <steps>6430</steps>
-          <height>null</height>
-      </healthProfile>
-      <healthProfile>
-          <hpId>1000</hpId>
-          <date>2013-11-05</date>
-          <weight>null</weight>
-          <height>null</height>
-          <steps>12083</steps>
-          <height>null</height>
-      </healthProfile>
+      <measure>
+          <value>999</value>
+          <dateUpdated>2014-01-03</dateUpdated> 
+          <measureType>weight</measureType>
+          <measureValue>80</measureValue>
+          <measureValueType>Int</measureValueType>
+        </measure>
+      <measure>
+          <value>1000</value>
+          <dateUpdated>2014-01-02</dateUpdated> 
+          <measureType>weight</measureType>
+          <measureValue>82</measureValue>
+          <measureValueType>Int</measureValueType>
+        </measure>
+      <measure>
+          <value>1001</value>
+          <dateUpdated>2014-01-01</dateUpdated> 
+          <measureType>weight</measureType>
+          <measureValue>81</measureValue>
+          <measureValueType>Int</measureValueType>
+        </measure>
   </healthProfile-history> 
   ```
 
