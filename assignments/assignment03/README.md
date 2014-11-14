@@ -132,7 +132,7 @@
 * Rename the Zip file to: your **student_name_assignmentNumber.zip**. As **student_name**, use your name as registered in [this spreadsheet][10], replacing spaces by "_" (e.g.,"Ans-Riaz-2.zip"
 * Follow [this link for uploading your file][9]
 * Password will be given and class and sent to the group
-* The assignment is due on **24-Nov (Mid-Night)** for server part and **27-Nov (Mid-Night)** for client part. 
+* The assignment is due on **27-Nov (Mid-Night)**. 
 * On 28-Nov, the **VIVA Session** will be held where we will randomly pair servers and clients to check that they work.
 
 [1]: https://sites.google.com/site/introsdeunitn/lab-sessions/lab-session-7
