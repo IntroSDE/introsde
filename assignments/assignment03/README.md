@@ -16,7 +16,8 @@
 * JPA
 
 ## Assignment #3
-* **Comment**: please use introsde.assignment.soap as a package for your service interface
+## Server
+* Please use *introsde.assignment.soap* as a package for your service interface. Use *People* as the name for your endpoint interface. User https://github.com/cdparra/introsde/blob/master/lab09/Server/src/introsde/document/ws/People.java as a reference point, but implement your own methods.
 * Using JAX-WS, implement CRUD services for the following model including the following operations
    * **Method #1**: readPersonList() => List<Person> | should list all the people in the database (see below Person model to know what data to return here) in your database (wrapped under the root element "people")
    * **Method #2**: readPerson(Long id) => Person | should give all the Personal information plus current measures of one Person identified by {id} (e.g., current measures means current healthProfile)
@@ -99,27 +100,18 @@
   </healthProfile-history> 
   ```
 
-## Assignment #3: Part 2 
+## Client
 
-* Create a simple client that call each of this services and prints the result (using your service implementation).
+* Create a simple client that call each of these services and prints the result (using your service implementation).
 
 ## VIVA Testing Procedures for #3 
 
-5. **Assignment 3:**
-    * Stop your REST services. 
-    * Agree with your partner who will be the client/server first.
-    * The server should search for his/her SOAP services implementation and run it 
-    * The implementation will be at $HOME/assignments/servername_serverlastname_3/
-    * The server should run his/her own client implementation
-    * The server must copy all the output of the his/her client to a file named *servername_serverlastname_2_output.txt* in the *servername_serverlastname_2* folder
-    * Using the url to the WSDL of the server, the client must now generate the stubs for creating a quick client. 
-    * The server must select which of his services should be tested. 
-    * The client will have 10 minutes to:
-        * implement a simple client in java that will call this service
-        * call the selected SOAP service from the browser, via HTTP POST of the SOAP message 
-    * The server will have 10 minutes for making quick changes on the server (or requesting quick changes on the client) to make things work.
-    * The client must indicate on the evaluation document which services worked and which didn't (from both the server's own tests and the client's test). 
-    * Repeat the whole procedure changing roles 
+On the VIVA, the server student must run its application and then give the client its IP, PORT (preferebly 443, as it is not blocked in the unitn network) and Service Endpoint Name. The client will then use this IP + PORT + ENDPOINT as BASEURL to run its application. The results displayed on the screen must be copy and pasted in a text file with the name [serverstudentname]_[BASEURL]_results.txt.
+
+Once the first client finished running, students will shift roles and do the same procedure.
+Once the second client finished running, both students will have 30 min to correct things in their server to approach potential limitations encountered during execution.
+After this time, a second test round will be followed, which results must be stored in the file[serverstudentname]_[BASEURL]_results_secondround.txt
+Each student must then decide which of the results use as the final.
 
 ## Assignment Evaluation
 
@@ -129,7 +121,7 @@
     * please, do not include .class or IDE generated project files
 * Rename the Zip file to: your **student_name_assignmentNumber.zip**. As **student_name**, use your name as registered in [this spreadsheet][10], replacing spaces by "_" (e.g.,"Ans-Riaz-2.zip"
 * Follow [this link for uploading your file][9]
-* Password will be given and class and sent to the group
+* Password will be given in class and sent to the group
 * The assignment is due on **27-Nov (Mid-Night)**. 
 * On 28-Nov, the **VIVA Session** will be held where we will randomly pair servers and clients to check that they work.
 
