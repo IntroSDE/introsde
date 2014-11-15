@@ -119,7 +119,7 @@ Each student must then decide which of the results use as the final.
     * All Java source files 
     * All XML and XSD files
     * please, do not include .class or IDE generated project files
-* Rename the Zip file to: your **student_name_assignmentNumber.zip**. As **student_name**, use your name as registered in [this spreadsheet][10], replacing spaces by "_" (e.g.,"Ans-Riaz-2.zip"
+* Rename the Zip file to: your **student_name_assignmentNumber.zip**. As **student_name**, use your name as registered in [this spreadsheet][10], replacing spaces by "_" (e.g.,"Ans-Riaz-3.zip"
 * Follow [this link for uploading your file][9]
 * Password will be given in class and sent to the group
 * The assignment is due on **27-Nov (Mid-Night)**. 
