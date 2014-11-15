@@ -185,9 +185,9 @@
     
 * **Step 3.** Use the following plan of requests to guide your implementation of the client. 
  * **Step 3.1.** Send **R#1 (GET BASE_URL/person)**. Calculate how many people are in the response. If more than 2, result is OK, else is ERROR (less than 3 persons). Save into a variable id of the first person (**first_person_id**) and of the last person (**last_person_id**)
- * **Step 3.2.** Send **R#2** for **first_person_id**. If the responses for this is 200, the result is OK.  
+ * **Step 3.2.** Send **R#2** for **first_person_id**. If the responses for this is 200 or 202, the result is OK.  
  * **Step 3.3.** Send **R#3** for **first_person_id** changing the firstname. If the responses has the name changed, the result is OK. 
- * **Step 3.4.** Send **R#4** to create the following person (first using JSON and then using XML). Store the id of the new person. If the answer is 200 with a person in the body who has an ID, the result is OK.
+ * **Step 3.4.** Send **R#4** to create the following person (first using JSON and then using XML). Store the id of the new person. If the answer is 201 (200 or 202 are also applicable) with a person in the body who has an ID, the result is OK.
  
     ```json
         {
