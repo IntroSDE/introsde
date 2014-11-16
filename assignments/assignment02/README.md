@@ -204,7 +204,7 @@
  * **Step 3.5.** Send **R#5** for the person you have just created. Then send **R#1** with the id of the person that person. If the answer is 404, your result must be OK.
  * **Step 3.6.** Follow now with the **R#9 (GET BASE_URL/measureTypes)**. If response contains more than 2 measureTypes - result is OK, else is ERROR (less than 3 measureTypes). Save all measureTypes into array (**measure_types**)
  * **Step 3.7.** Send **R#6 (GET BASE_URL/person/{id}/{measureType})** for the first person you obtained at the beginning and the last person, and for each measure types from **measure_types**. If no response has at least one measure - result is ERROR (no data at all) else result is OK. Store one **measure_id** and one **measureType**. 
- * **Step 3.8.** Send **R#6 (GET BASE_URL/person/{id}/{measureType}/{mid})** for the stored measure_id and measureType. If the response is 200, result is OK, else is ERROR.
+ * **Step 3.8.** Send **R#7 (GET BASE_URL/person/{id}/{measureType}/{mid})** for the stored measure_id and measureType. If the response is 200, result is OK, else is ERROR.
  * **Step 3.9.** Choose a **measureType** from **measure_types** and send the request **R#6 (GET BASE_URL/person/{first_person_id}/{measureType})** and save count value (e.g. 5 measurements). Then send **R#8 (POST BASE_URL/person/{first_person_id}/{measureTypes})** with the measurement specified below. Follow up with another **R#6** as the first to check the new count value. If it is 1 time more - print OK, else print ERROR. Remember, first with JSON and then with XML as content-types 
  
     ```xml
