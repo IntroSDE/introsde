@@ -56,7 +56,7 @@
       <birthdate>1945-01-01</birthdate>
       <currentHealth>
         <measure>
-          <value>999</value>
+          <mid>999</mid>
           <dateRegistered>2014-01-03</dateRegistered> 
           <measureType>weight</measureType>
           <measureValue>80</measureValue>
@@ -78,21 +78,21 @@
   ```xml
   <healthProfile-history> 
       <measure>
-          <value>999</value>
+          <mid>999</mid>
           <dateRegistered>2014-01-03</dateRegistered> 
           <measureType>weight</measureType>
           <measureValue>80</measureValue>
           <measureValueType>Int</measureValueType>
         </measure>
       <measure>
-          <value>1000</value>
+          <mid>1000</mid>
           <dateRegistered>2014-01-02</dateRegistered> 
           <measureType>weight</measureType>
           <measureValue>82</measureValue>
           <measureValueType>Int</measureValueType>
         </measure>
       <measure>
-          <value>1001</value>
+          <mid>1001</mid>
           <dateRegistered>2014-01-01</dateRegistered> 
           <measureType>weight</measureType>
           <measureValue>81</measureValue>
