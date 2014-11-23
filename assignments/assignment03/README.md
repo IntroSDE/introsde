@@ -26,7 +26,7 @@
    * **Method #5**: deletePerson(Long id) should delete the Person identified by {id} from the system
    * **Method #6**: readPersonHistory(Long id, String measureType) => List<Measure> should return the list of values (the history) of {measureType} (e.g. weight) for Person identified by {id}
    * **Method #7**: readPersonMeasurement(Long id, String measureType, Long mid) => Measure should return the value of {measureType} (e.g. weight) identified by {mid} for Person identified by {id}
-   * **Method #8**: savePersonMeasurement(Long id, String measureType) => Measure should save a new value for the {measureType} (e.g. weight) of Person identified by {id} and archive the old value in the history
+   * **Method #8**: savePersonMeasurement(Long id, Measure m) =>should save a new measure object {m} (e.g. weight) of Person identified by {id} and archive the old value in the history
    * **Method #9**: readMeasureTypes() => List<String> should return the list of measures 
 
    The minimal model supported by your service should include: 
