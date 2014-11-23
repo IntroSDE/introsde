@@ -21,7 +21,7 @@
 * Using JAX-WS, implement CRUD services for the following model including the following operations
    * **Method #1**: readPersonList() => List<Person> | should list all the people in the database (see below Person model to know what data to return here) in your database (wrapped under the root element "people")
    * **Method #2**: readPerson(Long id) => Person | should give all the Personal information plus current measures of one Person identified by {id} (e.g., current measures means current healthProfile)
-   * **Method #3**: updatePerson(Long id) => Person | should update the Personal information of the Person identified by {id} (e.g., only the Person's information, not the measures of the health profile)
+   * **Method #3**: updatePerson(Person p) => Person | should update the Personal information of the Person identified by {id} (e.g., only the Person's information, not the measures of the health profile)
    * **Method #4**: createPerson(Person p) => Person | should create a new Person and return the newly created Person with its assigned id (if a health profile is included, create also those measurements for the new Person).
    * **Method #5**: deletePerson(Long id) should delete the Person identified by {id} from the system
    * **Method #6**: readPersonHistory(Long id, String measureType) => List<Measure> should return the list of values (the history) of {measureType} (e.g. weight) for Person identified by {id}
