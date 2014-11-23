@@ -40,6 +40,7 @@
    }
    
    public class Measure {
+     Long mid,
      Date dateRegistered;
      String measureType;
      String measureValue;
@@ -67,7 +68,7 @@
   ```
 
 * **Extra #1**: Having a real database in sqlite
-* **Extra #2** (Method #10): updatePersonMeasure(Long id, String measureType, Long mid) => Measure | should update the value for the {measureType} (e.g., weight) identified by {mid}, related to the Person identified by {id}
+* **Extra #2** (Method #10): updatePersonMeasure(Long id, Measure m) => Measure | should update the measure identified with {m.mid}, related to the Person identified by {id}
 * **Extra #3** (Method #11): readPersonMeasureByDates(Long id, String measureType, Date before, Date after) => List<Measure> | should return the history of {measureType} (e.g., weight) for Person {id} in the specified range of date
 * **Extra #4** (Method #12): readPersonListByMeasurement(String measureType, String maxValue, String minValue) | retrieves people whose {measureType} (e.g., weight) value is in the [{min},{max}] range (if only one for the query params is provided, use only that)
   
