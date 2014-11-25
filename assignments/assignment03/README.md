@@ -103,7 +103,11 @@
 
 ## Client
 
-* Create a simple client that call each of these services and prints the result (using your service implementation).
+Create a simple client that call each of these services and prints the result (using your service implementation).
+For all the methods your client should do:
+* print method's name (e.g. Method #5)
+* make methods request
+* print response for the request
 
 ## VIVA Testing Procedures for #3 
 
