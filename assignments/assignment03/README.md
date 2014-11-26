@@ -32,9 +32,10 @@
    The minimal model supported by your service should include: 
    ```java
    public class Person {
-     Long id;
+     Long personId;
      String firstname;
      String lastname;
+     Date birthday;
      List<Measure> currentHealth; // one for each type of measure
      List<Measure> healthHistory; // all measurements
    }
