@@ -19,7 +19,7 @@
 ## Server
 * Please use *introsde.assignment.soap* as a package for your service interface. Use *People* as the name for your endpoint interface. User https://github.com/cdparra/introsde/blob/master/lab09/Server/src/introsde/document/ws/People.java as a reference point, but implement your own methods.
 * Using JAX-WS, implement CRUD services for the following model including the following operations
-   * **Method #1**: readPersonList() => List<Person> | should list all the people in the database (see below Person model to know what data to return here) in your database (wrapped under the root element "people")
+   * **Method #1**: readPersonList() => List<Person> | should list all the people in the database (see below Person model to know what data to return here) in your database 
    * **Method #2**: readPerson(Long id) => Person | should give all the Personal information plus current measures of one Person identified by {id} (e.g., current measures means current healthProfile)
    * **Method #3**: updatePerson(Person p) => Person | should update the Personal information of the Person identified by {id} (e.g., only the Person's information, not the measures of the health profile)
    * **Method #4**: createPerson(Person p) => Person | should create a new Person and return the newly created Person with its assigned id (if a health profile is included, create also those measurements for the new Person).
