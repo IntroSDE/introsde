@@ -26,12 +26,13 @@
   * A Health/Lifestyle profile for each person, with measures such as **weight** and **height** (and others if you like)
   * The history of these measures by date
 
-* To clients, the model should look like as follows: 
+* To clients, the model should look like as follows (beware that IDs are only available when the resource has been created, if you are posting a new resource, no ID is passed): 
 
-* **Person**
+* **Person resource**
 
     ```json
     {
+          "personId"      : 999,
           "firstname"     : "Chuck",
           "lastname"      : "Norris",
           "birthdate"     : "1945-01-01",
@@ -42,7 +43,7 @@
     }
     ```
 
-* **History of one measure (e.g., weight)**
+* **History of one measure (e.g., weight).** Notice that this is a list of **Measure resources**.
 
     ```json
     [ 
@@ -68,6 +69,7 @@
 
     ```xml
     <person>
+        <personId>999</personId>
         <firstname>Chuck</firstname>
             <lastname>Norris</lastname>
             <birthdate>1945-01-01</birthdate>
@@ -77,15 +79,17 @@
             </healthProfile>
     </person>
     ```
-	In case you keep healthProfile *static* (stays with weight and height only, even if other measures are available) the 	structure is:
+    
+In case you keep healthProfile *static* (stays with weight and height only, even if other measures are available) the structure is:
+	
 	```xml
 	<healthProfile>
 	        <weight>78.9</weight>
 	        <height>172</height>
 	</healthProfile>
 	```
-	In case you have healthProfile build *dynamicly* (according to measureTypes - you get extra points for that),
-	then the structure is approximately like this (**it can be different and it is fine**, as this part is not checked by 		**Client**):
+	
+In case you have healthProfile build *dynamicly* (according to measureTypes - you get extra points for that),then the structure is approximately like this (**it can be different and it is fine**, as this part is not checked by **Client**):
 	```xml
 	<healthProfile>
 		<measureType>
@@ -98,6 +102,7 @@
 		</measureType>
 	</healthProfile>
 	```
+	
 * **History of one measure in XML (e.g., weight)**
 
     ```xml
@@ -126,11 +131,11 @@
  * **Request #1:** *GET /person* should list all the names in your database (wrapped under the root element "people") 
  * **Request #2:** *GET /person/{id}* should give all the personal information plus current measures of person identified by {id} (e.g., current measures means current health profile) 
  * **Request #3:** *PUT /person/{id}* should update the personal information of the person identified by {id} (e.g., only the person's information, not the measures of the health profile) 
- * **Request #4:** *POST /person* should create a new person and return the newly created person with its assigned id (if a health profile is included, create also those measurements for the new person).  
+ * **Request #4:** *POST /person* should create a new person and return the newly created person with its assigned id (if a health profile is included, create also those measurements for the new person). The body of the request should contain a **Person resource** that follows the examples presented before, without an id (which should be generated after being created) 
  * **Request #5:** *DELETE /person/{id}* should delete the person identified by {id} from the system 
  * **Request #6:** *GET /person/{id}/{measureType}* should return the list of values (the history) of {measureType} (e.g. weight) for person identified by {id}
- * **Request #7:** *GET /person/{id}/{measureType}/{mid} should return the value of {measureType} (e.g. weight) identified by {mid} for person identified by {id}
- * **Request #8:** *POST /person/{id}/{measureType}* should save a new value for the {measureType} (e.g. weight) of person identified by {id} and archive the old value in the history
+ * **Request #7:** *GET /person/{id}/{measureType}/{mid}* should return the value of {measureType} (e.g. weight) identified by {mid} for person identified by {id}
+ * **Request #8:** *POST /person/{id}/{measureType}* should save a new value for the {measureType} (e.g. weight) of person identified by {id} and archive the old value in the history. The body of the request should contain a **Measure resource** that follows the examples presented before, without an id (which should be generated after being created)
  * **Request #9:** *GET /measureTypes* should return the list of measures your model supports in the following formats:
 
     ```xml
@@ -156,7 +161,7 @@
 
 * **Extra points:**
  * **Extra #1:** Having a real database in sqlite	
- * **Extra #2 (Request #10):** *PUT /person/{id}/{measureType}/{mid}* should update the value for the {measureType} (e.g., weight) identified by {mid}, related to the person identified by {id}
+ * **Extra #2 (Request #10):** *PUT /person/{id}/{measureType}/{mid}* should update the value for the {measureType} (e.g., weight) identified by {mid}, related to the person identified by {id}. The body of the request should contain a **Measure resource** that follows the examples presented before.
  * **Extra #3 (Request #11):** *GET /person/{id}/{measureType}?before={beforeDate}&after={afterDate}* should return the history of {measureType} (e.g., weight) for person {id} in the specified range of date
  * **Extra #4 (Request #12):** *GET /person?measureType={measureType}&max={max}&min={min}* retrieves people whose {measureType} (e.g., weight) value is in the [{min},{max}] range (if only one for the query params is provided, use only that)
 
@@ -164,7 +169,7 @@
 
 * Implement a client that can send all of these **requests** and print the **responses** 
 * Instructions:
- * **Step 1.** Ask as an input, the **BASE_URL** of the server (e.g. http://192.10.168.3:443/johndoe). This should be given to you by another student who will be assigned to you in the day of the VIVA evaluation. 
+ * **Step 1.** Ask as an input, the **BASE_URL** of the server (e.g. http://192.10.168.3:8000/johndoe). This should be given to you by another student who will be assigned to you in the day of the VIVA evaluation. 
  * **Step 2.** For each of of requests in the plan of **Step 3**, including extras, you have to send the request first with the **Accept** header set to **Applicaiton/XML** and then with **Application/JSON**. Same for Content-Type in the **write requests**. After getting the response, print the following in the console: 
  
     ```bash
