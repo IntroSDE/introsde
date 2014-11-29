@@ -170,7 +170,7 @@ In case you have healthProfile build *dynamicly* (according to measureTypes - yo
 * Implement a client that can send all of these **requests** and print the **responses** 
 * Instructions:
  * **Step 1.** Ask as an input, the **BASE_URL** of the server (e.g. http://192.10.168.3:8000/johndoe). This should be given to you by another student who will be assigned to you in the day of the VIVA evaluation. 
- * **Step 2.** For each of of requests in the plan of **Step 3**, including extras, you have to send the request first with the **Accept** header set to **Applicaiton/XML** and then with **Application/JSON**. Same for Content-Type in the **write requests**. After getting the response, print the following in the console: 
+ * **Step 2.** For each of of requests in the plan of **Step 3**, including extras, you have to send the request first with the **Accept** header set to **Application/XML** and then with **Application/JSON**. Same for Content-Type in the **write requests**. After getting the response, print the following in the console: 
  
     ```bash
     Request #[NUMBER]: [HTTP METHOD] [URL] Accept: [TYPE] Content-type: [TYPE] 
@@ -240,12 +240,15 @@ In case you have healthProfile build *dynamicly* (according to measureTypes - yo
  * For POST/PUT services, use the examples provided in the plan
 
 * Notes about the **VIVA SESSION**
- * On the date of evaluation, we will test your implementation live using the client of one of your fellow students (pairs of **server** and **client** students will be assigned and send out 1 day before the VIVA). 
- * On the VIVA, the **server** student must run its application and then give the client its IP. The client will then use this IP plus the port 443 as BASE_URL to run its application. The results displayed on the screen must be **copy and pasted** in a text file with the name **[serverstudentname]_[BASEURL]_results.txt**. 
- * Once the first client finished running, students will shift roles and do the same procedure. 
- * Once the second client finished running, both students will have 1 hour to correct things in their server to answer potential limitations encountered during execution. 
- * After this one hour, a second test round will be followed, which results must be stored in the file **[serverstudentname]_[BASEURL]_results_secondround.txt**
- * Each student must then decide which of the results use as the final. 
+ * On the date of evaluation, we will test your implementation live using the client of one of your fellow students (pairs of **server** and **client** students will be assigned during the VIVA).
+ * **Running servers and clients (30 minutes)**
+  * On the VIVA, the **server** student must run its application and then give the client its IP. The client will then use this IP plus the port 8000 as the **BASE_URL** of run its requests. The results displayed on the screen must be **copy and pasted** in a text file with the name **server_fullname_results.txt** (where fullname refers to the name of the student's who implemented the server).
+  * Additionally, in order to provide us with a way of comparing results better, the server owner should also run his/her own client against the server, and copy the output to a text file with the name **server_fullname_results_SELF.txt** 
+  * Once the first client finished running, students will shift roles and follow the same procedure.
+ * **Bugfixing and second run (45 minutes)** 
+  * Once the second client finished running, both students will have *45 minutes* to correct things in their server to answer potential limitations encountered during execution. 
+  * A second test round should follow.
+  * Each student must then decide which of the results use as the final, and copy those results in the text file, which must then be shared with instructors. 
 
 ## Assignment Rules
 
@@ -253,7 +256,7 @@ In case you have healthProfile build *dynamicly* (according to measureTypes - yo
     * All Java source files 
     * All XML and XSD files
     * please, do not include .class or IDE generated project files
-* Rename the Zip file to: your **student_name_assignmentNumber.zip**. As **student_name**, use your name as registered in [this spreadsheet][10], replacing spaces by "_" (e.g.,"Ans-Riaz-2.zip"
+* Rename the Zip file to: your **studentfullname_assignmentNumber.zip**. As **studentfullname**, use your name as registered in [this spreadsheet][10], replacing spaces by "_" (e.g.,"Ans-Riaz-2.zip"
 * Follow [this link for uploading your file][9]
 * Password will be given and class and sent to the group
 * The assignment is due on **18-Nov (Mid-Night)**. 
@@ -269,6 +272,7 @@ In case you have healthProfile build *dynamicly* (according to measureTypes - yo
 	* Submitted on time ? 
 	* Report (you should provide at least a README file explaining how to deploy and run your work)
 * Extra points are used as "recovery" you didn't finish the requirements or didn't submit in time
+* We will also take into account your ability to solve problems on the spot, under the pressure of time during the VIVA session. 
 
 [1]: https://sites.google.com/site/introsdeunitn/lab-sessions/lab-session-4
 [2]: https://github.com/cdparra/introsde/tree/master/lab04
