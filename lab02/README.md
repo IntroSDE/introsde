@@ -1,4 +1,4 @@
-# LAB02: More Java, Eclipse, ANT and Firs example of a service with Axis2
+# LAB02: More Java, Eclipse, ANT and the first example of a service with Axis2
 
 
 **Introduction to Service Design and Engineering | University of Trento | [Webpage](https://sites.google.com/site/introsdeunitn/lab-sessions/lab-session-2 "Permalink to LAB02: More Java, Eclipse, ANT and Firs example of a service with Axis2")**
