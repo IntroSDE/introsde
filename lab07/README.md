@@ -65,9 +65,9 @@ Links: [Source code][3]
 
 * Mimicking the last module, create the following packages in your project: 
  * **introsde.rest.ehealth** - you can already copy both **App.java** and **MyApplicationConfig.java** from the previous module
- * **introsde.rest.dao** - no need to copy PersonDao.java
- * **introsde.rest.resources** - do not copy the resources from previous moduel yet
- * **introsde.rest.model** - do not copy the original models, we will create a new one for this module
+ * **introsde.rest.ehealth.dao** - no need to copy PersonDao.java
+ * **introsde.rest.ehealth.resources** - do not copy the resources from previous moduel yet
+ * **introsde.rest.ehealth.model** - do not copy the original models, we will create a new one for this module
 
 ### JPA Tutorial: The DAO
 
