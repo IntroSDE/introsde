@@ -5,7 +5,7 @@
 	<portlet>
 		<portlet-name>create-account</portlet-name>
 		<display-name>Create Account</display-name>
-		<portlet-class>com.test.CreateAccount</portlet-class>
+		<portlet-class>net.atos.acanto.cpsn.CreateAccount</portlet-class>
 		<init-param>
 			<name>view-template</name>
 			<value>/html/create_account/view.jsp</value>
