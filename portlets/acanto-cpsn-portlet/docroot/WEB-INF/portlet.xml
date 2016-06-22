@@ -1,11 +1,14 @@
 <?xml version="1.0"?>
 
-<portlet-app xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" version="2.0">
-	
+<portlet-app xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd"
+	version="2.0">
+
 	<portlet>
 		<portlet-name>create-account</portlet-name>
 		<display-name>Create Account</display-name>
-		<portlet-class>net.atos.acanto.cpsn.CreateAccount</portlet-class>
+		<portlet-class>net.atos.acanto.cpsn.AccountPortlet</portlet-class>
 		<init-param>
 			<name>view-template</name>
 			<value>/html/create_account/view.jsp</value>
@@ -18,6 +21,14 @@
 			<name>about-template</name>
 			<value>/html/create_account/about.jsp</value>
 		</init-param>
+
+		<init-param>
+			<name>edit_account-template</name>
+			<value>/html/create_account/edit_account.jsp</value>
+		</init-param>
+
+
+
 		<expiration-cache>0</expiration-cache>
 		<supports>
 			<mime-type>text/html</mime-type>
