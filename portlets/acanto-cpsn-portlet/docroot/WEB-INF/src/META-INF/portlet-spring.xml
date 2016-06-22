@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="com.liferay.docs.accounts.service.AccountLocalService" class="com.liferay.docs.accounts.service.impl.AccountLocalServiceImpl" />
+	<bean id="com.liferay.docs.accounts.service.AccountService" class="com.liferay.docs.accounts.service.impl.AccountServiceImpl" />
+	<bean id="com.liferay.docs.accounts.service.persistence.AccountPersistence" class="com.liferay.docs.accounts.service.persistence.AccountPersistenceImpl" parent="basePersistence" />
+</beans>
