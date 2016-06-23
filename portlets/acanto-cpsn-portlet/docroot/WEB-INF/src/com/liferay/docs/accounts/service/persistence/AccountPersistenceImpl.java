@@ -2299,8 +2299,18 @@ public class AccountPersistenceImpl extends BasePersistenceImpl<Account>
 		accountImpl.setUserName(account.getUserName());
 		accountImpl.setCreateDate(account.getCreateDate());
 		accountImpl.setModifiedDate(account.getModifiedDate());
-		accountImpl.setName(account.getName());
-		accountImpl.setPassword(account.getPassword());
+		accountImpl.setFirstName(account.getFirstName());
+		accountImpl.setFamilyName(account.getFamilyName());
+		accountImpl.setEmail(account.getEmail());
+		accountImpl.setBirthday(account.getBirthday());
+		accountImpl.setGender(account.getGender());
+		accountImpl.setAccountPassword(account.getAccountPassword());
+		accountImpl.setMaritalStatus(account.getMaritalStatus());
+		accountImpl.setInterests(account.getInterests());
+		accountImpl.setEducationLevel(account.getEducationLevel());
+		accountImpl.setForeignLanguages(account.getForeignLanguages());
+		accountImpl.setProfession(account.getProfession());
+		accountImpl.setPreferences(account.getPreferences());
 
 		return accountImpl;
 	}
@@ -2623,7 +2633,7 @@ public class AccountPersistenceImpl extends BasePersistenceImpl<Account>
 				PropsKeys.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE));
 	private static Log _log = LogFactoryUtil.getLog(AccountPersistenceImpl.class);
 	private static Set<String> _badColumnNames = SetUtil.fromArray(new String[] {
-				"uuid", "password"
+				"uuid"
 			});
 	private static Account _nullAccount = new AccountImpl() {
 			@Override

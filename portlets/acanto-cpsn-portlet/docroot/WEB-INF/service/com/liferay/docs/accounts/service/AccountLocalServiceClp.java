@@ -142,7 +142,10 @@ public class AccountLocalServiceClp implements AccountLocalService {
 
 		_methodParameterTypes25 = new String[] {
 				"long", "java.lang.String", "java.lang.String",
-				"com.liferay.portal.service.ServiceContext"
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "com.liferay.portal.service.ServiceContext"
 			};
 	}
 
@@ -883,7 +886,12 @@ public class AccountLocalServiceClp implements AccountLocalService {
 
 	@Override
 	public com.liferay.docs.accounts.model.Account addAccount(long userId,
-		java.lang.String name, java.lang.String password,
+		java.lang.String firstName, java.lang.String familyName,
+		java.lang.String email, java.lang.String birthday,
+		java.lang.String gender, java.lang.String accountPassword,
+		java.lang.String maritalStatus, java.lang.String interests,
+		java.lang.String educationLevel, java.lang.String foreignLanguages,
+		java.lang.String profession, java.lang.String preferences,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -895,9 +903,29 @@ public class AccountLocalServiceClp implements AccountLocalService {
 					new Object[] {
 						userId,
 						
-					ClpSerializer.translateInput(name),
+					ClpSerializer.translateInput(firstName),
 						
-					ClpSerializer.translateInput(password),
+					ClpSerializer.translateInput(familyName),
+						
+					ClpSerializer.translateInput(email),
+						
+					ClpSerializer.translateInput(birthday),
+						
+					ClpSerializer.translateInput(gender),
+						
+					ClpSerializer.translateInput(accountPassword),
+						
+					ClpSerializer.translateInput(maritalStatus),
+						
+					ClpSerializer.translateInput(interests),
+						
+					ClpSerializer.translateInput(educationLevel),
+						
+					ClpSerializer.translateInput(foreignLanguages),
+						
+					ClpSerializer.translateInput(profession),
+						
+					ClpSerializer.translateInput(preferences),
 						
 					ClpSerializer.translateInput(serviceContext)
 					});

@@ -23,10 +23,18 @@
 			<basic name="modifiedDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
-			<basic name="name" />
-			<basic name="password">
-				<column name="PASSWORD_" />
-			</basic>
+			<basic name="firstName" />
+			<basic name="familyName" />
+			<basic name="email" />
+			<basic name="birthday" />
+			<basic name="gender" />
+			<basic name="accountPassword" />
+			<basic name="maritalStatus" />
+			<basic name="interests" />
+			<basic name="educationLevel" />
+			<basic name="foreignLanguages" />
+			<basic name="profession" />
+			<basic name="preferences" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

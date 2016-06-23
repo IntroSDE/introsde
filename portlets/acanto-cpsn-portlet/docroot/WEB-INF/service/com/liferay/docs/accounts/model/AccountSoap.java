@@ -39,8 +39,18 @@ public class AccountSoap implements Serializable {
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
-		soapModel.setName(model.getName());
-		soapModel.setPassword(model.getPassword());
+		soapModel.setFirstName(model.getFirstName());
+		soapModel.setFamilyName(model.getFamilyName());
+		soapModel.setEmail(model.getEmail());
+		soapModel.setBirthday(model.getBirthday());
+		soapModel.setGender(model.getGender());
+		soapModel.setAccountPassword(model.getAccountPassword());
+		soapModel.setMaritalStatus(model.getMaritalStatus());
+		soapModel.setInterests(model.getInterests());
+		soapModel.setEducationLevel(model.getEducationLevel());
+		soapModel.setForeignLanguages(model.getForeignLanguages());
+		soapModel.setProfession(model.getProfession());
+		soapModel.setPreferences(model.getPreferences());
 
 		return soapModel;
 	}
@@ -157,20 +167,100 @@ public class AccountSoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
-	public String getName() {
-		return _name;
+	public String getFirstName() {
+		return _firstName;
 	}
 
-	public void setName(String name) {
-		_name = name;
+	public void setFirstName(String firstName) {
+		_firstName = firstName;
 	}
 
-	public String getPassword() {
-		return _password;
+	public String getFamilyName() {
+		return _familyName;
 	}
 
-	public void setPassword(String password) {
-		_password = password;
+	public void setFamilyName(String familyName) {
+		_familyName = familyName;
+	}
+
+	public String getEmail() {
+		return _email;
+	}
+
+	public void setEmail(String email) {
+		_email = email;
+	}
+
+	public String getBirthday() {
+		return _birthday;
+	}
+
+	public void setBirthday(String birthday) {
+		_birthday = birthday;
+	}
+
+	public String getGender() {
+		return _gender;
+	}
+
+	public void setGender(String gender) {
+		_gender = gender;
+	}
+
+	public String getAccountPassword() {
+		return _accountPassword;
+	}
+
+	public void setAccountPassword(String accountPassword) {
+		_accountPassword = accountPassword;
+	}
+
+	public String getMaritalStatus() {
+		return _maritalStatus;
+	}
+
+	public void setMaritalStatus(String maritalStatus) {
+		_maritalStatus = maritalStatus;
+	}
+
+	public String getInterests() {
+		return _interests;
+	}
+
+	public void setInterests(String interests) {
+		_interests = interests;
+	}
+
+	public String getEducationLevel() {
+		return _educationLevel;
+	}
+
+	public void setEducationLevel(String educationLevel) {
+		_educationLevel = educationLevel;
+	}
+
+	public String getForeignLanguages() {
+		return _foreignLanguages;
+	}
+
+	public void setForeignLanguages(String foreignLanguages) {
+		_foreignLanguages = foreignLanguages;
+	}
+
+	public String getProfession() {
+		return _profession;
+	}
+
+	public void setProfession(String profession) {
+		_profession = profession;
+	}
+
+	public String getPreferences() {
+		return _preferences;
+	}
+
+	public void setPreferences(String preferences) {
+		_preferences = preferences;
 	}
 
 	private String _uuid;
@@ -181,6 +271,16 @@ public class AccountSoap implements Serializable {
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _name;
-	private String _password;
+	private String _firstName;
+	private String _familyName;
+	private String _email;
+	private String _birthday;
+	private String _gender;
+	private String _accountPassword;
+	private String _maritalStatus;
+	private String _interests;
+	private String _educationLevel;
+	private String _foreignLanguages;
+	private String _profession;
+	private String _preferences;
 }

@@ -142,7 +142,10 @@ public class AccountLocalServiceClpInvoker {
 
 		_methodParameterTypes47 = new String[] {
 				"long", "java.lang.String", "java.lang.String",
-				"com.liferay.portal.service.ServiceContext"
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "com.liferay.portal.service.ServiceContext"
 			};
 	}
 
@@ -287,7 +290,14 @@ public class AccountLocalServiceClpInvoker {
 				Arrays.deepEquals(_methodParameterTypes47, parameterTypes)) {
 			return AccountLocalServiceUtil.addAccount(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
-				(com.liferay.portal.service.ServiceContext)arguments[3]);
+				(java.lang.String)arguments[3], (java.lang.String)arguments[4],
+				(java.lang.String)arguments[5], (java.lang.String)arguments[6],
+				(java.lang.String)arguments[7], (java.lang.String)arguments[8],
+				(java.lang.String)arguments[9],
+				(java.lang.String)arguments[10],
+				(java.lang.String)arguments[11],
+				(java.lang.String)arguments[12],
+				(com.liferay.portal.service.ServiceContext)arguments[13]);
 		}
 
 		throw new UnsupportedOperationException();

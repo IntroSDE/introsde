@@ -67,7 +67,19 @@ public class AccountLocalServiceImpl extends AccountLocalServiceBaseImpl {
 	}
 
 
-	public Account addAccount(long userId, String name, String password, 
+	public Account addAccount(long userId, 
+			String firstName, 
+			String familyName, 
+			String email, 
+			String birthday, 
+			String gender, 
+			String accountPassword, 
+			String maritalStatus, 
+			String interests, 
+			String educationLevel, 
+			String foreignLanguages, 
+			String profession, 
+			String preferences,
 			ServiceContext serviceContext) throws SystemException, PortalException {
 
 		long groupId = serviceContext.getScopeGroupId();
@@ -76,7 +88,19 @@ public class AccountLocalServiceImpl extends AccountLocalServiceBaseImpl {
 
 		Date now = new Date();
 
-		validate(name);
+		validate(firstName);
+		validate(familyName); 
+		validate(email); 
+		validate(birthday); 
+		validate(gender); 
+		validate(accountPassword); 
+		validate(maritalStatus); 
+		validate(interests); 
+		validate(educationLevel); 
+		validate(foreignLanguages); 
+		validate(profession); 
+		validate(preferences);
+
 
 		long accountId = counterLocalService.increment();
 
@@ -89,8 +113,20 @@ public class AccountLocalServiceImpl extends AccountLocalServiceBaseImpl {
 		account.setUserName(user.getFullName());
 		account.setCreateDate(serviceContext.getCreateDate(now));
 		account.setModifiedDate(serviceContext.getModifiedDate(now));
-		account.setName(name);
-		account.setPassword(password);
+
+		account.setFirstName(firstName);
+		account.setFamilyName(familyName);
+		account.setEmail(email);
+		account.setBirthday(birthday);
+		account.setGender(gender);
+		account.setAccountPassword(accountPassword);
+		account.setMaritalStatus(maritalStatus);
+		account.setInterests(interests);
+		account.setEducationLevel(educationLevel);
+		account.setForeignLanguages(foreignLanguages);
+		account.setProfession(profession);
+		account.setPreferences(preferences);
+
 		account.setExpandoBridgeAttributes(serviceContext);
 
 		accountPersistence.update(account);

@@ -3,7 +3,8 @@
 <service-builder package-path="com.liferay.docs.accounts">
 	<author>a616659</author>
 	<namespace>GB</namespace>
-	<entity name="Account" local-service="true" remote-service="true" uuid="true">
+	<entity name="Account" local-service="true" remote-service="true"
+		uuid="true">
 
 		<!-- PK fields -->
 
@@ -33,15 +34,42 @@
 		<column name="userName" type="String"></column>
 		<column name="createDate" type="Date"></column>
 		<column name="modifiedDate" type="Date"></column>
-        <column name="name" type="String"></column>
-        <column name="password" type="String"></column>
-        
-        <finder name="GroupId" return-type="Collection">
-            <finder-column name="groupId"></finder-column>
-        </finder>
+		<column name="firstName" type="String"></column>
+        <column name="familyName" type="String"></column>
+        <column name="email" type="String"></column>
+        <column name="birthday" type="String"></column>
+        <column name="gender" type="String"></column>
+        <column name="accountPassword" type="String"></column>
+        <column name="maritalStatus" type="String"></column>
+        <column name="interests" type="String"></column>
+        <column name="educationLevel" type="String"></column>
+        <column name="foreignLanguages" type="String"></column>
+        <column name="profession" type="String"></column>
+        <column name="preferences" type="String"></column>
+
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId"></finder-column>
+		</finder>
+
+
+		<!-- PK fields -->
+
+		<!-- Group instance -->
+
+		<!-- Audit fields -->
 	</entity>
-    <exceptions>
-        <exception>AccountName</exception>
+	<exceptions>
+        <exception>AccountFirstName</exception>
+        <exception>AccountFamilyName</exception>
+        <exception>AccountEmail</exception>
+        <exception>AccountBirthday</exception>
+        <exception>AccountGender</exception>
         <exception>AccountPassword</exception>
+        <exception>AccountMaritalStatus</exception>
+        <exception>AccountInterests</exception>
+        <exception>AccountEducationLevel</exception>
+        <exception>AccountForeignLanguages</exception>
+        <exception>AccountProfession</exception>
+        <exception>AccountPreferences</exception>
     </exceptions>
 </service-builder>

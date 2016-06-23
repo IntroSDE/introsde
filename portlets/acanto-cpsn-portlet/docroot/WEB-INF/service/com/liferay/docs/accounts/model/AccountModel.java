@@ -207,34 +207,184 @@ public interface AccountModel extends BaseModel<Account>, StagedGroupedModel {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Returns the name of this account.
+	 * Returns the first name of this account.
 	 *
-	 * @return the name of this account
+	 * @return the first name of this account
 	 */
 	@AutoEscape
-	public String getName();
+	public String getFirstName();
 
 	/**
-	 * Sets the name of this account.
+	 * Sets the first name of this account.
 	 *
-	 * @param name the name of this account
+	 * @param firstName the first name of this account
 	 */
-	public void setName(String name);
+	public void setFirstName(String firstName);
 
 	/**
-	 * Returns the password of this account.
+	 * Returns the family name of this account.
 	 *
-	 * @return the password of this account
+	 * @return the family name of this account
 	 */
 	@AutoEscape
-	public String getPassword();
+	public String getFamilyName();
 
 	/**
-	 * Sets the password of this account.
+	 * Sets the family name of this account.
 	 *
-	 * @param password the password of this account
+	 * @param familyName the family name of this account
 	 */
-	public void setPassword(String password);
+	public void setFamilyName(String familyName);
+
+	/**
+	 * Returns the email of this account.
+	 *
+	 * @return the email of this account
+	 */
+	@AutoEscape
+	public String getEmail();
+
+	/**
+	 * Sets the email of this account.
+	 *
+	 * @param email the email of this account
+	 */
+	public void setEmail(String email);
+
+	/**
+	 * Returns the birthday of this account.
+	 *
+	 * @return the birthday of this account
+	 */
+	@AutoEscape
+	public String getBirthday();
+
+	/**
+	 * Sets the birthday of this account.
+	 *
+	 * @param birthday the birthday of this account
+	 */
+	public void setBirthday(String birthday);
+
+	/**
+	 * Returns the gender of this account.
+	 *
+	 * @return the gender of this account
+	 */
+	@AutoEscape
+	public String getGender();
+
+	/**
+	 * Sets the gender of this account.
+	 *
+	 * @param gender the gender of this account
+	 */
+	public void setGender(String gender);
+
+	/**
+	 * Returns the account password of this account.
+	 *
+	 * @return the account password of this account
+	 */
+	@AutoEscape
+	public String getAccountPassword();
+
+	/**
+	 * Sets the account password of this account.
+	 *
+	 * @param accountPassword the account password of this account
+	 */
+	public void setAccountPassword(String accountPassword);
+
+	/**
+	 * Returns the marital status of this account.
+	 *
+	 * @return the marital status of this account
+	 */
+	@AutoEscape
+	public String getMaritalStatus();
+
+	/**
+	 * Sets the marital status of this account.
+	 *
+	 * @param maritalStatus the marital status of this account
+	 */
+	public void setMaritalStatus(String maritalStatus);
+
+	/**
+	 * Returns the interests of this account.
+	 *
+	 * @return the interests of this account
+	 */
+	@AutoEscape
+	public String getInterests();
+
+	/**
+	 * Sets the interests of this account.
+	 *
+	 * @param interests the interests of this account
+	 */
+	public void setInterests(String interests);
+
+	/**
+	 * Returns the education level of this account.
+	 *
+	 * @return the education level of this account
+	 */
+	@AutoEscape
+	public String getEducationLevel();
+
+	/**
+	 * Sets the education level of this account.
+	 *
+	 * @param educationLevel the education level of this account
+	 */
+	public void setEducationLevel(String educationLevel);
+
+	/**
+	 * Returns the foreign languages of this account.
+	 *
+	 * @return the foreign languages of this account
+	 */
+	@AutoEscape
+	public String getForeignLanguages();
+
+	/**
+	 * Sets the foreign languages of this account.
+	 *
+	 * @param foreignLanguages the foreign languages of this account
+	 */
+	public void setForeignLanguages(String foreignLanguages);
+
+	/**
+	 * Returns the profession of this account.
+	 *
+	 * @return the profession of this account
+	 */
+	@AutoEscape
+	public String getProfession();
+
+	/**
+	 * Sets the profession of this account.
+	 *
+	 * @param profession the profession of this account
+	 */
+	public void setProfession(String profession);
+
+	/**
+	 * Returns the preferences of this account.
+	 *
+	 * @return the preferences of this account
+	 */
+	@AutoEscape
+	public String getPreferences();
+
+	/**
+	 * Sets the preferences of this account.
+	 *
+	 * @param preferences the preferences of this account
+	 */
+	public void setPreferences(String preferences);
 
 	@Override
 	public boolean isNew();

@@ -58,8 +58,18 @@ public class AccountWrapper implements Account, ModelWrapper<Account> {
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("name", getName());
-		attributes.put("password", getPassword());
+		attributes.put("firstName", getFirstName());
+		attributes.put("familyName", getFamilyName());
+		attributes.put("email", getEmail());
+		attributes.put("birthday", getBirthday());
+		attributes.put("gender", getGender());
+		attributes.put("accountPassword", getAccountPassword());
+		attributes.put("maritalStatus", getMaritalStatus());
+		attributes.put("interests", getInterests());
+		attributes.put("educationLevel", getEducationLevel());
+		attributes.put("foreignLanguages", getForeignLanguages());
+		attributes.put("profession", getProfession());
+		attributes.put("preferences", getPreferences());
 
 		return attributes;
 	}
@@ -114,16 +124,76 @@ public class AccountWrapper implements Account, ModelWrapper<Account> {
 			setModifiedDate(modifiedDate);
 		}
 
-		String name = (String)attributes.get("name");
+		String firstName = (String)attributes.get("firstName");
 
-		if (name != null) {
-			setName(name);
+		if (firstName != null) {
+			setFirstName(firstName);
 		}
 
-		String password = (String)attributes.get("password");
+		String familyName = (String)attributes.get("familyName");
 
-		if (password != null) {
-			setPassword(password);
+		if (familyName != null) {
+			setFamilyName(familyName);
+		}
+
+		String email = (String)attributes.get("email");
+
+		if (email != null) {
+			setEmail(email);
+		}
+
+		String birthday = (String)attributes.get("birthday");
+
+		if (birthday != null) {
+			setBirthday(birthday);
+		}
+
+		String gender = (String)attributes.get("gender");
+
+		if (gender != null) {
+			setGender(gender);
+		}
+
+		String accountPassword = (String)attributes.get("accountPassword");
+
+		if (accountPassword != null) {
+			setAccountPassword(accountPassword);
+		}
+
+		String maritalStatus = (String)attributes.get("maritalStatus");
+
+		if (maritalStatus != null) {
+			setMaritalStatus(maritalStatus);
+		}
+
+		String interests = (String)attributes.get("interests");
+
+		if (interests != null) {
+			setInterests(interests);
+		}
+
+		String educationLevel = (String)attributes.get("educationLevel");
+
+		if (educationLevel != null) {
+			setEducationLevel(educationLevel);
+		}
+
+		String foreignLanguages = (String)attributes.get("foreignLanguages");
+
+		if (foreignLanguages != null) {
+			setForeignLanguages(foreignLanguages);
+		}
+
+		String profession = (String)attributes.get("profession");
+
+		if (profession != null) {
+			setProfession(profession);
+		}
+
+		String preferences = (String)attributes.get("preferences");
+
+		if (preferences != null) {
+			setPreferences(preferences);
 		}
 	}
 
@@ -330,43 +400,243 @@ public class AccountWrapper implements Account, ModelWrapper<Account> {
 	}
 
 	/**
-	* Returns the name of this account.
+	* Returns the first name of this account.
 	*
-	* @return the name of this account
+	* @return the first name of this account
 	*/
 	@Override
-	public java.lang.String getName() {
-		return _account.getName();
+	public java.lang.String getFirstName() {
+		return _account.getFirstName();
 	}
 
 	/**
-	* Sets the name of this account.
+	* Sets the first name of this account.
 	*
-	* @param name the name of this account
+	* @param firstName the first name of this account
 	*/
 	@Override
-	public void setName(java.lang.String name) {
-		_account.setName(name);
+	public void setFirstName(java.lang.String firstName) {
+		_account.setFirstName(firstName);
 	}
 
 	/**
-	* Returns the password of this account.
+	* Returns the family name of this account.
 	*
-	* @return the password of this account
+	* @return the family name of this account
 	*/
 	@Override
-	public java.lang.String getPassword() {
-		return _account.getPassword();
+	public java.lang.String getFamilyName() {
+		return _account.getFamilyName();
 	}
 
 	/**
-	* Sets the password of this account.
+	* Sets the family name of this account.
 	*
-	* @param password the password of this account
+	* @param familyName the family name of this account
 	*/
 	@Override
-	public void setPassword(java.lang.String password) {
-		_account.setPassword(password);
+	public void setFamilyName(java.lang.String familyName) {
+		_account.setFamilyName(familyName);
+	}
+
+	/**
+	* Returns the email of this account.
+	*
+	* @return the email of this account
+	*/
+	@Override
+	public java.lang.String getEmail() {
+		return _account.getEmail();
+	}
+
+	/**
+	* Sets the email of this account.
+	*
+	* @param email the email of this account
+	*/
+	@Override
+	public void setEmail(java.lang.String email) {
+		_account.setEmail(email);
+	}
+
+	/**
+	* Returns the birthday of this account.
+	*
+	* @return the birthday of this account
+	*/
+	@Override
+	public java.lang.String getBirthday() {
+		return _account.getBirthday();
+	}
+
+	/**
+	* Sets the birthday of this account.
+	*
+	* @param birthday the birthday of this account
+	*/
+	@Override
+	public void setBirthday(java.lang.String birthday) {
+		_account.setBirthday(birthday);
+	}
+
+	/**
+	* Returns the gender of this account.
+	*
+	* @return the gender of this account
+	*/
+	@Override
+	public java.lang.String getGender() {
+		return _account.getGender();
+	}
+
+	/**
+	* Sets the gender of this account.
+	*
+	* @param gender the gender of this account
+	*/
+	@Override
+	public void setGender(java.lang.String gender) {
+		_account.setGender(gender);
+	}
+
+	/**
+	* Returns the account password of this account.
+	*
+	* @return the account password of this account
+	*/
+	@Override
+	public java.lang.String getAccountPassword() {
+		return _account.getAccountPassword();
+	}
+
+	/**
+	* Sets the account password of this account.
+	*
+	* @param accountPassword the account password of this account
+	*/
+	@Override
+	public void setAccountPassword(java.lang.String accountPassword) {
+		_account.setAccountPassword(accountPassword);
+	}
+
+	/**
+	* Returns the marital status of this account.
+	*
+	* @return the marital status of this account
+	*/
+	@Override
+	public java.lang.String getMaritalStatus() {
+		return _account.getMaritalStatus();
+	}
+
+	/**
+	* Sets the marital status of this account.
+	*
+	* @param maritalStatus the marital status of this account
+	*/
+	@Override
+	public void setMaritalStatus(java.lang.String maritalStatus) {
+		_account.setMaritalStatus(maritalStatus);
+	}
+
+	/**
+	* Returns the interests of this account.
+	*
+	* @return the interests of this account
+	*/
+	@Override
+	public java.lang.String getInterests() {
+		return _account.getInterests();
+	}
+
+	/**
+	* Sets the interests of this account.
+	*
+	* @param interests the interests of this account
+	*/
+	@Override
+	public void setInterests(java.lang.String interests) {
+		_account.setInterests(interests);
+	}
+
+	/**
+	* Returns the education level of this account.
+	*
+	* @return the education level of this account
+	*/
+	@Override
+	public java.lang.String getEducationLevel() {
+		return _account.getEducationLevel();
+	}
+
+	/**
+	* Sets the education level of this account.
+	*
+	* @param educationLevel the education level of this account
+	*/
+	@Override
+	public void setEducationLevel(java.lang.String educationLevel) {
+		_account.setEducationLevel(educationLevel);
+	}
+
+	/**
+	* Returns the foreign languages of this account.
+	*
+	* @return the foreign languages of this account
+	*/
+	@Override
+	public java.lang.String getForeignLanguages() {
+		return _account.getForeignLanguages();
+	}
+
+	/**
+	* Sets the foreign languages of this account.
+	*
+	* @param foreignLanguages the foreign languages of this account
+	*/
+	@Override
+	public void setForeignLanguages(java.lang.String foreignLanguages) {
+		_account.setForeignLanguages(foreignLanguages);
+	}
+
+	/**
+	* Returns the profession of this account.
+	*
+	* @return the profession of this account
+	*/
+	@Override
+	public java.lang.String getProfession() {
+		return _account.getProfession();
+	}
+
+	/**
+	* Sets the profession of this account.
+	*
+	* @param profession the profession of this account
+	*/
+	@Override
+	public void setProfession(java.lang.String profession) {
+		_account.setProfession(profession);
+	}
+
+	/**
+	* Returns the preferences of this account.
+	*
+	* @return the preferences of this account
+	*/
+	@Override
+	public java.lang.String getPreferences() {
+		return _account.getPreferences();
+	}
+
+	/**
+	* Sets the preferences of this account.
+	*
+	* @param preferences the preferences of this account
+	*/
+	@Override
+	public void setPreferences(java.lang.String preferences) {
+		_account.setPreferences(preferences);
 	}
 
 	@Override

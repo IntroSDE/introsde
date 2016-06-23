@@ -62,9 +62,29 @@
     <liferay-ui:search-container-row
         className="com.liferay.docs.accounts.model.Account" modelVar="account1">
 
-        <liferay-ui:search-container-column-text property="name" />
+        <liferay-ui:search-container-column-text property="firstName" />
+        
+        <liferay-ui:search-container-column-text property="familyName" />
+        
+        <liferay-ui:search-container-column-text property="email" />
+        
+        <liferay-ui:search-container-column-text property="birthday" />
+        
+        <liferay-ui:search-container-column-text property="gender" />
+        
+        <liferay-ui:search-container-column-text property="accountPassword" />
+        
+        <liferay-ui:search-container-column-text property="maritalStatus" />
+        
+        <liferay-ui:search-container-column-text property="interests" />
+        
+        <liferay-ui:search-container-column-text property="educationLevel" />
+        
+        <liferay-ui:search-container-column-text property="foreignLanguages" />
+        
+        <liferay-ui:search-container-column-text property="profession" />
 
-        <liferay-ui:search-container-column-text property="password" />
+        <liferay-ui:search-container-column-text property="preferences" />
 
     </liferay-ui:search-container-row>
 

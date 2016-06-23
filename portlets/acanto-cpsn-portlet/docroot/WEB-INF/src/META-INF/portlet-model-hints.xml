@@ -10,7 +10,17 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="name" type="String" />
-		<field name="password" type="String" />
+		<field name="firstName" type="String" />
+		<field name="familyName" type="String" />
+		<field name="email" type="String" />
+		<field name="birthday" type="String" />
+		<field name="gender" type="String" />
+		<field name="accountPassword" type="String" />
+		<field name="maritalStatus" type="String" />
+		<field name="interests" type="String" />
+		<field name="educationLevel" type="String" />
+		<field name="foreignLanguages" type="String" />
+		<field name="profession" type="String" />
+		<field name="preferences" type="String" />
 	</model>
 </model-hints>

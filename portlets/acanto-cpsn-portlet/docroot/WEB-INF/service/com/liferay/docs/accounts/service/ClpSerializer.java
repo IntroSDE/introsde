@@ -265,13 +265,62 @@ public class ClpSerializer {
 			return new SystemException();
 		}
 
-		if (className.equals("com.liferay.docs.accounts.AccountNameException")) {
-			return new com.liferay.docs.accounts.AccountNameException();
+		if (className.equals(
+					"com.liferay.docs.accounts.AccountBirthdayException")) {
+			return new com.liferay.docs.accounts.AccountBirthdayException();
+		}
+
+		if (className.equals(
+					"com.liferay.docs.accounts.AccountEducationLevelException")) {
+			return new com.liferay.docs.accounts.AccountEducationLevelException();
+		}
+
+		if (className.equals("com.liferay.docs.accounts.AccountEmailException")) {
+			return new com.liferay.docs.accounts.AccountEmailException();
+		}
+
+		if (className.equals(
+					"com.liferay.docs.accounts.AccountFamilyNameException")) {
+			return new com.liferay.docs.accounts.AccountFamilyNameException();
+		}
+
+		if (className.equals(
+					"com.liferay.docs.accounts.AccountFirstNameException")) {
+			return new com.liferay.docs.accounts.AccountFirstNameException();
+		}
+
+		if (className.equals(
+					"com.liferay.docs.accounts.AccountForeignLanguagesException")) {
+			return new com.liferay.docs.accounts.AccountForeignLanguagesException();
+		}
+
+		if (className.equals("com.liferay.docs.accounts.AccountGenderException")) {
+			return new com.liferay.docs.accounts.AccountGenderException();
+		}
+
+		if (className.equals(
+					"com.liferay.docs.accounts.AccountInterestsException")) {
+			return new com.liferay.docs.accounts.AccountInterestsException();
+		}
+
+		if (className.equals(
+					"com.liferay.docs.accounts.AccountMaritalStatusException")) {
+			return new com.liferay.docs.accounts.AccountMaritalStatusException();
 		}
 
 		if (className.equals(
 					"com.liferay.docs.accounts.AccountPasswordException")) {
 			return new com.liferay.docs.accounts.AccountPasswordException();
+		}
+
+		if (className.equals(
+					"com.liferay.docs.accounts.AccountPreferencesException")) {
+			return new com.liferay.docs.accounts.AccountPreferencesException();
+		}
+
+		if (className.equals(
+					"com.liferay.docs.accounts.AccountProfessionException")) {
+			return new com.liferay.docs.accounts.AccountProfessionException();
 		}
 
 		if (className.equals("com.liferay.docs.accounts.NoSuchAccountException")) {

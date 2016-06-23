@@ -18,6 +18,8 @@ import javax.portlet.ValidatorException;
 
 
 
+
+
 import com.liferay.docs.accounts.model.Account;
 import com.liferay.docs.accounts.service.AccountLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -96,13 +98,35 @@ public class AccountPortlet extends MVCPortlet {
 
 	    ServiceContext serviceContext = ServiceContextFactory.getInstance(
 	        Account.class.getName(), request);
-
-	    String name = ParamUtil.getString(request, "name");
-	    String password = ParamUtil.getString(request, "password");
+	    
+		String firstName = ParamUtil.getString(request, "firstName");
+		String familyName = ParamUtil.getString(request, "familyName");
+		String email = ParamUtil.getString(request, "email");
+		String birthday = ParamUtil.getString(request, "birthday");
+		String gender = ParamUtil.getString(request, "gender");
+		String accountPassword = ParamUtil.getString(request, "accountPassword");
+		String maritalStatus = ParamUtil.getString(request, "maritalStatus");
+		String interests = ParamUtil.getString(request, "interests");
+		String educationLevel = ParamUtil.getString(request, "educationLevel");
+		String foreignLanguages = ParamUtil.getString(request, "foreignLanguages");
+		String profession = ParamUtil.getString(request, "profession");
+		String preferences = ParamUtil.getString(request, "preferences");
 
 	    try {
 	        AccountLocalServiceUtil.addAccount(serviceContext.getUserId(),
-	                name, password, serviceContext);
+	    			firstName, 
+	    			familyName, 
+	    			email, 
+	    			birthday, 
+	    			gender, 
+	    			accountPassword, 
+	    			maritalStatus, 
+	    			interests, 
+	    			educationLevel, 
+	    			foreignLanguages, 
+	    			profession, 
+	    			preferences,
+	                serviceContext);
 
 	        SessionMessages.add(request, "accountAdded");
 
@@ -137,7 +161,20 @@ public class AccountPortlet extends MVCPortlet {
 	        
 	        if (accounts.size() == 0) {
 	            Account account = AccountLocalServiceUtil.addAccount(
-	                    serviceContext.getUserId(), "ExampleUser", "exampleP4ssword", serviceContext);
+	                    serviceContext.getUserId(), 
+	                    "exampleFirstName", 
+		    			"exampleFamilyName", 
+		    			"exampleEmail", 
+		    			"exampleBirthday", 
+		    			"exampleGender", 
+		    			"exampleAccountPassword", 
+		    			"exampleMaritalStatus", 
+		    			"exampleInterests", 
+		    			"exampleEducationLevel", 
+		    			"exampleForeignLanguages", 
+		    			"exampleProfession", 
+		    			"examplePreferences", 
+	                    serviceContext);
 
 	            accountId = account.getAccountId();
 

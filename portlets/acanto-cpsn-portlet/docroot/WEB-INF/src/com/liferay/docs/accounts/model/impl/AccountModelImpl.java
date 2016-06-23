@@ -75,10 +75,20 @@ public class AccountModelImpl extends BaseModelImpl<Account>
 			{ "userName", Types.VARCHAR },
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
-			{ "name", Types.VARCHAR },
-			{ "password_", Types.VARCHAR }
+			{ "firstName", Types.VARCHAR },
+			{ "familyName", Types.VARCHAR },
+			{ "email", Types.VARCHAR },
+			{ "birthday", Types.VARCHAR },
+			{ "gender", Types.VARCHAR },
+			{ "accountPassword", Types.VARCHAR },
+			{ "maritalStatus", Types.VARCHAR },
+			{ "interests", Types.VARCHAR },
+			{ "educationLevel", Types.VARCHAR },
+			{ "foreignLanguages", Types.VARCHAR },
+			{ "profession", Types.VARCHAR },
+			{ "preferences", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table GB_Account (uuid_ VARCHAR(75) null,accountId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,password_ VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table GB_Account (uuid_ VARCHAR(75) null,accountId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,firstName VARCHAR(75) null,familyName VARCHAR(75) null,email VARCHAR(75) null,birthday VARCHAR(75) null,gender VARCHAR(75) null,accountPassword VARCHAR(75) null,maritalStatus VARCHAR(75) null,interests VARCHAR(75) null,educationLevel VARCHAR(75) null,foreignLanguages VARCHAR(75) null,profession VARCHAR(75) null,preferences VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table GB_Account";
 	public static final String ORDER_BY_JPQL = " ORDER BY account.accountId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY GB_Account.accountId ASC";
@@ -120,8 +130,18 @@ public class AccountModelImpl extends BaseModelImpl<Account>
 		model.setUserName(soapModel.getUserName());
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
-		model.setName(soapModel.getName());
-		model.setPassword(soapModel.getPassword());
+		model.setFirstName(soapModel.getFirstName());
+		model.setFamilyName(soapModel.getFamilyName());
+		model.setEmail(soapModel.getEmail());
+		model.setBirthday(soapModel.getBirthday());
+		model.setGender(soapModel.getGender());
+		model.setAccountPassword(soapModel.getAccountPassword());
+		model.setMaritalStatus(soapModel.getMaritalStatus());
+		model.setInterests(soapModel.getInterests());
+		model.setEducationLevel(soapModel.getEducationLevel());
+		model.setForeignLanguages(soapModel.getForeignLanguages());
+		model.setProfession(soapModel.getProfession());
+		model.setPreferences(soapModel.getPreferences());
 
 		return model;
 	}
@@ -194,8 +214,18 @@ public class AccountModelImpl extends BaseModelImpl<Account>
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("name", getName());
-		attributes.put("password", getPassword());
+		attributes.put("firstName", getFirstName());
+		attributes.put("familyName", getFamilyName());
+		attributes.put("email", getEmail());
+		attributes.put("birthday", getBirthday());
+		attributes.put("gender", getGender());
+		attributes.put("accountPassword", getAccountPassword());
+		attributes.put("maritalStatus", getMaritalStatus());
+		attributes.put("interests", getInterests());
+		attributes.put("educationLevel", getEducationLevel());
+		attributes.put("foreignLanguages", getForeignLanguages());
+		attributes.put("profession", getProfession());
+		attributes.put("preferences", getPreferences());
 
 		return attributes;
 	}
@@ -250,16 +280,76 @@ public class AccountModelImpl extends BaseModelImpl<Account>
 			setModifiedDate(modifiedDate);
 		}
 
-		String name = (String)attributes.get("name");
+		String firstName = (String)attributes.get("firstName");
 
-		if (name != null) {
-			setName(name);
+		if (firstName != null) {
+			setFirstName(firstName);
 		}
 
-		String password = (String)attributes.get("password");
+		String familyName = (String)attributes.get("familyName");
 
-		if (password != null) {
-			setPassword(password);
+		if (familyName != null) {
+			setFamilyName(familyName);
+		}
+
+		String email = (String)attributes.get("email");
+
+		if (email != null) {
+			setEmail(email);
+		}
+
+		String birthday = (String)attributes.get("birthday");
+
+		if (birthday != null) {
+			setBirthday(birthday);
+		}
+
+		String gender = (String)attributes.get("gender");
+
+		if (gender != null) {
+			setGender(gender);
+		}
+
+		String accountPassword = (String)attributes.get("accountPassword");
+
+		if (accountPassword != null) {
+			setAccountPassword(accountPassword);
+		}
+
+		String maritalStatus = (String)attributes.get("maritalStatus");
+
+		if (maritalStatus != null) {
+			setMaritalStatus(maritalStatus);
+		}
+
+		String interests = (String)attributes.get("interests");
+
+		if (interests != null) {
+			setInterests(interests);
+		}
+
+		String educationLevel = (String)attributes.get("educationLevel");
+
+		if (educationLevel != null) {
+			setEducationLevel(educationLevel);
+		}
+
+		String foreignLanguages = (String)attributes.get("foreignLanguages");
+
+		if (foreignLanguages != null) {
+			setForeignLanguages(foreignLanguages);
+		}
+
+		String profession = (String)attributes.get("profession");
+
+		if (profession != null) {
+			setProfession(profession);
+		}
+
+		String preferences = (String)attributes.get("preferences");
+
+		if (preferences != null) {
+			setPreferences(preferences);
 		}
 	}
 
@@ -405,34 +495,194 @@ public class AccountModelImpl extends BaseModelImpl<Account>
 
 	@JSON
 	@Override
-	public String getName() {
-		if (_name == null) {
+	public String getFirstName() {
+		if (_firstName == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _name;
+			return _firstName;
 		}
 	}
 
 	@Override
-	public void setName(String name) {
-		_name = name;
+	public void setFirstName(String firstName) {
+		_firstName = firstName;
 	}
 
 	@JSON
 	@Override
-	public String getPassword() {
-		if (_password == null) {
+	public String getFamilyName() {
+		if (_familyName == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _password;
+			return _familyName;
 		}
 	}
 
 	@Override
-	public void setPassword(String password) {
-		_password = password;
+	public void setFamilyName(String familyName) {
+		_familyName = familyName;
+	}
+
+	@JSON
+	@Override
+	public String getEmail() {
+		if (_email == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _email;
+		}
+	}
+
+	@Override
+	public void setEmail(String email) {
+		_email = email;
+	}
+
+	@JSON
+	@Override
+	public String getBirthday() {
+		if (_birthday == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _birthday;
+		}
+	}
+
+	@Override
+	public void setBirthday(String birthday) {
+		_birthday = birthday;
+	}
+
+	@JSON
+	@Override
+	public String getGender() {
+		if (_gender == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _gender;
+		}
+	}
+
+	@Override
+	public void setGender(String gender) {
+		_gender = gender;
+	}
+
+	@JSON
+	@Override
+	public String getAccountPassword() {
+		if (_accountPassword == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _accountPassword;
+		}
+	}
+
+	@Override
+	public void setAccountPassword(String accountPassword) {
+		_accountPassword = accountPassword;
+	}
+
+	@JSON
+	@Override
+	public String getMaritalStatus() {
+		if (_maritalStatus == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _maritalStatus;
+		}
+	}
+
+	@Override
+	public void setMaritalStatus(String maritalStatus) {
+		_maritalStatus = maritalStatus;
+	}
+
+	@JSON
+	@Override
+	public String getInterests() {
+		if (_interests == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _interests;
+		}
+	}
+
+	@Override
+	public void setInterests(String interests) {
+		_interests = interests;
+	}
+
+	@JSON
+	@Override
+	public String getEducationLevel() {
+		if (_educationLevel == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _educationLevel;
+		}
+	}
+
+	@Override
+	public void setEducationLevel(String educationLevel) {
+		_educationLevel = educationLevel;
+	}
+
+	@JSON
+	@Override
+	public String getForeignLanguages() {
+		if (_foreignLanguages == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _foreignLanguages;
+		}
+	}
+
+	@Override
+	public void setForeignLanguages(String foreignLanguages) {
+		_foreignLanguages = foreignLanguages;
+	}
+
+	@JSON
+	@Override
+	public String getProfession() {
+		if (_profession == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _profession;
+		}
+	}
+
+	@Override
+	public void setProfession(String profession) {
+		_profession = profession;
+	}
+
+	@JSON
+	@Override
+	public String getPreferences() {
+		if (_preferences == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _preferences;
+		}
+	}
+
+	@Override
+	public void setPreferences(String preferences) {
+		_preferences = preferences;
 	}
 
 	@Override
@@ -480,8 +730,18 @@ public class AccountModelImpl extends BaseModelImpl<Account>
 		accountImpl.setUserName(getUserName());
 		accountImpl.setCreateDate(getCreateDate());
 		accountImpl.setModifiedDate(getModifiedDate());
-		accountImpl.setName(getName());
-		accountImpl.setPassword(getPassword());
+		accountImpl.setFirstName(getFirstName());
+		accountImpl.setFamilyName(getFamilyName());
+		accountImpl.setEmail(getEmail());
+		accountImpl.setBirthday(getBirthday());
+		accountImpl.setGender(getGender());
+		accountImpl.setAccountPassword(getAccountPassword());
+		accountImpl.setMaritalStatus(getMaritalStatus());
+		accountImpl.setInterests(getInterests());
+		accountImpl.setEducationLevel(getEducationLevel());
+		accountImpl.setForeignLanguages(getForeignLanguages());
+		accountImpl.setProfession(getProfession());
+		accountImpl.setPreferences(getPreferences());
 
 		accountImpl.resetOriginalValues();
 
@@ -593,20 +853,100 @@ public class AccountModelImpl extends BaseModelImpl<Account>
 			accountCacheModel.modifiedDate = Long.MIN_VALUE;
 		}
 
-		accountCacheModel.name = getName();
+		accountCacheModel.firstName = getFirstName();
 
-		String name = accountCacheModel.name;
+		String firstName = accountCacheModel.firstName;
 
-		if ((name != null) && (name.length() == 0)) {
-			accountCacheModel.name = null;
+		if ((firstName != null) && (firstName.length() == 0)) {
+			accountCacheModel.firstName = null;
 		}
 
-		accountCacheModel.password = getPassword();
+		accountCacheModel.familyName = getFamilyName();
 
-		String password = accountCacheModel.password;
+		String familyName = accountCacheModel.familyName;
 
-		if ((password != null) && (password.length() == 0)) {
-			accountCacheModel.password = null;
+		if ((familyName != null) && (familyName.length() == 0)) {
+			accountCacheModel.familyName = null;
+		}
+
+		accountCacheModel.email = getEmail();
+
+		String email = accountCacheModel.email;
+
+		if ((email != null) && (email.length() == 0)) {
+			accountCacheModel.email = null;
+		}
+
+		accountCacheModel.birthday = getBirthday();
+
+		String birthday = accountCacheModel.birthday;
+
+		if ((birthday != null) && (birthday.length() == 0)) {
+			accountCacheModel.birthday = null;
+		}
+
+		accountCacheModel.gender = getGender();
+
+		String gender = accountCacheModel.gender;
+
+		if ((gender != null) && (gender.length() == 0)) {
+			accountCacheModel.gender = null;
+		}
+
+		accountCacheModel.accountPassword = getAccountPassword();
+
+		String accountPassword = accountCacheModel.accountPassword;
+
+		if ((accountPassword != null) && (accountPassword.length() == 0)) {
+			accountCacheModel.accountPassword = null;
+		}
+
+		accountCacheModel.maritalStatus = getMaritalStatus();
+
+		String maritalStatus = accountCacheModel.maritalStatus;
+
+		if ((maritalStatus != null) && (maritalStatus.length() == 0)) {
+			accountCacheModel.maritalStatus = null;
+		}
+
+		accountCacheModel.interests = getInterests();
+
+		String interests = accountCacheModel.interests;
+
+		if ((interests != null) && (interests.length() == 0)) {
+			accountCacheModel.interests = null;
+		}
+
+		accountCacheModel.educationLevel = getEducationLevel();
+
+		String educationLevel = accountCacheModel.educationLevel;
+
+		if ((educationLevel != null) && (educationLevel.length() == 0)) {
+			accountCacheModel.educationLevel = null;
+		}
+
+		accountCacheModel.foreignLanguages = getForeignLanguages();
+
+		String foreignLanguages = accountCacheModel.foreignLanguages;
+
+		if ((foreignLanguages != null) && (foreignLanguages.length() == 0)) {
+			accountCacheModel.foreignLanguages = null;
+		}
+
+		accountCacheModel.profession = getProfession();
+
+		String profession = accountCacheModel.profession;
+
+		if ((profession != null) && (profession.length() == 0)) {
+			accountCacheModel.profession = null;
+		}
+
+		accountCacheModel.preferences = getPreferences();
+
+		String preferences = accountCacheModel.preferences;
+
+		if ((preferences != null) && (preferences.length() == 0)) {
+			accountCacheModel.preferences = null;
 		}
 
 		return accountCacheModel;
@@ -614,7 +954,7 @@ public class AccountModelImpl extends BaseModelImpl<Account>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(21);
+		StringBundler sb = new StringBundler(41);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -632,10 +972,30 @@ public class AccountModelImpl extends BaseModelImpl<Account>
 		sb.append(getCreateDate());
 		sb.append(", modifiedDate=");
 		sb.append(getModifiedDate());
-		sb.append(", name=");
-		sb.append(getName());
-		sb.append(", password=");
-		sb.append(getPassword());
+		sb.append(", firstName=");
+		sb.append(getFirstName());
+		sb.append(", familyName=");
+		sb.append(getFamilyName());
+		sb.append(", email=");
+		sb.append(getEmail());
+		sb.append(", birthday=");
+		sb.append(getBirthday());
+		sb.append(", gender=");
+		sb.append(getGender());
+		sb.append(", accountPassword=");
+		sb.append(getAccountPassword());
+		sb.append(", maritalStatus=");
+		sb.append(getMaritalStatus());
+		sb.append(", interests=");
+		sb.append(getInterests());
+		sb.append(", educationLevel=");
+		sb.append(getEducationLevel());
+		sb.append(", foreignLanguages=");
+		sb.append(getForeignLanguages());
+		sb.append(", profession=");
+		sb.append(getProfession());
+		sb.append(", preferences=");
+		sb.append(getPreferences());
 		sb.append("}");
 
 		return sb.toString();
@@ -643,7 +1003,7 @@ public class AccountModelImpl extends BaseModelImpl<Account>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(34);
+		StringBundler sb = new StringBundler(64);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.docs.accounts.model.Account");
@@ -682,12 +1042,52 @@ public class AccountModelImpl extends BaseModelImpl<Account>
 		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>name</column-name><column-value><![CDATA[");
-		sb.append(getName());
+			"<column><column-name>firstName</column-name><column-value><![CDATA[");
+		sb.append(getFirstName());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>password</column-name><column-value><![CDATA[");
-		sb.append(getPassword());
+			"<column><column-name>familyName</column-name><column-value><![CDATA[");
+		sb.append(getFamilyName());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>email</column-name><column-value><![CDATA[");
+		sb.append(getEmail());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>birthday</column-name><column-value><![CDATA[");
+		sb.append(getBirthday());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>gender</column-name><column-value><![CDATA[");
+		sb.append(getGender());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>accountPassword</column-name><column-value><![CDATA[");
+		sb.append(getAccountPassword());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>maritalStatus</column-name><column-value><![CDATA[");
+		sb.append(getMaritalStatus());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>interests</column-name><column-value><![CDATA[");
+		sb.append(getInterests());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>educationLevel</column-name><column-value><![CDATA[");
+		sb.append(getEducationLevel());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>foreignLanguages</column-name><column-value><![CDATA[");
+		sb.append(getForeignLanguages());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>profession</column-name><column-value><![CDATA[");
+		sb.append(getProfession());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>preferences</column-name><column-value><![CDATA[");
+		sb.append(getPreferences());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -713,8 +1113,18 @@ public class AccountModelImpl extends BaseModelImpl<Account>
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _name;
-	private String _password;
+	private String _firstName;
+	private String _familyName;
+	private String _email;
+	private String _birthday;
+	private String _gender;
+	private String _accountPassword;
+	private String _maritalStatus;
+	private String _interests;
+	private String _educationLevel;
+	private String _foreignLanguages;
+	private String _profession;
+	private String _preferences;
 	private long _columnBitmask;
 	private Account _escapedModel;
 }

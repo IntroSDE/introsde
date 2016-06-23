@@ -15,7 +15,17 @@
 		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="createDate" type="org.hibernate.type.TimestampType" />
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
-		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="password" type="com.liferay.portal.dao.orm.hibernate.StringType" column="password_" />
+		<property name="firstName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="familyName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="email" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="birthday" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="gender" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="accountPassword" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="maritalStatus" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="interests" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="educationLevel" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="foreignLanguages" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="profession" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="preferences" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 </hibernate-mapping>

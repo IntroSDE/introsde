@@ -15,8 +15,19 @@
 
 	<aui:fieldset>
 
-		<aui:input name="name" />
-		<aui:input name="password" />
+		<aui:input name="firstName" />
+		<aui:input name="familyName" />
+		<aui:input name="email" />
+		<aui:input name="birthday" />
+		<aui:input name="gender" />
+		<aui:input name="accountPassword" />
+		<aui:input name="maritalStatus" />
+		<aui:input name="interests" />
+		<aui:input name="educationLevel" />
+		<aui:input name="foreignLanguages" />
+		<aui:input name="profession" />
+		<aui:input name="preferences" />
+		
 		<aui:input name='accountId' type='hidden'
 			value='<%= ParamUtil.getString(renderRequest, "accountId") %>' />
 

@@ -361,11 +361,18 @@ public class AccountLocalServiceWrapper implements AccountLocalService,
 
 	@Override
 	public com.liferay.docs.accounts.model.Account addAccount(long userId,
-		java.lang.String name, java.lang.String password,
+		java.lang.String firstName, java.lang.String familyName,
+		java.lang.String email, java.lang.String birthday,
+		java.lang.String gender, java.lang.String accountPassword,
+		java.lang.String maritalStatus, java.lang.String interests,
+		java.lang.String educationLevel, java.lang.String foreignLanguages,
+		java.lang.String profession, java.lang.String preferences,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _accountLocalService.addAccount(userId, name, password,
+		return _accountLocalService.addAccount(userId, firstName, familyName,
+			email, birthday, gender, accountPassword, maritalStatus, interests,
+			educationLevel, foreignLanguages, profession, preferences,
 			serviceContext);
 	}
 

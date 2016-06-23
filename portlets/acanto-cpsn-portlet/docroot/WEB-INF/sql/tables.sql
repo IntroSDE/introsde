@@ -7,6 +7,16 @@ create table GB_Account (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	name VARCHAR(75) null,
-	password_ VARCHAR(75) null
+	firstName VARCHAR(75) null,
+	familyName VARCHAR(75) null,
+	email VARCHAR(75) null,
+	birthday VARCHAR(75) null,
+	gender VARCHAR(75) null,
+	accountPassword VARCHAR(75) null,
+	maritalStatus VARCHAR(75) null,
+	interests VARCHAR(75) null,
+	educationLevel VARCHAR(75) null,
+	foreignLanguages VARCHAR(75) null,
+	profession VARCHAR(75) null,
+	preferences VARCHAR(75) null
 );

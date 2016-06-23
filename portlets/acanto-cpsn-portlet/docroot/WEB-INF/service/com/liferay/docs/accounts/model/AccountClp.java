@@ -83,8 +83,18 @@ public class AccountClp extends BaseModelImpl<Account> implements Account {
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("name", getName());
-		attributes.put("password", getPassword());
+		attributes.put("firstName", getFirstName());
+		attributes.put("familyName", getFamilyName());
+		attributes.put("email", getEmail());
+		attributes.put("birthday", getBirthday());
+		attributes.put("gender", getGender());
+		attributes.put("accountPassword", getAccountPassword());
+		attributes.put("maritalStatus", getMaritalStatus());
+		attributes.put("interests", getInterests());
+		attributes.put("educationLevel", getEducationLevel());
+		attributes.put("foreignLanguages", getForeignLanguages());
+		attributes.put("profession", getProfession());
+		attributes.put("preferences", getPreferences());
 
 		return attributes;
 	}
@@ -139,16 +149,76 @@ public class AccountClp extends BaseModelImpl<Account> implements Account {
 			setModifiedDate(modifiedDate);
 		}
 
-		String name = (String)attributes.get("name");
+		String firstName = (String)attributes.get("firstName");
 
-		if (name != null) {
-			setName(name);
+		if (firstName != null) {
+			setFirstName(firstName);
 		}
 
-		String password = (String)attributes.get("password");
+		String familyName = (String)attributes.get("familyName");
 
-		if (password != null) {
-			setPassword(password);
+		if (familyName != null) {
+			setFamilyName(familyName);
+		}
+
+		String email = (String)attributes.get("email");
+
+		if (email != null) {
+			setEmail(email);
+		}
+
+		String birthday = (String)attributes.get("birthday");
+
+		if (birthday != null) {
+			setBirthday(birthday);
+		}
+
+		String gender = (String)attributes.get("gender");
+
+		if (gender != null) {
+			setGender(gender);
+		}
+
+		String accountPassword = (String)attributes.get("accountPassword");
+
+		if (accountPassword != null) {
+			setAccountPassword(accountPassword);
+		}
+
+		String maritalStatus = (String)attributes.get("maritalStatus");
+
+		if (maritalStatus != null) {
+			setMaritalStatus(maritalStatus);
+		}
+
+		String interests = (String)attributes.get("interests");
+
+		if (interests != null) {
+			setInterests(interests);
+		}
+
+		String educationLevel = (String)attributes.get("educationLevel");
+
+		if (educationLevel != null) {
+			setEducationLevel(educationLevel);
+		}
+
+		String foreignLanguages = (String)attributes.get("foreignLanguages");
+
+		if (foreignLanguages != null) {
+			setForeignLanguages(foreignLanguages);
+		}
+
+		String profession = (String)attributes.get("profession");
+
+		if (profession != null) {
+			setProfession(profession);
+		}
+
+		String preferences = (String)attributes.get("preferences");
+
+		if (preferences != null) {
+			setPreferences(preferences);
 		}
 	}
 
@@ -347,21 +417,21 @@ public class AccountClp extends BaseModelImpl<Account> implements Account {
 	}
 
 	@Override
-	public String getName() {
-		return _name;
+	public String getFirstName() {
+		return _firstName;
 	}
 
 	@Override
-	public void setName(String name) {
-		_name = name;
+	public void setFirstName(String firstName) {
+		_firstName = firstName;
 
 		if (_accountRemoteModel != null) {
 			try {
 				Class<?> clazz = _accountRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setName", String.class);
+				Method method = clazz.getMethod("setFirstName", String.class);
 
-				method.invoke(_accountRemoteModel, name);
+				method.invoke(_accountRemoteModel, firstName);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -370,21 +440,254 @@ public class AccountClp extends BaseModelImpl<Account> implements Account {
 	}
 
 	@Override
-	public String getPassword() {
-		return _password;
+	public String getFamilyName() {
+		return _familyName;
 	}
 
 	@Override
-	public void setPassword(String password) {
-		_password = password;
+	public void setFamilyName(String familyName) {
+		_familyName = familyName;
 
 		if (_accountRemoteModel != null) {
 			try {
 				Class<?> clazz = _accountRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setPassword", String.class);
+				Method method = clazz.getMethod("setFamilyName", String.class);
 
-				method.invoke(_accountRemoteModel, password);
+				method.invoke(_accountRemoteModel, familyName);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getEmail() {
+		return _email;
+	}
+
+	@Override
+	public void setEmail(String email) {
+		_email = email;
+
+		if (_accountRemoteModel != null) {
+			try {
+				Class<?> clazz = _accountRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setEmail", String.class);
+
+				method.invoke(_accountRemoteModel, email);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getBirthday() {
+		return _birthday;
+	}
+
+	@Override
+	public void setBirthday(String birthday) {
+		_birthday = birthday;
+
+		if (_accountRemoteModel != null) {
+			try {
+				Class<?> clazz = _accountRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setBirthday", String.class);
+
+				method.invoke(_accountRemoteModel, birthday);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getGender() {
+		return _gender;
+	}
+
+	@Override
+	public void setGender(String gender) {
+		_gender = gender;
+
+		if (_accountRemoteModel != null) {
+			try {
+				Class<?> clazz = _accountRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setGender", String.class);
+
+				method.invoke(_accountRemoteModel, gender);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getAccountPassword() {
+		return _accountPassword;
+	}
+
+	@Override
+	public void setAccountPassword(String accountPassword) {
+		_accountPassword = accountPassword;
+
+		if (_accountRemoteModel != null) {
+			try {
+				Class<?> clazz = _accountRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setAccountPassword",
+						String.class);
+
+				method.invoke(_accountRemoteModel, accountPassword);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getMaritalStatus() {
+		return _maritalStatus;
+	}
+
+	@Override
+	public void setMaritalStatus(String maritalStatus) {
+		_maritalStatus = maritalStatus;
+
+		if (_accountRemoteModel != null) {
+			try {
+				Class<?> clazz = _accountRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setMaritalStatus", String.class);
+
+				method.invoke(_accountRemoteModel, maritalStatus);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getInterests() {
+		return _interests;
+	}
+
+	@Override
+	public void setInterests(String interests) {
+		_interests = interests;
+
+		if (_accountRemoteModel != null) {
+			try {
+				Class<?> clazz = _accountRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setInterests", String.class);
+
+				method.invoke(_accountRemoteModel, interests);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getEducationLevel() {
+		return _educationLevel;
+	}
+
+	@Override
+	public void setEducationLevel(String educationLevel) {
+		_educationLevel = educationLevel;
+
+		if (_accountRemoteModel != null) {
+			try {
+				Class<?> clazz = _accountRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setEducationLevel",
+						String.class);
+
+				method.invoke(_accountRemoteModel, educationLevel);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getForeignLanguages() {
+		return _foreignLanguages;
+	}
+
+	@Override
+	public void setForeignLanguages(String foreignLanguages) {
+		_foreignLanguages = foreignLanguages;
+
+		if (_accountRemoteModel != null) {
+			try {
+				Class<?> clazz = _accountRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setForeignLanguages",
+						String.class);
+
+				method.invoke(_accountRemoteModel, foreignLanguages);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getProfession() {
+		return _profession;
+	}
+
+	@Override
+	public void setProfession(String profession) {
+		_profession = profession;
+
+		if (_accountRemoteModel != null) {
+			try {
+				Class<?> clazz = _accountRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setProfession", String.class);
+
+				method.invoke(_accountRemoteModel, profession);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getPreferences() {
+		return _preferences;
+	}
+
+	@Override
+	public void setPreferences(String preferences) {
+		_preferences = preferences;
+
+		if (_accountRemoteModel != null) {
+			try {
+				Class<?> clazz = _accountRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setPreferences", String.class);
+
+				method.invoke(_accountRemoteModel, preferences);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -475,8 +778,18 @@ public class AccountClp extends BaseModelImpl<Account> implements Account {
 		clone.setUserName(getUserName());
 		clone.setCreateDate(getCreateDate());
 		clone.setModifiedDate(getModifiedDate());
-		clone.setName(getName());
-		clone.setPassword(getPassword());
+		clone.setFirstName(getFirstName());
+		clone.setFamilyName(getFamilyName());
+		clone.setEmail(getEmail());
+		clone.setBirthday(getBirthday());
+		clone.setGender(getGender());
+		clone.setAccountPassword(getAccountPassword());
+		clone.setMaritalStatus(getMaritalStatus());
+		clone.setInterests(getInterests());
+		clone.setEducationLevel(getEducationLevel());
+		clone.setForeignLanguages(getForeignLanguages());
+		clone.setProfession(getProfession());
+		clone.setPreferences(getPreferences());
 
 		return clone;
 	}
@@ -529,7 +842,7 @@ public class AccountClp extends BaseModelImpl<Account> implements Account {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(21);
+		StringBundler sb = new StringBundler(41);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -547,10 +860,30 @@ public class AccountClp extends BaseModelImpl<Account> implements Account {
 		sb.append(getCreateDate());
 		sb.append(", modifiedDate=");
 		sb.append(getModifiedDate());
-		sb.append(", name=");
-		sb.append(getName());
-		sb.append(", password=");
-		sb.append(getPassword());
+		sb.append(", firstName=");
+		sb.append(getFirstName());
+		sb.append(", familyName=");
+		sb.append(getFamilyName());
+		sb.append(", email=");
+		sb.append(getEmail());
+		sb.append(", birthday=");
+		sb.append(getBirthday());
+		sb.append(", gender=");
+		sb.append(getGender());
+		sb.append(", accountPassword=");
+		sb.append(getAccountPassword());
+		sb.append(", maritalStatus=");
+		sb.append(getMaritalStatus());
+		sb.append(", interests=");
+		sb.append(getInterests());
+		sb.append(", educationLevel=");
+		sb.append(getEducationLevel());
+		sb.append(", foreignLanguages=");
+		sb.append(getForeignLanguages());
+		sb.append(", profession=");
+		sb.append(getProfession());
+		sb.append(", preferences=");
+		sb.append(getPreferences());
 		sb.append("}");
 
 		return sb.toString();
@@ -558,7 +891,7 @@ public class AccountClp extends BaseModelImpl<Account> implements Account {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(34);
+		StringBundler sb = new StringBundler(64);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.docs.accounts.model.Account");
@@ -597,12 +930,52 @@ public class AccountClp extends BaseModelImpl<Account> implements Account {
 		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>name</column-name><column-value><![CDATA[");
-		sb.append(getName());
+			"<column><column-name>firstName</column-name><column-value><![CDATA[");
+		sb.append(getFirstName());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>password</column-name><column-value><![CDATA[");
-		sb.append(getPassword());
+			"<column><column-name>familyName</column-name><column-value><![CDATA[");
+		sb.append(getFamilyName());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>email</column-name><column-value><![CDATA[");
+		sb.append(getEmail());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>birthday</column-name><column-value><![CDATA[");
+		sb.append(getBirthday());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>gender</column-name><column-value><![CDATA[");
+		sb.append(getGender());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>accountPassword</column-name><column-value><![CDATA[");
+		sb.append(getAccountPassword());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>maritalStatus</column-name><column-value><![CDATA[");
+		sb.append(getMaritalStatus());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>interests</column-name><column-value><![CDATA[");
+		sb.append(getInterests());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>educationLevel</column-name><column-value><![CDATA[");
+		sb.append(getEducationLevel());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>foreignLanguages</column-name><column-value><![CDATA[");
+		sb.append(getForeignLanguages());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>profession</column-name><column-value><![CDATA[");
+		sb.append(getProfession());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>preferences</column-name><column-value><![CDATA[");
+		sb.append(getPreferences());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -619,8 +992,18 @@ public class AccountClp extends BaseModelImpl<Account> implements Account {
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _name;
-	private String _password;
+	private String _firstName;
+	private String _familyName;
+	private String _email;
+	private String _birthday;
+	private String _gender;
+	private String _accountPassword;
+	private String _maritalStatus;
+	private String _interests;
+	private String _educationLevel;
+	private String _foreignLanguages;
+	private String _profession;
+	private String _preferences;
 	private BaseModel<?> _accountRemoteModel;
 	private Class<?> _clpSerializerClass = com.liferay.docs.accounts.service.ClpSerializer.class;
 }
