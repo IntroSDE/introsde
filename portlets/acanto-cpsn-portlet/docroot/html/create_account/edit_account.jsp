@@ -111,7 +111,11 @@
 <!--  ---------  -->
 
 
-
+<!--  PREFERENCES = ? -->	
+		<aui:input name="preferences">
+			<aui:validator name="required" />
+			<aui:validator name="preferences" />
+		</aui:input>
 
 
 

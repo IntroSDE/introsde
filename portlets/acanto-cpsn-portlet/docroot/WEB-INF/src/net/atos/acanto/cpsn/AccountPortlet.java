@@ -115,7 +115,7 @@ public class AccountPortlet extends MVCPortlet {
 		String foreignLanguages = ParamUtil.getString(request, "foreignLanguages");
 		String profession = ParamUtil.getString(request, "profession");
 		
-		//String preferences = ParamUtil.getString(request, "preferences");
+		String preferences = ParamUtil.getString(request, "preferences");
 
 		
 	    try {
@@ -131,7 +131,7 @@ public class AccountPortlet extends MVCPortlet {
 	    			educationLevel, 
 	    			foreignLanguages, 
 	    			profession, 
-	    			"preferences",
+	    			preferences,
 	    			
 	                serviceContext);
 
