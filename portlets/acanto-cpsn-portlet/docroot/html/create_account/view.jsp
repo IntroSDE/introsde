@@ -87,8 +87,8 @@
         <liferay-ui:search-container-column-text property="foreignLanguages" />
         
         <liferay-ui:search-container-column-text property="profession" />
-
-        <!--<liferay-ui:search-container-column-text property="preferences" /> -->
+        
+        <liferay-ui:search-container-column-text property="preferences" />
 
     </liferay-ui:search-container-row>
 

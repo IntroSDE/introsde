@@ -131,7 +131,7 @@ public class AccountPortlet extends MVCPortlet {
 	    			educationLevel, 
 	    			foreignLanguages, 
 	    			profession, 
-	    			"iiih",
+	    			"preferences",
 	    			
 	                serviceContext);
 

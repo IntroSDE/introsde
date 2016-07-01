@@ -77,7 +77,7 @@
 
 
 <!--  INTERESTS = ? -->	
-		<aui:field-wrapper label="interests">
+		<aui:field-wrapper label="interests-preferences">
 		<liferay-ui:asset-tags-selector ></liferay-ui:asset-tags-selector>
 		</aui:field-wrapper>
 <!--  ---------  -->		
