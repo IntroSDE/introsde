@@ -20,6 +20,7 @@ import javax.portlet.ValidatorException;
 
 
 
+
 import com.liferay.docs.accounts.model.Account;
 import com.liferay.docs.accounts.service.AccountLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -30,6 +31,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.util.bridges.mvc.MVCPortlet;
+import com.mysql.jdbc.StringUtils;
 
 /**
  * Portlet implementation class AccountPortlet
@@ -106,26 +108,31 @@ public class AccountPortlet extends MVCPortlet {
 		String gender = ParamUtil.getString(request, "gender");
 		String accountPassword = ParamUtil.getString(request, "accountPassword");
 		String maritalStatus = ParamUtil.getString(request, "maritalStatus");
-		String interests = ParamUtil.getString(request, "interests");
+		
+		String[] interests = serviceContext.getAssetTagNames();
+		
 		String educationLevel = ParamUtil.getString(request, "educationLevel");
 		String foreignLanguages = ParamUtil.getString(request, "foreignLanguages");
 		String profession = ParamUtil.getString(request, "profession");
-		String preferences = ParamUtil.getString(request, "preferences");
+		
+		//String preferences = ParamUtil.getString(request, "preferences");
 
+		
 	    try {
-	        AccountLocalServiceUtil.addAccount(serviceContext.getUserId(),
-	    			firstName, 
+	        AccountLocalServiceUtil.addAccount(serviceContext.getUserId(),		
+	        		firstName, 
 	    			familyName, 
 	    			email, 
 	    			birthday, 
 	    			gender, 
 	    			accountPassword, 
 	    			maritalStatus, 
-	    			interests, 
+	    			Arrays.toString(interests),
 	    			educationLevel, 
 	    			foreignLanguages, 
 	    			profession, 
-	    			preferences,
+	    			"iiih",
+	    			
 	                serviceContext);
 
 	        SessionMessages.add(request, "accountAdded");

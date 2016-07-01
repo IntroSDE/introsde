@@ -57,6 +57,9 @@
 		<!-- Group instance -->
 
 		<!-- Audit fields -->
+		
+		<!--reference package-path="com.liferay.portlet.asset" entity="AssetEntry" / -->
+		
 	</entity>
 	<exceptions>
         <exception>AccountFirstName</exception>

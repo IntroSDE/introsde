@@ -15,102 +15,102 @@
 
 	<aui:fieldset>
 
-<!--  FIRST NAME = OK -->
-		<aui:input name="first name">
-			<aui:validator name="firstName" />
+		<!--  FIRST NAME = OK -->
+		<aui:input name="firstName">
 			<aui:validator name="required" />
+			<aui:validator name="firstName" />
+			
 		</aui:input>
 <!--  ---------  -->
 
 
 <!--  SECOND NAME = OK -->
-		<aui:input name="family name">
-			<aui:validator name="familyName" />
+		<aui:input name="familyName">
 			<aui:validator name="required" />
+			<aui:validator name="familyName" />
+			
 		</aui:input>
 <!--  ---------  -->
 
 
 <!--  EMAIL = OK -->
 		<aui:input name="email">
-			<aui:validator name="email" />
 			<aui:validator name="required" />
+			<aui:validator name="email" />
+			
 		</aui:input>
 <!--  ---------  -->
 
 
 <!--  BIRTHDAY = OK -->
 		<aui:input name="birthday" type="Date">
-			<aui:validator name="birthday" />
 			<aui:validator name="required" />
+			<aui:validator name="birthday" />
 		</aui:input>
-<!--  ---------  -->		
-
-
-<!--  GENDER = OK -->		
+<!--  ---------  -->	
+ 		
+ 		<!--  GENDER = OK -->		
 		<aui:select name="gender" no-empty-value="true">
-		<aui:option>Female</aui:option>
-            <aui:option>Male</aui:option>
+			<aui:option label="Female" value="Female" />
+            <aui:option label="Male" value="Male" />
         </aui:select>
 <!--  ---------  -->
-
-
+ 		
+ 		
 <!--  PASSWORD = OK -->
-		<aui:input name="password" type="password">
-			<aui:validator name="accountPassword" />
+		<aui:input name="accountPassword" type="password">
 			<aui:validator name="required" />
+			<aui:validator name="accountPassword" />	
 		</aui:input>
 <!--  ---------  -->
 
 
 <!--  MARITAL STATUS = OK -->	
-		<aui:select name="marital status" no-empty-value="true">
-		<aui:option>Single</aui:option>
-		<aui:option>Engaged</aui:option>
-            <aui:option>Married</aui:option>
-            <aui:option>Divorced</aui:option>
-            <aui:option>Widower</aui:option>
+		<aui:select name="maritalStatus" no-empty-value="true">
+			<aui:option label="Single" value="Single" />
+			<aui:option label="Engaged" value="Engaged" />
+            <aui:option label="Married" value="Married" />
+            <aui:option label="Divorced" value="Divorced" />
+            <aui:option label="Widower" value="Widower" />
         </aui:select>
 <!--  ---------  -->
 
 
-<!--  INTERESTS = OK -->
+<!--  INTERESTS = ? -->	
 		<aui:field-wrapper label="interests">
 		<liferay-ui:asset-tags-selector ></liferay-ui:asset-tags-selector>
 		</aui:field-wrapper>
-<!--  ---------  -->
-
+<!--  ---------  -->		
+		
 
 <!--  EDUCATION LEVEL = OK -->
-		<aui:select name="education level" no-empty-value="true">
-		<aui:option>Primary education</aui:option>
-		<aui:option>Secondary education</aui:option>
-            <aui:option>Higher education</aui:option>
-            <aui:option>Undergraduate</aui:option>
-            <aui:option>Postgraduate</aui:option>
+
+		<aui:select name="educationLevel" no-empty-value="true">
+			<aui:option label="Primary education" value="Primary education" />
+			<aui:option label="Secondary education" value="Secondary education" />
+            <aui:option label="Higher education" value="Higher education" />
+            <aui:option label="Undergraduate" value="Undergraduate" />
+            <aui:option label="Postgraduate" value="Postgraduate" />
         </aui:select>
 <!--  ---------  -->
 
 
-<!--  FOREIGN LANGUAGES = OK -->
-		<aui:field-wrapper label="foreign languages">
-		<liferay-ui:asset-tags-selector ></liferay-ui:asset-tags-selector>
-		</aui:field-wrapper>
+<!--  FOREIGN LANGUAGES = ? -->	
+		<aui:input name="foreignLanguages">
+		<aui:validator name="required" />
+			<aui:validator name="foreignLanguages" />
+		</aui:input>
 <!--  ---------  -->
-
+		
 
 <!--  PROFESSION = OK -->
-		<aui:field-wrapper label="profession">
-		<liferay-ui:asset-tags-selector ></liferay-ui:asset-tags-selector>
-		</aui:field-wrapper>
+		<aui:input name="profession">
+			<aui:validator name="required" />
+			<aui:validator name="profession" />
+		</aui:input>
 <!--  ---------  -->
 
 
-<!--  PREFERENCES = OK -->
-		<aui:field-wrapper label="preferences">
-		<liferay-ui:asset-tags-selector ></liferay-ui:asset-tags-selector>
-		</aui:field-wrapper>
-<!--  ---------  -->
 
 
 
