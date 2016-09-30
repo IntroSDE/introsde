@@ -21,12 +21,12 @@
     <description>
         Stock Quote Service
     </description>
-    <messageReceivers>
-        <messageReceiver mep="http://www.w3.org/2004/08/wsdl/in-only"
-                         class="org.apache.axis2.rpc.receivers.RPCInOnlyMessageReceiver"/>
-        <messageReceiver mep="http://www.w3.org/2004/08/wsdl/in-out"
-                         class="org.apache.axis2.rpc.receivers.RPCMessageReceiver"/>
-    </messageReceivers>
+	<messageReceivers>
+		<messageReceiver mep="http://www.w3.org/ns/wsdl/in-only"
+			class="org.apache.axis2.rpc.receivers.RPCInOnlyMessageReceiver" />
+		<messageReceiver mep="http://www.w3.org/ns/wsdl/in-out"
+			class="org.apache.axis2.rpc.receivers.RPCMessageReceiver" />
+	</messageReceivers>
     <schema schemaNamespace="http://quickstart.samples/xsd"/>
     <parameter name="ServiceClass">samples.quickstart.service.pojo.StockQuoteService</parameter>
 </service>
