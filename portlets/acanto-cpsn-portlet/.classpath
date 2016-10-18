@@ -9,14 +9,11 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="com.liferay.ide.eclipse.server.plugin.container/portlet"/>
-	<classpathentry kind="lib" path="C:/liferay-developer-studio/liferay-portal-6.2-ce-ga5/tomcat-7.0.62/webapps/ROOT/WEB-INF/lib/util-bridges.jar">
-		<attributes>
-			<attribute name="javadoc_location" value=""/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/liferay-developer-studio/liferay-portal-6.2-ce-ga5/tomcat-7.0.62/webapps/ROOT/WEB-INF/lib/log4j.jar"/>
-	<classpathentry kind="lib" path="C:/liferay-developer-studio/liferay-portal-6.2-ce-ga5/tomcat-7.0.62/webapps/ROOT/WEB-INF/lib/util-java.jar"/>
-	<classpathentry kind="lib" path="C:/liferay-developer-studio/liferay-portal-6.2-ce-ga5/tomcat-7.0.62/webapps/ROOT/WEB-INF/lib/util-taglib.jar"/>
+	<classpathentry kind="lib" path="/acanto/lib/commons-logging.jar"/>
+	<classpathentry kind="lib" path="/acanto/lib/log4j.jar"/>
+	<classpathentry kind="lib" path="C:/IVO/liferay-developer-studio/liferay-portal-6.2-ce-Tomcat-ga5/tomcat-7.0.62/webapps/ROOT/WEB-INF/lib/util-bridges.jar"/>
+	<classpathentry kind="lib" path="C:/IVO/liferay-developer-studio/liferay-portal-6.2-ce-Tomcat-ga5/tomcat-7.0.62/webapps/ROOT/WEB-INF/lib/util-java.jar"/>
+	<classpathentry kind="lib" path="C:/IVO/liferay-developer-studio/liferay-portal-6.2-ce-Tomcat-ga5/tomcat-7.0.62/webapps/ROOT/WEB-INF/lib/util-taglib.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/com.liferay.ide.eclipse.server.tomcat.runtimeClasspathProvider/Liferay v6.2 CE (Tomcat 7)">
 		<attributes>
 			<attribute name="owner.project.facets" value="jst.web"/>
