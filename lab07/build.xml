@@ -15,7 +15,7 @@
        # The target "download-ivy" and "install-ivy" will download the ivy jar and place it in the "ivy" folder
        # 
 -->
-<project name="sdelab06" default="compile" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant">
+<project name="sdelab07" default="compile" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant">
 
 	<!-- PART 1: Ivy properties, download, installation and configuration -->
 	<property name="ivy.install.version" value="2.4.0-rc1" />
@@ -110,7 +110,7 @@
 
 	<!-- make sure you have created first the WebContent folder, including a META-INF folder, WEB-INF/web.xml file and WEB-INF/lib folder --> 
 	<target name="create.war" depends="compile">
-		<war destfile="sdelab06.war" webxml="${web.dir}/WebContent/WEB-INF/web.xml">
+		<war destfile="sdelab07.war" webxml="${web.dir}/WebContent/WEB-INF/web.xml">
 			<fileset dir="${web.dir}/WebContent">
 				<include name="**/*.*"/>
 			</fileset>
