@@ -15,10 +15,10 @@
        # The target "download-ivy" and "install-ivy" will download the ivy jar and place it in the "ivy" folder
        # 
 -->
-<project name="sdelab06" default="compile" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant">
+<project name="sdelab07" default="compile" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant">
 
 	<!-- PART 1: Ivy properties, download, installation and configuration -->
-	<property name="ivy.install.version" value="2.4.0-rc1" />
+	<property name="ivy.install.version" value="2.4.0" />
 	<property name="ivy.jar.dir" value="${basedir}/ivy" />
 	<property name="ivy.jar.file" value="${ivy.jar.dir}/ivy.jar" />
 
@@ -106,15 +106,31 @@
 				<include name="*.xml" />
 			</fileset>
 		</copy>
+		<!-- The following operation mkdir and copy might change with the time (November 2016)-->
+		<mkdir dir="${web.dir}/WebContent/WEB-INF/classes/META-INF" />
+		<copy todir="${web.dir}/WebContent/WEB-INF/classes/META-INF" overwrite="true">
+			<fileset dir="${src.dir}/META-INF">
+				<include name="*.xml" />
+			</fileset>
+		</copy>
 	</target>
 
 	<!-- make sure you have created first the WebContent folder, including a META-INF folder, WEB-INF/web.xml file and WEB-INF/lib folder --> 
 	<target name="create.war" depends="compile">
-		<war destfile="sdelab06.war" webxml="${web.dir}/WebContent/WEB-INF/web.xml">
+		<war destfile="sdelab07.war" webxml="${web.dir}/WebContent/WEB-INF/web.xml">
 			<fileset dir="${web.dir}/WebContent">
 				<include name="**/*.*"/>
 			</fileset>
 			<classes dir="${build.dir}"/>
 		</war>
 	</target>
+	
+	<!-- CHANGE THIS PROPERTY TO THE CORRECT PLACE OF THE APACHE TOMCAT HOME --> 
+	<property name="apache.dir" value="C:\app\2016\apache-tomcat-8.5.6" />	
+	<target name="apache.deploy.war" depends="create.war">
+		<copy file="${web.dir}/sdelab06.war"
+	    	toDir="${apache.dir}/webapps"
+	        overwrite="yes">  
+	    </copy>
+	</target>	
 </project>

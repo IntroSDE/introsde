@@ -12,7 +12,7 @@
             <property name="javax.persistence.jdbc.driver" value="org.sqlite.JDBC" />
             <property name="javax.persistence.jdbc.url" value="jdbc:sqlite:lifecoach.sqlite" />
             <property name="eclipselink.logging.level" value="ALL" />
-            <!-- <property name="eclipselink.ddl-generation" value="create-tables" /> -->
+            <property name="eclipselink.ddl-generation" value="create-tables" />
         </properties>
     </persistence-unit>
 </persistence>

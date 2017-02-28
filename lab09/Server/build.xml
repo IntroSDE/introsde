@@ -18,7 +18,7 @@
 <project name="sdelab08" default="compile" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant">
 
 	<!-- PART 1: Ivy properties, download, installation and configuration -->
-	<property name="ivy.install.version" value="2.4.0-rc1" />
+	<property name="ivy.install.version" value="2.4.0" />
 	<property name="ivy.jar.dir" value="${basedir}/ivy" />
 	<property name="ivy.jar.file" value="${ivy.jar.dir}/ivy.jar" />
 
@@ -103,6 +103,13 @@
 		</javac>
 		<copy todir="${build.dir}" overwrite="true">
 			<fileset dir="${src.dir}">
+				<include name="*.xml" />
+			</fileset>
+		</copy>
+		<!-- The following operation mkdir and copy might change with the time (November 2016)-->
+		<mkdir dir="${web.dir}/WebContent/WEB-INF/classes/META-INF" />
+		<copy todir="${web.dir}/WebContent/WEB-INF/classes/META-INF" overwrite="true">
+			<fileset dir="${src.dir}/META-INF">
 				<include name="*.xml" />
 			</fileset>
 		</copy>
