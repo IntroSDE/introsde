@@ -1,4 +1,4 @@
-# LAB05: CRUD RESTful Services (2)
+# LAB06: CRUD RESTful Services (2)
 
 **Introduction to Service Design and Engineering | University of Trento | [Webpage](https://sites.google.com/site/introsdeunitn/lab-sessions/lab-session-5 "Permalink to LAB06: CRUD RESTful Services (2)")**
 
