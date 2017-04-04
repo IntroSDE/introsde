@@ -60,7 +60,8 @@ Pinco Pallino's health profile is: Height=1.72, Weight=85.5
 ### Homework: things To Do BEFORE NEXT session
 
 * If you are not familiar with git, follow the tutorial at [Try Github][7]&nbsp;(15 minutes)&nbsp;
-* Make sure to install the following tools (especially, make sure that both **Tomcat** and **Axis2** are ready to use, and that both tomcat and ANT binaries are in the PATH (see additional notes below))
+* Make sure to install the following tools (especially, make sure that both **Tomcat** and **Axis2** are ready to use, and that both tomcat and ANT binaries are in the PATH (see additional notes below)). 
+* If you need some help, there are video guides and more details about each of the following tools in [this starting up page](https://sites.google.com/site/introsdeunitn/lab-sessions/lab-sessions-starting-up)
     * [Git][8]&nbsp;(version 1.8 or higher)
     * [Msysgit (for windows) ][9]&nbsp;
     * [Ant][10]&nbsp;(version 1.9 or higher, download binaries and make them available on your PATH)&nbsp;&nbsp;
@@ -71,7 +72,7 @@ Pinco Pallino's health profile is: Height=1.72, Weight=85.5
     * Create your account in [Github][15] (if you haven't)
     * Fork the lab repository to your account (i.e., create a copy of the repository in your github account)
     ```
-    Go to https://github.com/cdparra/introsde.git.
+    Go to https://github.com/introsde/introsde.git.
     Click on "Fork" in the upper right corner of the page
     ```
     * Clone your fork in your local machine (i.e., download your copy to your machine)
