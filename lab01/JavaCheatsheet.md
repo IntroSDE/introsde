@@ -1,6 +1,6 @@
 # Java Cheatsheet
 
-Based on examples from [Java in 21 minutes](http://fileadmin.cs.lth.se/cs/Education/EDA040/common/java21.pdf), the following
+Based on examples from [Java in 21 minutes](http://fileadmin.cs.lth.se/cs/Education/EDA040/common/java21.pdf), the following are code samples that exemplify Java's syntax. For a similar cheatsheet, but showing Java 8 advanced features, please refer to [this Java 8 Cheatsheet](https://github.com/BafS/Java8-CheatSheet). 
 
 
 ## Simple declarations
@@ -197,6 +197,38 @@ public void addMouseListener(MouseListener m) {
 // ... and loads of more stuff...
 }
 ```
+
+# Java Generics
+Generics were added to the now ancient Java 5 way back in 2005 when the world was a much simpler place. The main idea of generics was to enhance the Java compiler by using additional information on the classes for additional type safety. The most prominent user of generics is, perhaps, the Java Collections framework, which consists of the classes that act as containers for other objects. Generics, as mentioned in the official tutorial by Oracle, allow developers to implement a collection of types in a single declaration, reducing the verbosity of your code as well as its cost of maintenance.
+
+Using Java Generics, a class can be parameterized with a type argument. For instance, consider class A, in the example below.
+```java
+    class A {
+        ...
+    }
+```
+
+```java
+    class A<T> { 
+        T myFieldOfTypeT;
+        ...
+    }
+```
+To instantiate A, you need to provide the arguments for the type parameters, which is the actual type you want to use:
+
+```java
+    A<Long> a = new A<Long>(); 
+```
+
+Now a is an instance of the A class, which is a proper parameterized generic class. Here we need to clarify a few definitions:
+
+A generic type is a class that is parameterized with type arguments, for example, ArrayList<T>. A parameterized type is a class where the type parameter is instantiated with a fixed argument, for example, ArrayList<Long>.
+A raw type is a generic type that is not parameterized with anything, like new ArrayList(). But, why would you use a raw class? Well, in a nutshell, there are no benefits of using raw classes whatsoever.
+
+If you’re to take away one thing about the generics, here’s the most important bit: **Generics do not exist at runtime! Generics are compile-time only. It means they are a utility for you to have a more readable code.**
+
+
+More about Generics see [this](https://zeroturnaround.com/rebellabs/java-generics-cheat-sheet/) or [this](http://files.hii-tech.com/zeroturnaround/zt_java_generics_cheatsheet.pdf)
 
 # Exceptions
 
@@ -445,4 +477,3 @@ class FigureWindow extends Frame {
 ```
 
 
-https://github.com/BafS/Java8-CheatSheet
