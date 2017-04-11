@@ -52,7 +52,7 @@ Pinco Pallino's health profile is: Height=1.72, Weight=85.5
            ```java HealthProfileReader method_name method_parameters```
            ```Example: java HealthProfileReader displayHealthProfile 1```
 * More about Programming in Java
-    - See the Cheat Sheet in this repository in [Java Cheatsheet](Java Cheatsheet.md)
+    - See the Cheat Sheet in this repository in [Java Cheatsheet](https://github.com/IntroSDE/introsde/blob/master/lab01/JavaCheatsheet.md)
     - [Java Cheat Sheet][3]
     - [Java Introductory Tutorial][4] 
     - [Other Java Tutorials][5]
