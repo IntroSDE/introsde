@@ -354,6 +354,7 @@ Links: [PPT slides][1] | [PDF slides][2] | [Source code][3]
 * [Python EVE][18] - another python-based REST framework  
 * [Expressjs][20] - a web application framework for NodeJS
 
+
 [1]: https://drive.google.com/open?id=0B7ShzcEnCJFNWENNN1RpYU9xeUk&authuser=0
 [2]: https://drive.google.com/open?id=0B7ShzcEnCJFNQ2FfR21FUUk1Y1E&authuser=0
 [3]: https://github.com/cdparra/introsde/tree/master/lab05/Examples
@@ -361,7 +362,7 @@ Links: [PPT slides][1] | [PDF slides][2] | [Source code][3]
 [5]: https://jersey.java.net/
 [6]: http://www.jboss.org/resteasy
 [7]: http://restlet.org/
-[8]: http://www.playframework.com/) 
+[8]: http://www.playframework.com/ 
 [9]: http://docs.spring.io/spring/docs/3.0.0.M3/reference/html/ch18s02.html
 [10]: http://jcp.org/en/jsr/detail?id=311 
 [11]: http://www.getpostman.com
