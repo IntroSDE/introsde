@@ -40,7 +40,7 @@ public class PersonResource {
 
 	// for the browser
 	@GET
-	@Produces(MediaType.TEXT_XML)
+	@Produces(MediaType.TEXT_HTML)
 	public Person getPersonHTML() {
 		Person person = PersonDao.instance.getDataProvider().get(id);
 		if (person == null)
@@ -54,13 +54,20 @@ public class PersonResource {
 		System.out.println("--> Updating Person... " +this.id);
 		System.out.println("--> "+person.toString());
 		
-		if (PersonDao.instance.getDataProvider().containsKey(this.id)) {
-			person.setPersonId(this.id);
-			PersonDao.instance.getDataProvider().put(person.getPersonId(), person);
-			return Response.ok(uriInfo.getAbsolutePath()).build();
-		} else {
-			System.out.println("--> Person... " +this.id + " not found");
-			return Response.noContent().build();
+		try {
+			if (PersonDao.instance.getDataProvider().containsKey(this.id)) {
+				System.out.println("Person was found");
+				person.setPersonId(this.id);
+				PersonDao.instance.getDataProvider().put(person.getPersonId(), person);
+				return Response.ok(person).build();
+			} else {
+				System.out.println("--> Person... " +this.id + " not found");
+				return Response.noContent().build();
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return Response.serverError().build();
 		}
 	}
 

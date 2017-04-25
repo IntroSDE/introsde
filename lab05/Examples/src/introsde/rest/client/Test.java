@@ -15,9 +15,17 @@ public class Test {
 		Client client = ClientBuilder.newClient(clientConfig);
 		WebTarget service = client.target(getBaseURI());
 		
+		
+		//1.  http://localhost:5700/salutation/Cristhian?age=32
+		
 		// // GET BASEURL/rest/helloworld
 		// // Accept: text/plain
 		System.out.println(service.path("salutation").request().accept(MediaType.TEXT_PLAIN).get().readEntity(String.class));
+		
+		// 2. http://localhost:5700/salutation/Cristhian?age=32/salutation
+		
+		
+		
 		// // Get plain text
 		System.out.println(service.path("salutation")
 				.request().accept(MediaType.TEXT_PLAIN).get().readEntity(String.class));
@@ -28,12 +36,17 @@ public class Test {
 		// // The HTML
 		System.out.println(service.path("salutation").request()
 				.accept(MediaType.TEXT_HTML).get().readEntity(String.class));
+		
+		
+
+		System.out.println(service.path("salutation").request()
+				.accept(MediaType.APPLICATION_JSON).get().readEntity(String.class));
 
 	}
 
 	private static URI getBaseURI() {
 		return UriBuilder.fromUri(
-				"http://localhost:8080/sdelab05/rest").build();
+				"http://localhost:5700/").build();
 	}
 
 }

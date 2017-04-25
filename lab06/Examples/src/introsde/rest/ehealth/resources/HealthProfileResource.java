@@ -63,10 +63,7 @@ public class HealthProfileResource {
 		
 		return result.toString();
 	}
-	
-	
-	
-	
+
 	
 	
 	@POST
@@ -76,10 +73,17 @@ public class HealthProfileResource {
 			@FormParam("lastname") String lname,
 			@FormParam("birthdate") String bdate,
 			@Context HttpServletResponse servletResponse) throws IOException {
-		Person person= new Person(Math.round(Math.floor(Math.random()*9998)+1), fname, lname, bdate);
-		PersonDao.instance.getDataProvider().put(person.getPersonId(), person);
+		try {
+			System.out.println("Request: fname "+fname+", lname="+lname);
+			Person person= new Person(Math.round(Math.floor(Math.random()*9998)+1), fname, lname, bdate);
+				.getDataProvider().put(person.getPersonId(), person);
 
-		servletResponse.sendRedirect("../create_todo.html");
+			//servletResponse.sendRedirect("../create_todo.html");
+			//return "<html><head></head><body><p>Person '"+fname+" "+lname"' was created</body></html>";
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 }

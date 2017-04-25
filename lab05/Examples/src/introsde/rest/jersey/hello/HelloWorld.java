@@ -59,8 +59,5 @@ public class HelloWorld {
   		return "<html> " + "<title>" + "Hello Jersey" + "</title>"
   				+ "<body><h1>" + "Hello "+name+". Welcome to Jersey REST." +printAlsoAge+ "</body></h1>"
   				+ "</html> ";
-  	} 
-  	
-
-	
+  	} 	
 }
