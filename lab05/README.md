@@ -343,16 +343,18 @@ Links: [PPT slides][1] | [PDF slides][2] | [Source code][3]
 * Right click on the server and select **Start** to test everything works. You should see the standard welcome page of tomcat in http://localhost:8080/
 
 ### Other REST frameworks
+* [Expressjs][20] - a web application framework for NodeJS
+* [Sinatra][16] - a ruby lightweight framework for implementing REST Services
 * [Restlet][7] - probably the first REST framework, which existed prior to JAX-RS.
 * [RESTEasy][6] - JBosss JAX-RS implementation.
 * [Play Framework][8] - popular nowadays, it is an MVC framework with a heavy focus on RESTful design and available for both Java and Scala programmers
-* [Spring Framework][9]  - another very popular java application framework that you can use to build RESTful services 
-* [Apache CXF][4] - Apache's open source services framework that allows you to develop services using either JAX-WS or JAX-RS specifications; speaking a variety of protocols including SOAP, XML/HTTP, RESTful HTTP, or CORBA; and working over a variety of transports layers such as HTTP, JMS or JBI.
 * [RAILS][15] - the ruby most well known web development framework, which heavily supports the RESTful style
-* [Sinatra][16] - a ruby lightweight framework for implementing REST Services
 * [Djanjo REST framework][17] - REST development framework for the python language
 * [Python EVE][18] - another python-based REST framework  
-* [Expressjs][20] - a web application framework for NodeJS
+* [Spring Framework][9]  - another very popular java application framework that you can use to build RESTful services 
+* [Apache CXF][4] - Apache's open source services framework that allows you to develop services using either JAX-WS or JAX-RS specifications; speaking a variety of protocols including SOAP, XML/HTTP, RESTful HTTP, or CORBA; and working over a variety of transports layers such as HTTP, JMS or JBI.
+* [Slim][21] - PHP based REST framework
+* [Nancy][22] - .NET based REST framewo
 
 
 [1]: https://drive.google.com/open?id=0B7ShzcEnCJFNWENNN1RpYU9xeUk&authuser=0
@@ -375,3 +377,5 @@ Links: [PPT slides][1] | [PDF slides][2] | [Source code][3]
 [18]: http://python-eve.org/
 [19]: http://docs.helloworld66.apiary.io/
 [20]: http://expressjs.com/
+[21]: http://www.slimframework.com/
+[22]: http://nancyfx.org/
