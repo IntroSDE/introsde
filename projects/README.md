@@ -4,19 +4,6 @@ This is space is for projects that expand our current service design tutorials t
 
 ## Other framework tutorials
 Develop a tutorial of no more than 3 hours (similar to our lab session guiding notes) to learn one of the following frameworks used for web service development: 
-* ExpressJS - javascript based framework running on NodeJS
-Sinatra - a ruby lightweight framework for implementing REST Services
-Restlet - probably the first java based REST framework, which existed prior to JAX-RS.
-RESTEasy - JBosss JAX-RS implementation.
-Play Framework - popular nowadays, it is an MVC full-stack framework with a heavy focus on RESTful design and available for both Java and Scala programmers
-RAILS - ruby's most well known web development framework, which heavily supports the RESTful style
-Djanjo REST framework - REST development framework for the python language
-Python EVE - another python-based REST framework
-Spring Framework - another popular java application framework that you can use to build RESTful services
-Apache CXF - Apache's open source services framework that allows you to develop services using either JAX-WS or JAX-RS specifications; speaking a variety of protocols including SOAP, XML/HTTP, RESTful HTTP, or CORBA; and working over a variety of transports layers such as HTTP, JMS or JBI.
-Slim - PHP based REST framework
-Nancy - .NET based REST framework
-
 * [Expressjs][20] - a web application framework for NodeJS
 * [Sinatra][16] - a ruby lightweight framework for implementing REST Services
 * [Restlet][7] - probably the first REST framework, which existed prior to JAX-RS.
