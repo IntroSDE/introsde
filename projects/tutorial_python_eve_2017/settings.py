@@ -1,0 +1,1 @@
+DOMAIN = {'lifecoach/person': {}}

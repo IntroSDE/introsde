@@ -19,6 +19,36 @@ mkdir C:\data\log
 mongod
 ```
 
+## Minimal Application
+### Launch Script
+Create a file named run.py with the following content:
+```python
+from eve import Eve
+app = Eve()
+
+if __name__ == '__main__':
+    app.run()
+```
+### Configuration File
+Create a file named settings.py (save it in the same directory as run.py) with the following content:
+```python
+DOMAIN = {'lifecoach/person': {}}
+```
+
+* Start an instance of MongoDB
+```
+$ mongod
+```
+* Launch the API
+```
+$ python run.py
+```
+* Consume the API
+```
+$ curl http://127.0.0.1:5000/ | python -m json.tool
+$ curl http://127.0.0.1:5000/lifecoach/person | python -m json.tool
+```
+
 [1]: https://www.python.org/
 [2]: https://www.mongodb.com/
 [3]: http://python-eve.org/
