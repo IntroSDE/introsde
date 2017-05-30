@@ -82,7 +82,9 @@ In Django, we can create multiple apps that integrate to form one application. W
                 #Return a human readable representation of the model instance.
                 return '%0.2f m %0.2f kg' % (self.height, self.weight)
     ```
-    
+
+* Migrations are Django’s way of propagating changes you make to your models (like adding a field, deleting a model, etc.) into your database schema. Now that we have a rich model in place, we need to tell the database to create the relevant schema. To do this, we run `python manage.py makemigrations`.
+* Then apply the changes with `python manage.py migrate`.    
 * Now we will create the serializers for the app. Serializers serialize and deserialize data. So what's all this about, you ask? Serializing is changing the data from complex querysets from the DB to a form of data we can understand, like JSON or XML. Deserializing is reverting this process after validating the data we want to save to the DB.
 * We will create a file `serializers.py` in our `api/` folder.
 
