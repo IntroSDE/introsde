@@ -1,73 +1,538 @@
-This is space is for projects that expand our current service design tutorials to other languages or frameworks, which could potentially enrich the sessions of our lab. 
+# Tutorial Slim + Doctrine
+## 1. Introducción
+En el tutorial vamos a desarrollar una servicio Web utilizando el framewokr Slim para PHP.
+## 2. Preparación del ambiente de trabajo (30 min)
+### 2.1. Instalación de Composer
+Composer es una manejador de dependencias, que nos va a permitir instalar todas las librerias (y sus dependencias) que vamos a necesitar en el proyecto. Para instalar composer se debe acceder al [sitio oficial](https://getcomposer.org) y seguir las instrucciones de instalación. Composer esta disponible tanto para Windows, Linux y MACOS.
 
-# Suggested Projects
-
-## Other framework tutorials
-Develop a tutorial of no more than 3 hours (similar to our lab session guiding notes) to learn one of the following frameworks used for web service development: 
-* [Expressjs][20] - a web application framework for NodeJS
-* [Sinatra][16] - a ruby lightweight framework for implementing REST Services
-* [Restlet][7] - probably the first REST framework, which existed prior to JAX-RS.
-* [RESTEasy][6] - JBosss JAX-RS implementation.
-* [Play Framework][8] - popular nowadays, it is an MVC framework with a heavy focus on RESTful design and available for both Java and Scala programmers
-* [RAILS][15] - the ruby most well known web development framework, which heavily supports the RESTful style
-* [Djanjo REST framework][17] - REST development framework for the python language
-* [Python EVE][18] - another python-based REST framework  
-* [Spring Framework][9]  - another very popular java application framework that you can use to build RESTful services 
-* [Apache CXF][4] - Apache's open source services framework that allows you to develop services using either JAX-WS or JAX-RS specifications; speaking a variety of protocols including SOAP, XML/HTTP, RESTful HTTP, or CORBA; and working over a variety of transports layers such as HTTP, JMS or JBI.
-* [Slim][21] - PHP based REST framework
-* [Nancy][22] - .NET based REST framework
-
-
-[1]: https://drive.google.com/open?id=0B7ShzcEnCJFNWENNN1RpYU9xeUk&authuser=0
-[2]: https://drive.google.com/open?id=0B7ShzcEnCJFNQ2FfR21FUUk1Y1E&authuser=0
-[3]: https://github.com/cdparra/introsde/tree/master/lab05/Examples
-[4]: http://cxf.apache.org/
-[5]: https://jersey.java.net/
-[6]: http://www.jboss.org/resteasy
-[7]: http://restlet.org/
-[8]: http://www.playframework.com/ 
-[9]: http://docs.spring.io/spring/docs/3.0.0.M3/reference/html/ch18s02.html
-[10]: http://jcp.org/en/jsr/detail?id=311 
-[11]: http://www.getpostman.com
-[12]: https://chrome.google.com/webstore/detail/fhjcajmcbmldlhcimfajhfbgofnpcjmb
-[13]: http://code.google.com/p/rest-client/
-[14]: http://code.google.com/p/cocoa-rest-client/
-[15]: http://rubyonrails.org/
-[16]: http://www.sinatrarb.com/
-[17]: http://www.django-rest-framework.org/
-[18]: http://python-eve.org/
-[19]: http://docs.helloworld66.apiary.io/
-[20]: http://expressjs.com/
-[21]: http://www.slimframework.com/
-[22]: http://nancyfx.org/
-
-The tutorial should use the example from Lab 06 and help the learner build the a similar RESTful API (see below for the basic API spec).  Adding a connection to a database is a plus but not required.  
-
-The Simple Health Profile API
-* GET /lifecoach/person: return the list of people in the database, with their health profiles, which should include at least weight and height. 
-* GET /lifecoach/person/{personId}: returns the record for person with id 'personId'
-* GET /lifecoach/person/{personId}/health-profile: returns the health-profile of 'personId'  
-* POST /lifecoach/person: creates a new person in the system
-* PUT /lifecoach/person/{personId}: update information about the person
-* DELETE /lifecoach/person/{personId}: deletes a person and her health profile
-* [Suggest as Exercise] GET/lifecoach/person/{personId}/health-profile/history: returns the history of previous health profile values. For this, the learner has to add the support for storing the old health-profile value every time a there is an update throught endpoint 5
-* [Suggest as Exercise] POST /lifecoach/person/{personId}/health-profile: creates a new health-profile value for the person pushing his the current values to the history
-
-The items marked with the label [Suggest as Exercise] should be described as exercises in the tutorial, but the students have to provide the source code as a solution to all the items. 
-
-How to deliver and evaluate the project
-To deliver your tutorial, you will have to follow these instructions: 
-* Fork the IntroSDE/introsde repository in Github. This will create a repository with the same name under your Github user. 
-* Clone your newly created repository
+Una vez que hayamos instalado (siguiendo las instrucciones del sitio oficial), debemos comprobar que el mismo funciona correctamente abriendo la consola del sistema y escribiendo el siguiente comando:
 ```
-git clone https://github.com/<Your_Github_Username>/introsde
+C:\Users\username>composer -V
+Composer version 1.0.0 2016-01-10 20:34:53
 ```
-* Under the folder called projects, create your project with the following name template:
+### 2.2. Instalación de Postgresql 
+Como repositorio de datos, vamos a utilizar Postgresql. Una base de datos relacional y orientada a objetos libre.
+Se puede descargar e instalar, siguiendo las instrucción del [sitio oficial](https://www.postgresql.org/).
+### 2.3. Instalación de PHP
+Necesitaremos PHP, para realizar pruebas. Podemos descargarlo en el [sitio oficial](http://windows.php.net/download/). Para este tutorial utilizaremos la versión 5.6.
+También necesitamos que se encuentre habilitada la extensión PDO. Las instrucciones para instalar se pueden ver [aquí](http://php.net/manual/es/book.pdo.php).
+
+Para verificar que PHP se encuentra correctamente instalado, probamos lo siguiente desde la consola de comandos:
 ```
-tutorial_[name_of_framework]_2017
-Examples: 
-tutorial_expresjs_2017
-tutorial_play_framework_2017 
+C:\Users\migue> php -v
+PHP 5.6.28 (cli) (built: Nov  9 2016 06:40:27)
+Copyright (c) 1997-2016 The PHP Group
+Zend Engine v2.6.0, Copyright (c) 1998-2016 Zend Technologies
 ```
-* Commit and push all of your code to your github repository, including your tutorial in a README.md file. 
-* When you have finished, create a pull request from your fork in github. A reviewer will look at your project, provide feedback and then merge if everything works fine. 
+### 2.4. Instalación de Postman
+Postman es un cliente REST, que nos va a permitir probar nuestro servicio web. Se puede descargar desde el [sitio oficial](https://www.getpostman.com/).
+### 2.5. Instalación de ATOM (opcional)
+A fin de codificar mas cómodamente, recomiento instalar in IDE. Propongo [ATOM](https://atom.io/), que es un IDE open source y altamente customizable.
+Se puede descargar del sitio oficial y está disponible para Linux, Windows y MACOS.
+
+
+## 3. Instalación de SLIM, DOCTRINE y RESPECT
+Para empezar nos ubicamos en la carpeta del proyecto y generamos la siguiente estructura:
+```
+├── proyecto
+│   └── src
+│       └── public
+│       └── endpoints
+│       └── entity
+```
+La carpeta public, sera la raiz de nuestro sitio. La carpeta endpoints, contendrá las defininiciones de los endpoints. La carpeta entity contendrá las clases.
+Luego creamos en la raiz de la carpeta un archivo *composer.json* con el siguiente contenido:
+```
+{
+    "require": {
+        "slim/slim": "*",
+        "doctrine/orm": "*",
+        "respect/validation": "*"
+    },
+    "autoload": {
+        "psr-4": {"Custom\\": "src/"}
+    }
+}
+```
+Le indicamos al composer, que instale Slim que es el framework para generar el web service. Doctrine es un mapeador de objetos-relacional (ORM) escrito en PHP que proporciona una capa de persistencia para objetos PHP. Respect es una librería para validar datos.
+Instalamos los paquetes con el siguiente comando, desde la consola:
+```
+composer update
+```
+En la carpeta vendor, se encuentran todas las librerías necesarias para ejecutar el framework. El archivo composer contiene las definiciones de las dependencias que estan instaladas.
+Si abrimos el archivo composer, tiene la siguiente estructura:
+```
+{
+    "require": {
+        "slim/slim": "3.0"
+    }
+}
+```
+Creamos un archivo *index.php* en *src/public*:
+```
+<?php
+
+//establecemos los espacios de nombres
+use \Psr\Http\Message\ServerRequestInterface as Request;
+use \Psr\Http\Message\ResponseInterface as Response;
+use \Doctrine\ORM\Tools\Setup;
+use \Doctrine\ORM\EntityManager;
+use \Respect\Validation\Validator as v;
+
+//hacemos el autoload de las librerias
+require '../../vendor/autoload.php';
+
+//Doctrine
+$paths = array(__DIR__ . "/src");
+$isDevMode = false;
+//aca especificamos los datos de la conexion a la base de datos
+$dbParams = array(
+    'driver' => 'pdo_pgsql',
+    'host' => '127.0.0.1',
+    'user' => 'postgres',
+    'password' => 'postgres',
+    'dbname' => 'slimphp',
+);
+$configDoctrine = Setup::createAnnotationMetadataConfiguration($paths, $isDevMode, null, null, false);
+$entityManager = EntityManager::create($dbParams, $configDoctrine);
+
+//Slim
+$app = new \Slim\App;
+
+//endpoints
+include_once '../endpoints/endpoints.php'
+
+//creamos el web service
+$app->run();
+```
+Creamos un archivo *endpoints.php* en *src/endpoints*:
+```
+<?php
+$app->get('/index', function ($request,$response) {
+    $response->getBody()->write("Hola");
+    return $response;
+});
+```
+Luego desde la consolta, ubicados en la raiz del proyecto, ejecutamos el siguiente comando:
+```
+php -S localhost:80
+```
+Usando Postman hacemos una solicitud GET al endpoint que hemos creado:
+```
+http://localhost/src/public/index.php/index
+```
+Si todo se hizo correctamente, recibiremos lo siguiente:
+```
+Hola
+```
+
+## 4. Endpoints
+Ahora ya estamos listos para empezar a crear los endpoints. Seguiremos el estilo de arquitectura REST como protocolo para intercambio de información entre el usuario final y el almacén de datos (base de datos).
+REST define un conjunto de operaciones bien definidas que se aplican a todos los recursos de información que son, entre otras, las siguientes:
+- GET: Pide una representación del recurso especificado
+- POST: Envía los datos para que sean procesados por el recurso identificado. Creación de un recurso.
+- PUT: Igual que POST solo que lo utilizaremos para modificar un recurso existente.
+- DELETE: Elimina un recurso.
+
+| Operación     | Ruta          | Descripción   |
+| ------------- | ------------- | ------------- |
+| GET           | /lifecoach/person  |  Devuelve la lista de personas, con sus peso y altura |
+| GET           | /lifecoach/person/{personId}  |  Devuelve los datos de la persona |
+| GET           | /lifecoach/person/{personId}/health-profile   | Devuelve el perfil de salud de la persona |
+| POST           | /lifecoach/person | Crea una nueva persona   |
+| PUT           | /lifecoach/person/{personId}  | Actualiza los datos de la persona |
+| DELETE        | /lifecoach/person/{personId}  | Elimina a la persona y su perfil de salud |
+| GET           | /lifecoach/person/{personId}/health-profile/history | obtiene el perfil de salud historico |
+| POST          | /lifecoach/person/{personId}/health-profile | Crea un nuevo perfil de salud |
+
+### 4.1. Clases
+Usando Doctrine vamos a crear las dos entidades o clases que vamos a utilizar y que luego serán mapeadas a la base de datos.
+#### 4.1.1. Person
+En la carpeta *src/entity* creamos un nuevo archivo con el nombre *Person.php*.
+En la cabecera declaramos el nombre de la tabla e indicamos que se trata de una entidad.
+Luego especificamos las variables de la clase: id, firstName, lastName y birthDate.
+También indicamos que esta clase tiene una relación uno a muchos con HealthProfile.
+Por ultimo, especificamos el setter y el getter.
+```
+<?php
+
+namespace Custom\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+
+/**
+* Person
+* @ORM\Table(name="Person")
+* @ORM\Entity
+*/
+class Person
+
+{
+/**
+ * @ORM\Column(name="id", type="integer")
+ * @ORM\Id
+ * @ORM\GeneratedValue(strategy="AUTO")
+ */
+protected $id;
+/**
+ * @ORM\OneToMany(targetEntity="\Custom\Entity\HealthProfile", mappedBy="person")
+ */
+protected $healthProfile;
+/**
+ * @ORM\Column(name="firstName", type="string", length=255)
+ */
+private $firstName;
+/**
+ * @ORM\Column(name="lastName", type="string", length=255)
+ */
+private $lastName;
+/**
+ * @ORM\Column(name="birthDate", type="date")
+ */
+private $birthDate;
+
+
+
+public function addHealthProfile(\Custom\Entity\HealthProfile $hp){
+  $this->healthProfile[] = $hp;
+}
+
+
+public function __construct() {
+        $this->healthProfile = new ArrayCollection();
+    }
+
+public
+function __get($property)
+  {
+  if (property_exists($this, $property))
+    {
+    return $this->$property;
+    }
+  }
+
+public
+
+function __set($property, $value)
+  {
+  if (property_exists($this, $property))
+    {
+    $this->$property = $value;
+    }
+  }
+}
+
+```
+#### 4.1.1. HealthProfile
+En la carpeta *src/entity* creamos un nuevo archivo con el nombre *HealthProfile.php*.
+En la cabecera declaramos el nombre de la tabla e indicamos que se trata de una entidad.
+Luego especificamos las variables de la clase: id, wight, height y date (que corresponden al peso, altura en una determinada fecha).
+También indicamos que esta clase tiene una relación muchos a uno con Person.
+Por ultimo, especificamos el setter y el getter.
+```
+<?php
+
+namespace Custom\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+/**
+ * @ORM\Table(name="HealthProfile")
+ * @ORM\Entity
+ */
+
+class HealthProfile
+{
+    /**
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+    /**
+     * @ORM\ManyToOne(targetEntity="\Custom\Entity\Person", inversedBy="healthProfile",cascade={"remove"})
+     * @ORM\JoinColumn(name="person_id", referencedColumnName="id")
+     */
+    protected $person;
+    /**
+     * @ORM\Column(name="weight", type="decimal")
+     */
+    private $weight;
+    /**
+     * @ORM\Column(name="height", type="decimal")
+     */
+    private $height;
+    /**
+     * @ORM\Column(name="date", type="date")
+     */
+    private $date;
+
+    public function setPerson(\Custom\Entity\Person $p) {
+      $this->person = p;
+    }
+
+    public function __get($property)
+    {
+        if (property_exists($this, $property)) {
+            return $this->$property;
+        }
+    }
+    public function __set($property, $value)
+    {
+        if (property_exists($this, $property)) {
+            $this->$property = $value;
+        }
+    }
+}
+```
+Una vez que hayamos creado las dos clases, generamos la estructura en la base de datos, con el siguiente comando:
+```
+php vendor/doctrine/orm/bin/doctrine.php orm:schema-tool:create
+```
+En este punto, ya podemos utilizar las entidades Person, HealthProfile y manejarlos como objetos PHP.
+A modo de ejemplo, vamos a crear una entidad *Person* y luego hacerla persistente en la base de datos.
+En este ejemplo, creamos el objeto en *$person* , e asignamos sus atributos y luego lo hacemos persistente en la base de datos.
+El resultado de la ejecución de esta porción de código, debe imprimir el id de Person asignado.
+```
+$person = new \Custom\Entity\Person;
+$person->firstName = "Miguel";
+$person->lastName = "Torio";
+$person->birthDate = new DateTime();
+$entityManager->persist($person);
+$entityManager->flush();
+
+echo $person->id;
+```
+Para recuperar un dato específico, podemos hacer:
+```
+//buscar la Person con id = 30
+$person = $entityManager->find('\Custom\Entity\Person', 30);
+echo $person->lastName;
+```
+
+Ahora, ya podemos empezar a generar los endpoints.
+Todos los endpoints los vamos a colocar en *src/endpoints/endpoints.php*.
+A modo de ejemplo, tenemos un endpoint:
+```
+$app->get('/index', function ($request,$response) use($entityManager,$v) {
+    $response->getBody()->write("Hola");
+    return $response;
+});
+```
+En este endpoint que tiene como ruta */index*, recibe como parámetros un request y un response. El request contiene los datos recibidos y en el response se encapsulan los datos a ser enviados. Además usamos una instancia del entityManager y v que corresponden al ORM Doctrine y al Validador respectivamente. Devolvemos la instancia del response. 
+
+En los ejemplos siguientes, veremos las distintas variaciones del método.
+
+#### 4.2.1. GET lifecoach/person
+En este ejemplo realizamos una consulta sql en "duro". Retornamos lalista de todas las personas, con su último perfil de salud.
+```
+$app->get('/lifecoach/person',
+function ($request, $response) use($entityManager, $v)
+	{
+	$conection = $entityManager->getConnection();
+	$sql = "select * from Person P join
+          HealthProfile H ON P.id = H.person_id where H.id IN
+          (select H2.id from HealthProfile H2 where H2.person_id = P.id order by 1 desc limit 1) ";
+	$sqlStatement = $conection->prepare($sql);
+	$sqlStatement->execute();
+	$data = $sqlStatement->fetchAll();
+	return $response->withJson(['data' => $data], 200);
+	});
+```
+
+#### 4.2.2. GET lifecoach/person/{personId}
+En este ejemplo, utilizando el entity manager, buscamos la persona por su id y retornamos los datos.
+```
+$app->get('/lifecoach/person/{personId}',
+function ($request, $response) use($entityManager, $v)
+	{
+	$personId = $request->getAttribute('personId');
+	if ($v::intVal()->validate($personId) == false)
+		{
+		return $response->withJson(['message' => 'personId debe ser entero'], 400);
+		}
+
+	$query = $entityManager->createQueryBuilder()->select('p')->from('\Custom\Entity\Person', 'p')->where('p.id = ?1')->setParameter(1, $personId)->getQuery();
+	$data = $query->getArrayResult();
+	return $response->withJson(['data' => $data], 200);
+	});
+```    
+#### 4.2.3. GET lifecoach/person/{personId}/health-profile
+Nuevamente utilizando el entity manager, buscamos a la persona por su id y luego obtenemos todo su historial de salud.
+```
+$app->get('/lifecoach/person/{personId}/health-profile',
+function ($request, $response) use($entityManager, $v)
+	{
+	$personId = $request->getAttribute('personId');
+	if ($v::intVal()->validate($personId) == false)
+		{
+		return $response->withJson(['message' => 'personId debe ser entero'], 400);
+		}
+
+	$query = $entityManager->createQueryBuilder()->select('hp')->from('\Custom\Entity\HealthProfile', 'hp')->where('hp.id = ?1')->setParameter(1, $personId)->getQuery();
+	$data = $query->getArrayResult();
+	return $response->withJson(['data' => $data], 200);
+	});
+```    
+
+#### 4.2.4. POST lifecoach/person
+En este ejemplo, primero validamos que se reciban los datos de la pesona y su perfil de salud inicial. Luego insertamos la persona y su perfil de salud utilizando el entity manager.
+```
+$app->post('/lifecoach/person',
+function ($request, $response) use($entityManager, $v)
+	{
+	$body = $request->getBody();
+	$body = json_decode($body, true);
+
+	// validamos firstName
+
+	if ($v::key('firstName', $v::stringType() , true)->validate($body) == false)
+		{
+		return $response->withJson(['message' => 'debe proporcionar firstName'], 400);
+		}
+
+	// validamos lastName
+
+	if ($v::key('lastName', $v::stringType() , true)->validate($body) == false)
+		{
+		return $response->withJson(['message' => 'debe proporcionar lastName'], 400);
+		}
+
+	// validamos birthDate
+
+	if ($v::key('birthDate', $v::date('Y-m-d') , true)->validate($body) == false)
+		{
+		return $response->withJson(['message' => 'debe proporcionar birthDate en el formato Y-m-d'], 400);
+		}
+
+	// validamos height
+
+	if ($v::key('height', $v::floatType() , true)->validate($body) == false)
+		{
+		return $response->withJson(['message' => 'debe especificar height'], 400);
+		}
+
+	// validamos weight
+
+	if ($v::key('weight', $v::floatType() , true)->validate($body) == false)
+		{
+		return $response->withJson(['message' => 'debe especificar weight'], 400);
+		}
+
+	$person = new CustomEntityPerson;
+	$person->firstName = $body['firstName'];
+	$person->lastName = $body['lastName'];
+	$person->birthDate = new DateTime($body['birthDate']);
+	$healthProfile = new CustomEntityHealthProfile;
+	$healthProfile->weight = $body['weight'];
+	$healthProfile->height = $body['height'];
+	$healthProfile->date = new DateTime();
+	$healthProfile->person = $person;
+	$entityManager->persist($person);
+	$entityManager->persist($healthProfile);
+	$entityManager->flush();
+	return $response->withJson(['message' => 'persona insertada', 'id' => $person->id], 200);
+	});
+```    
+
+#### 4.2.5. DELETE	/lifecoach/person/{personId}
+Eliminamos la persona, siempre utilizando el entity manager. Verificamos antes que el id de la persona sea correcto.
+```
+
+$app->delete('/lifecoach/person/{personId}',
+function ($request, $response) use($entityManager, $v)
+	{
+	$personId = $request->getAttribute('personId');
+	if ($v::intVal()->validate($personId) == false)
+		{
+		return $response->withJson(['message' => 'personId debe ser entero'], 400);
+		}
+
+	$person = $entityManager->find('\Custom\Entity\Person', $personId);
+	if ($person == null)
+		{
+		return $response->withJson(['message' => 'la persona no existe'], 200);
+		}
+
+	$entityManager->remove($person);
+	$entityManager->flush();
+	return $response->withJson(['message' => 'persona eliminada'], 200);
+	});
+```
+
+#### 4.2.6. GET /lifecoach/person/{personId}/health-profile/history
+Utilizando el entity manager, obtenemos la lista completa de perfiles de salud
+```
+$app->get('/lifecoach/person/{personId}/health-profile/history',
+function ($request, $response) use($entityManager, $v)
+	{
+	$personId = $request->getAttribute('personId');
+	if ($v::intVal()->validate($personId) == false)
+		{
+		return $response->withJson(['message' => 'personId debe ser entero'], 400);
+		}
+
+	$person = $entityManager->find('\Custom\Entity\Person', $personId);
+	if ($person == null)
+		{
+		return $response->withJson(['message' => 'la persona no existe'], 200);
+		}
+
+	$query = $entityManager->createQueryBuilder()->select('hp')->from('\Custom\Entity\HealthProfile', 'hp')->innerJoin('\Custom\Entity\Person', 'p')->where('p.id = ?1')->setParameter(1, $personId)->getQuery();
+	$data = $query->getArrayResult();
+	return $response->withJson(['data' => $data], 200);
+	});
+
+```
+
+#### 4.2.7. POST /lifecoach/person/{personId}/health-profile/history
+Agregamos un nuevo perfil de salud.
+```
+
+$app->post('/lifecoach/person/{personId}/health-profile/history',
+function ($request, $response) use($entityManager, $v)
+	{
+	$personId = $request->getAttribute('personId');
+	if ($v::intVal()->validate($personId) == false)
+		{
+		return $response->withJson(['message' => 'personId debe ser entero'], 400);
+		}
+
+	$body = $request->getBody();
+	$body = json_decode($body, true);
+
+	// validamos height
+
+	if ($v::key('height', $v::floatType() , true)->validate($body) == false)
+		{
+		return $response->withJson(['message' => 'debe especificar height'], 400);
+		}
+
+	// validamos weight
+
+	if ($v::key('weight', $v::floatType() , true)->validate($body) == false)
+		{
+		return $response->withJson(['message' => 'debe especificar weight'], 400);
+		}
+
+	$person = $entityManager->find('\Custom\Entity\Person', $personId);
+	if ($person == null)
+		{
+		return $response->withJson(['message' => 'la persona no existe'], 200);
+		}
+
+	$healthProfile = new CustomEntityHealthProfile;
+	$healthProfile->weight = $body['weight'];
+	$healthProfile->height = $body['height'];
+	$healthProfile->date = new DateTime();
+	$healthProfile->person = $person;
+	$person->healthProfile[] = $healthProfile;
+	$entityManager->persist($person);
+	$entityManager->persist($healthProfile);
+	$entityManager->flush();
+	$query = $entityManager->createQueryBuilder()->select('hp')->from('\Custom\Entity\HealthProfile', 'hp')->innerJoin('\Custom\Entity\Person', 'p')->where('p.id = ?1')->setParameter(1, $person->id)->getQuery();
+	$data = $query->getArrayResult();
+	return $response->withJson(['data' => $data], 200);
+	});
+
+```
