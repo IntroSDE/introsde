@@ -44,7 +44,7 @@ Add a class file and give a name, here the example **“MainModule.cs"** has the
 
 we have 3 classes:
 ```
-1. MainModule.cs   the principal
+1. MainModule.cs   the main module 
 2. Person.cs       the data structure of person
 3. HealthP.cs       data structure of healthprofile
 ```
