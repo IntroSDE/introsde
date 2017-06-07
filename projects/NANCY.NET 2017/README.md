@@ -223,24 +223,26 @@ Output 1 -> Get["/"], pointing to the root folder.
 Output 2 ->
 Get[["/Person/{id}"], pointing to a route path.
 ```
-## Test POST, PUT and DELETE with Fiddle
+## Test POST, PUT and DELETE with Fiddler
+
 ###### Step 1:
->In Composer: Select POST and put `http://localhost:52961/persons` or
- Select PUT and put `http://localhost:52961/person/id` or
-Select DELETE and put `http://localhost:52961/person/id`
+>In Composer: Select `POST` and put `http://localhost:52961/person` or
+ Select `PUT` and put `http://localhost:52961/person/id` or
+Select `DELETE` and put `http://localhost:52961/person/id`
 In the Request headers tab, enter a
 JSON content type.
 `Content-Type:application/json; charset=utf-8`
 You need more info here but Fiddler
 will fill the rest for you when you hit execute.
-Put your JSON string array in the Request Body
+Put your JSON string array in the `Request Body`
 * For POST method:
-`:{"Name":"Andrea","Lastname":"Shaw3","Birthdate":"Inflated3",”Weight”:85.5, “Height”:1.72}`
- 
- 
+```
+Request Body
+:{"Name":"Andrea","Lastname":"Shaw3","Birthdate":"Inflated3",”Weight”:85.5, “Height”:1.72}
+``` 
  
 * For DELETE method:
-In the composer select DELETE and  put `http://localhost:52961/person/id` , the id you pick for example delete the first person on the list so we will put `http://localhost:52961/person/1`
+In the composer select `DELETE` and  put `http://localhost:52961/person/id` , the id you pick for example delete the first person on the list so we will put `http://localhost:52961/person/1`
 `The list id 1 is: [{"name":"Kierkegaard","lastname":"Shaw","birthdate":"Inflated"}]`
  
 After enter you can check if the person was deleted put in the browser `http://localhost:52961/person` and should print this list:
