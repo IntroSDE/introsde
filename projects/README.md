@@ -27,6 +27,7 @@ You can go to this page for more information: https://docs.microsoft.com/en-us/n
  
 Once NuGet is installed, open:
 `"Package Manager Console" from "Tools" -> "Library Package Manager"` and run the following commands one after another. We can select the default project to which the installation should happen. 
+
 `PM > Install-Package Nancy`
 We will get a successful installation message like:
 ```
