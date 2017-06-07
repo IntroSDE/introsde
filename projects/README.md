@@ -4,7 +4,7 @@ Nancy is a lightweight, low-ceremony, framework for building HTTP based services
  
 ## Before the lab
 **Set environment:**
-two installation:
+two installations:
 * visual studio
 * fiddler
 
@@ -15,7 +15,7 @@ Install visual studio 2010 or higher, you can download on the official page of [
 It takes time the installation and when everything is installed we can start the lab.
 Other program we need is `fiddler` so you can test the PUT, DELETE and POST
 * The installation its very simple just download from this page:
-https://www.telerik.com/download/fiddler
+[telerik](https://www.telerik.com/download/fiddler)
 For more information you can read in this page of microsoft: [fildder](https://docs.microsoft.com/en-us/azure/search/search-fiddler).
  
 ## Getting Started: Install packages
@@ -42,11 +42,12 @@ the application.
 Add a class file and give a name, here the example **“MainModule.cs"** has the following lines of codes.
 
 we have 3 classes:
+```
 1. MainModule.cs   the principal
 2. Person.cs       the data structure of person
 3. HealthP.cs       data structure of healthprofile
-
-1. MainModule.cs : add this in your main module 
+```
+1. MainModule.cs 
 ``` 
 using Nancy;
 using System;
