@@ -331,6 +331,7 @@ namespace lab06.Models
         {
             Array.Clear(persona, id, 1);
         };
+        
     }
 }
 ```
