@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -36,63 +36,66 @@ namespace lab06.Models
         {
             this.firstname = "Pinco";
             this.lastname = "Pallino";
-
             HealthProfile hp = new HealthProfile();
-     
             this.hProfile = hp;
+            
             // setting personId to a random number between 1 and 9999
             Random rnd = new Random();
             int nro = rnd.Next(9999);
-            //this.personId =nro; // Solution to Exercise #01-1d
-            this.personId = 1;
+            this.personId = nro;
+            
             this.birthdate = "11/11/2011";
         }
-        public void delete()
-        {
-            
-        }
-
+        
         public String getFirstname()
         {
             return firstname;
         }
+        
         public void setFirstname(String firstname)
         {
             this.firstname = firstname;
         }
+        
         public String getLastname()
         {
             return lastname;
         }
+        
         public void setLastname(String lastname)
         {
             this.lastname = lastname;
         }
+        
         public HealthProfile getHProfile()
         {
             return hProfile;
         }
+        
         public void setHProfile(HealthProfile hProfile)
         {
             this.hProfile = hProfile;
         }
+        
         public String getBirthdate()
         {
             return birthdate;
         }
+        
         public void setBirthdate(String birthdate)
         {
             this.birthdate = birthdate;
         }
+        
         public long getPersonId()
         {
             return personId;
         }
+        
         public void setPersonId(long personId)
         {
             this.personId = personId;
         }
-
 
     }
 }
