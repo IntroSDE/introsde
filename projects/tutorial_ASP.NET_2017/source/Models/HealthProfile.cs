@@ -46,7 +46,6 @@ namespace lab06.Models
         {
             return "{" + this.height + "," + this.weight + "," + this.getBMI() + "," + "}";
         }
-
-
+        
     }
 }
