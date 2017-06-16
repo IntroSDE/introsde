@@ -1,65 +1,101 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
+using System.Web;
 using lab06.Models;
 
 namespace lab06.Models
 {
-    public class PersonController : ApiController
+    public class PersonCR
     {
-        public PersonCR[] persona = new PersonCR[]
-        {
-            new PersonCR()
-        };
+        public string firstname;
+        public string lastname;
+        public HealthProfile hProfile;
+        public string birthdate;
+        public long personId;
 
-        public IEnumerable<PersonCR> GetAllPersons()
-        { 
-            return persona;
-        };
+        public PersonCR(long personId, String fname, String lname, String birthdate, HealthProfile hp)
+        {
+            this.setPersonId(personId);
+            this.setFirstname(fname);
+            this.setLastname(lname);
+            this.setBirthdate(birthdate);
+            this.hProfile = hp;
+        }
+
+        public PersonCR(long personId, String fname, String lname, String birthdate)
+        {
+            this.setPersonId(personId);
+            this.setFirstname(fname);
+            this.setLastname(lname);
+            this.setBirthdate(birthdate);
+            this.hProfile = new HealthProfile();
+        }
+
+        public PersonCR()
+        {
+            this.firstname = "Pinco";
+            this.lastname = "Pallino";
+            HealthProfile hp = new HealthProfile();
+            this.hProfile = hp;
+            
+            // setting personId to a random number between 1 and 9999
+            Random rnd = new Random();
+            int nro = rnd.Next(9999);
+            this.personId = nro;
+            
+            this.birthdate = "11/11/2011";
+        }
         
-        public IHttpActionResult GetPersonid(int id)
+        public String getFirstname()
         {
-            var pers = persona.FirstOrDefault((p) => p.personId == id);
-            if (pers == null)
-            {
-                return NotFound();
-            }
-            return Ok(pers);
-        };
-
-        public IHttpActionResult Get(long perId)
-        {
-            var pers = persona.FirstOrDefault((p) => p.personId == perId);
-            if (pers == null)
-            {
-                  return NotFound();
-            }
-            return Ok(pers.hProfile);
-        };
-
-        public void Post(PersonCR pers)
-        {
-            Array.Resize(ref persona, persona.Length + 1);
-            persona[persona.Length-1] = new PersonCR(pers.personId,pers.firstname,pers.lastname,pers.birthdate);
-        };
-
-        public void Put(int id, PersonCR perso)
-        {
-            var pers = persona.FirstOrDefault((p) => p.personId == id);
-            if (pers != null)
-            {
-                pers.firstname = perso.firstname;
-                pers.lastname = perso.lastname;
-                pers.birthdate = perso.birthdate;
-            }
-        };
+            return firstname;
+        }
         
-        public void Delete(int id)
+        public void setFirstname(String firstname)
         {
-            Array.Clear(persona, id, 1);
-        };
+            this.firstname = firstname;
+        }
+        
+        public String getLastname()
+        {
+            return lastname;
+        }
+        
+        public void setLastname(String lastname)
+        {
+            this.lastname = lastname;
+        }
+        
+        public HealthProfile getHProfile()
+        {
+            return hProfile;
+        }
+        
+        public void setHProfile(HealthProfile hProfile)
+        {
+            this.hProfile = hProfile;
+        }
+        
+        public String getBirthdate()
+        {
+            return birthdate;
+        }
+        
+        public void setBirthdate(String birthdate)
+        {
+            this.birthdate = birthdate;
+        }
+        
+        public long getPersonId()
+        {
+            return personId;
+        }
+        
+        public void setPersonId(long personId)
+        {
+            this.personId = personId;
+        }
+
     }
 }
