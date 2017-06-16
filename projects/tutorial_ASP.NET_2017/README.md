@@ -55,12 +55,21 @@ namespace lab06.Models
         public string birthdate;
         public long personId;
 
-        public PersonCR(long personId, string fname, string lname, string birthdate, HealthProfile hp)
+        public PersonCR(long personId, String fname, String lname, String birthdate, HealthProfile hp)
         {
-            this.personId = personId;
-            this.firstname = fname;
-            this.lastname = lname;
-            this.birthdate = birthdate;
+            this.setPersonId(personId);
+            this.setFirstname(fname);
+            this.setLastname(lname);
+            this.setBirthdate(birthdate);
+            this.hProfile = hp;
+        }
+
+        public PersonCR(long personId, String fname, String lname, String birthdate)
+        {
+            this.setPersonId(personId);
+            this.setFirstname(fname);
+            this.setLastname(lname);
+            this.setBirthdate(birthdate);
             this.hProfile = new HealthProfile();
         }
 
@@ -68,10 +77,67 @@ namespace lab06.Models
         {
             this.firstname = "Pinco";
             this.lastname = "Pallino";
-            this.hProfile = new HealthProfile();
-            this.personId = 1;
-            this.birthdate = "24/02/1998";
+            HealthProfile hp = new HealthProfile();
+            this.hProfile = hp;
+            
+            // setting personId to a random number between 1 and 9999
+            Random rnd = new Random();
+            int nro = rnd.Next(9999);
+            this.personId = nro;
+            
+            this.birthdate = "11/11/2011";
         }
+        
+        public String getFirstname()
+        {
+            return firstname;
+        }
+        
+        public void setFirstname(String firstname)
+        {
+            this.firstname = firstname;
+        }
+        
+        public String getLastname()
+        {
+            return lastname;
+        }
+        
+        public void setLastname(String lastname)
+        {
+            this.lastname = lastname;
+        }
+        
+        public HealthProfile getHProfile()
+        {
+            return hProfile;
+        }
+        
+        public void setHProfile(HealthProfile hProfile)
+        {
+            this.hProfile = hProfile;
+        }
+        
+        public String getBirthdate()
+        {
+            return birthdate;
+        }
+        
+        public void setBirthdate(String birthdate)
+        {
+            this.birthdate = birthdate;
+        }
+        
+        public long getPersonId()
+        {
+            return personId;
+        }
+        
+        public void setPersonId(long personId)
+        {
+            this.personId = personId;
+        }
+
     }
 }
 ```
@@ -89,8 +155,8 @@ namespace lab06.Models
 {
     public class HealthProfile
     {
-        private double weight; // in kg
-        private double height; // in m
+        public double weight; // in kg
+        public double height; // in m
 
         public HealthProfile(double weight, double height)
         {
@@ -104,7 +170,31 @@ namespace lab06.Models
             this.height = 1.72;
         }
 
-        
+        public void setWeight(double weight)
+        {
+            this.weight = weight;
+        }
+
+        public double getHeight()
+        {
+            return height;
+        }
+
+        public void setHeight(double height)
+        {
+            this.height = height;
+        }
+
+        public double getBMI()
+        {
+            return this.weight / (Math.Pow(this.height, 2));
+        }
+
+        public String toString()
+        {
+            return "{" + this.height + "," + this.weight + "," + this.getBMI() + "," + "}";
+        }
+
     }
 }
 ```
